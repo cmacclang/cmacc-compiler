@@ -1,0 +1,13 @@
+{
+  "name": "cmacc-compiler",
+  "version": "1.0.0",
+  "description": "Cmacc Compiler",
+  "main": "src/index.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "marked": "^0.3.5",
+    "request": "^2.74.0"
+  }
+}
