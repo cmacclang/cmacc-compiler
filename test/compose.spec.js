@@ -71,8 +71,6 @@ describe('compose', function () {
                 assert.equal(ycombinator.variables[6].link.variables[4].key, "Company");
                 assert.equal(ycombinator.variables[6].link.variables[4].val, "Willem");
 
-                fs.writeFileSync('index.json', JSON.stringify(ast, null, 4));
-
                 render(ast, function (err, markdown) {
                     console.log(markdown)
                     done();
@@ -114,8 +112,6 @@ describe('compose', function () {
 
                 assert.equal(ycombinator.variables[6].link.link.variables[4].key, "Company");
                 assert.equal(ycombinator.variables[6].link.link.variables[4].val, "James");
-
-                fs.writeFileSync('index.json', JSON.stringify(ast, null, 4));
 
                 render(ast, function (err, markdown) {
                     console.log(markdown)

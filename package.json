@@ -2,7 +2,7 @@
   "name": "cmacc-compiler",
   "version": "1.0.0",
   "description": "Cmacc Compiler",
-  "main": "src/index.js",
+  "main": "src/cmacc.js",
   "author": "",
   "license": "ISC",
   "dependencies": {
