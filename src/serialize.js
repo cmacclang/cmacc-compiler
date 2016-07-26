@@ -19,8 +19,10 @@ var serialize = function (ast, callback) {
         else
             source += "\"" + variable.val + "\"";
 
-        source += "\n\n"
+        source += "\n\n";
     });
+
+    source += ast.text + "\n"
 
     callback(null, source)
 };
@@ -30,14 +32,13 @@ var json = function (variables) {
     var res = '{';
 
     variables.forEach(function (variable) {
-        if(variable.link){
+        if (variable.over) {
             res += "\n\t\"" + variable.key + "\"" + ' : ';
-            res +=  variable.val + "\n";
+            res += variable.val;
         }
-
     });
 
-    res += '}';
+    res += "\n" + '}';
 
     return res
 }
