@@ -44,7 +44,7 @@ describe('compose', function () {
     describe('SAFE_Robinson.md', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(__dirname, 'doc/acme/angel-round', 'SAFE_Robinson.md');
-            compose(file, null, function (err, ast) {
+            compose('file://' + file, null, function (err, ast) {
 
                 if(err) done(err);
 
@@ -82,7 +82,7 @@ describe('compose', function () {
     describe('SAFE_Robinson_v2.md', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(__dirname, 'doc/acme/angel-round', 'SAFE_Robinson_v2.md');
-            compose(file, null, function (err, ast) {
+            compose('file://' + file, null, function (err, ast) {
 
                 if(err) done(err)
 
@@ -99,19 +99,19 @@ describe('compose', function () {
                 assert.equal(robinson.variables[7].link.variables[4].key, "Company");
                 assert.equal(robinson.variables[7].link.variables[4].val, "James");
 
-                assert.equal(robinson.variables[8].variables[0].link.link.variables[4].key, "Company");
-                assert.equal(robinson.variables[8].variables[0].link.link.variables[4].val, "James");
+                assert.equal(robinson.variables[8].variables[0].link.variables[4].key, "Company");
+                assert.equal(robinson.variables[8].variables[0].link.variables[4].val, "James");
 
                 var ycombinator = robinson.variables[9];
 
                 assert.equal(ycombinator.variables[3].key, "valuationCap");
-                assert.equal(ycombinator.variables[3].link.link.val, "$1,000,000");
+                assert.equal(ycombinator.variables[3].link.val, "$1,000,000");
 
                 assert.equal(ycombinator.variables[4].link.variables[0].key, "fullName");
                 assert.equal(ycombinator.variables[4].link.variables[0].val, "Acme Inc.");
 
-                assert.equal(ycombinator.variables[6].link.link.variables[4].key, "Company");
-                assert.equal(ycombinator.variables[6].link.link.variables[4].val, "James");
+                assert.equal(ycombinator.variables[6].link.variables[4].key, "Company");
+                assert.equal(ycombinator.variables[6].link.variables[4].val, "James");
 
                 render(ast, function (err, markdown) {
                     console.log(markdown)

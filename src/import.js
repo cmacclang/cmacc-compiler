@@ -9,6 +9,9 @@ var imp = {
 
         var parse = url.parse(file);
 
+        if(!parse.protocol)
+            return callback(null, file);
+
         if(typeof window != 'undefined' && window.document){
 
             var call = '';
@@ -41,7 +44,11 @@ var imp = {
 
         }
 
-        fs.readFile(file, 'utf8', callback);
+        if(parse.protocol === "file:"){
+            fs.readFile(parse.path, 'utf8', callback);
+        }
+
+
 
     }
 

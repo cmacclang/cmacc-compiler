@@ -11,6 +11,7 @@ var serialize = function (ast, callback) {
 
         source += "$ " + variable.key + " = ";
 
+
         if (variable.ref)
             source += "[" + variable.ref + "] => ";
 
@@ -29,16 +30,20 @@ var serialize = function (ast, callback) {
 
 var json = function (variables) {
 
-    var res = '{';
-
-    variables.forEach(function (variable) {
-        if (variable.over) {
-            res += "\n\t\"" + variable.key + "\"" + ' : ';
-            res += variable.val;
-        }
-    });
-
-    res += "\n" + '}';
+    var res = '';
+    if (variables.length > 0) {
+        res += '{';
+        variables.forEach(function (variable) {
+            if (variable.over) {
+                res += "\n\t\"" + variable.key + "\"" + ' : ';
+                if (variable.type === 'string')
+                    res += "\"" + variable.val + "\"";
+                else
+                    res += variable.val;
+            }
+        });
+        res += "\n" + '}';
+    }
 
     return res
 }
