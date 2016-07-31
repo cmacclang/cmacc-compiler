@@ -13,7 +13,7 @@ describe('serialize', function () {
     describe('Variable.md', function () {
         it('should parse and serialize', function (done) {
             var file = path.join(__dirname, 'parser', 'Variable.md');
-            compose(file, null, function (err, ast) {
+            compose('file://' + file, null, function (err, ast) {
 
                 assert.equal(ast.variables[0].key, "hello1");
                 assert.equal(ast.variables[0].val, "World1");
@@ -34,7 +34,7 @@ describe('serialize', function () {
     describe('Object.md', function () {
         it('should parse and serialize', function (done) {
             var file = path.join(__dirname, 'parser', 'Object.md');
-            compose(file, null, function (err, ast) {
+            compose('file://' + file, null, function (err, ast) {
 
                 assert.equal(ast.variables[0].key, "str");
                 assert.equal(ast.variables[0].val, "Lala");
@@ -64,7 +64,7 @@ describe('serialize', function () {
     describe('ImportObjectOverwrite.md', function () {
         it('should parse and serialize', function (done) {
             var file = path.join(__dirname, 'parser', 'ImportObjectOverwrite.md');
-            compose(file, null, function (err, ast) {
+            compose('file://' + file, null, function (err, ast) {
 
                 assert.equal(ast.variables.length, 2)
                 assert.equal(ast.variables[0].key, "obj3");
@@ -84,7 +84,7 @@ describe('serialize', function () {
 
                 serialize(ast, function (err, src) {
 
-                    assert.equal(src, "$ obj3 = {}\n\n$ obj2 = [./Object.md] => {\n\t\"obj1\" : obj3\n}\n\n");
+                    assert.equal(src, "$ obj3 = {\n\t\"hello1\" : \"YOLO\"\n}\n\n$ obj2 = [./Object.md] => {\n\t\"obj1\" : obj3\n}\n\n");
                     fs.writeFileSync('jolo.md', src)
                     done();
                 });

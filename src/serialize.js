@@ -23,6 +23,7 @@ var serialize = function (ast, callback) {
         source += "\n\n";
     });
 
+    if(ast.text)
     source += ast.text + "\n"
 
     callback(null, source)

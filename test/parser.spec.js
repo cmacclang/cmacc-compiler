@@ -10,7 +10,7 @@ describe('regex', function () {
     describe('RegexVariable.md', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(__dirname, 'regex', 'RegexVariable.md');
-            parser(file, function (err, doc) {
+            parser("file://" + file, function (err, doc) {
 
                 console.log(doc);
 
