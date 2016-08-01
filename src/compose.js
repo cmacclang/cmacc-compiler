@@ -1,6 +1,7 @@
 var url = require('url');
 var path = require('path');
 var async = require('async');
+var resolveUrl = require("resolve-url")
 
 var helper = require('./helper');
 var parser = require('./parser');
@@ -42,7 +43,7 @@ var compose = function (file, parent, callback) {
                 if(!ast.variables[i].type){
                     resolve(ast.variables[i], ast, function (err, data) {
                         if (ast.variables[i].ref && !ast.variables[i].src) {
-                            var location = url.resolve(ast.file, ast.variables[i].ref)
+                            var location = resolveUrl(ast.file, ast.variables[i].ref)
                             compose(location, ast.variables[i], function (err, res) {
                                 callback();
                             });

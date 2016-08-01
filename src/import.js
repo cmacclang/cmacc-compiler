@@ -15,10 +15,11 @@ var imp = {
         if(typeof window != 'undefined' && window.document){
 
             var call = '';
-            if(parse.protocol === "ipfs:")
-                call += '/ipfs/' + file.replace('ipfs://', '')
 
-            call += parse.path || '/'
+            if(parse.protocol === "ipfs:")
+                call += '/ipfs/' + file.replace('ipfs://', '');
+            else
+                call += parse.path || '/';
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
