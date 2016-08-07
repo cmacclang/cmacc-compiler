@@ -60,6 +60,10 @@ var resolve = function (variable, ast, callback) {
 
 
         var res = helper.queryAst(ast, val, true);
+
+        if(!res)
+            return callback('cannot find variable: ' + val)
+
         variable.variables.push({
             type:'ref',
             key: key,

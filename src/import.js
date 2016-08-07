@@ -5,26 +5,31 @@ var request = require("request");
 var imp = {
 
 
-    readFile : function(file, callback){
+    readFile: function (file, callback) {
 
         var parse = url.parse(file);
 
-        if(!parse.protocol)
+        if (!parse.protocol)
             return callback(null, file);
 
-        if(typeof window != 'undefined' && window.document){
+        if (typeof window != 'undefined' && window.document) {
 
             var call = '';
 
-            if(parse.protocol === "ipfs:")
+            if (parse.protocol === "ipfs:")
                 call += '/ipfs/' + file.replace('ipfs://', '');
             else
                 call += parse.path || '/';
 
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (xhttp.readyState == 4 && xhttp.status == 200) {
-                    callback(null, xhttp.responseText)
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4) {
+                    if (xhttp.status == 200) {
+                        callback(null, xhttp.responseText)
+                    } else {
+                        console.log('Error::');
+                        callback('Cannot load file:' + call)
+                    }
                 }
             };
             xhttp.open("GET", call, true);
@@ -32,23 +37,25 @@ var imp = {
             return;
         }
 
-        if(parse.protocol === "http:"){
-            request(file, function (error, response, body) {
-                if (!error && response.statusCode == 200) {
+        if (parse.protocol === "http:") {
+            request(file, function (err, response, body) {
+                if(err){
+                    return callback(err)
+                }
+                if (response.statusCode == 200) {
                     callback(null, body)
                 }
             });
             return;
         }
 
-        if(parse.protocol === "ipfs:"){
+        if (parse.protocol === "ipfs:") {
 
         }
 
-        if(parse.protocol === "file:"){
+        if (parse.protocol === "file:") {
             fs.readFile(parse.path, 'utf8', callback);
         }
-
 
 
     }

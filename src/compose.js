@@ -7,7 +7,13 @@ var helper = require('./helper');
 var parser = require('./parser');
 var resolve = require('./resolve');
 
-var compose = function (file, parent, callback) {
+var compose = function (file, parent, options, callback) {
+
+    if(!callback)
+        callback = options;
+
+    options = options || {};
+    options.path = options.path || path.dirname(file) + '/';
 
     parser(file, function (err, ast) {
 
@@ -42,9 +48,15 @@ var compose = function (file, parent, callback) {
             exec.push(function (callback) {
                 if(!ast.variables[i].type){
                     resolve(ast.variables[i], ast, function (err, data) {
+
+                        if (err)
+                            return callback(err);
+
                         if (ast.variables[i].ref && !ast.variables[i].src) {
-                            var location = resolveUrl(ast.file, ast.variables[i].ref)
+                            var location = resolveUrl(options.path, ast.variables[i].ref)
                             compose(location, ast.variables[i], function (err, res) {
+                                if (err)
+                                    return callback(err);
                                 callback();
                             });
                         } else {
