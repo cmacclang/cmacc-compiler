@@ -18,8 +18,12 @@ var render = function (ast, callback, editor) {
             var res = helper.queryAst(ast, key, true) || {};
 
             if (res.text) {
-                return render(res, function (ast, text) {
-                    callback(null, text)
+                return render(res, function (err, text) {
+                    if(err)
+                        return callback(err);
+
+                    callback(null, text);
+
                 }, editor);
             }
 

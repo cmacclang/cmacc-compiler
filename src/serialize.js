@@ -10,16 +10,16 @@ var serialize = function (ast, callback, edit) {
     ast.variables.forEach(function (variable) {
 
         source += "$ ";
-        if(edit) source += '<cmacc-variable ref="' + variable.loc + '">';
+        if (edit) source += '<cmacc-variable ref="' + variable.loc + '">';
         source += variable.key;
-        if(edit) source += '</cmacc-variable>';
+        if (edit) source += '</cmacc-variable>';
         source += " = ";
 
         if (variable.ref) {
             source += "[";
-            if(edit) source += '<cmacc-link ref="'+ variable.ref +'">';
+            if (edit) source += '<cmacc-link ref="' + variable.ref + '">';
             source += variable.ref;
-            if(edit) source += '</cmacc-link>';
+            if (edit) source += '</cmacc-link>';
             source += "] => ";
         }
 
@@ -31,7 +31,8 @@ var serialize = function (ast, callback, edit) {
         source += "\n\n";
     });
 
-    source += ast.text + "\n"
+    if (ast.text)
+        source += ast.text + "\n"
 
     callback(null, source)
 };

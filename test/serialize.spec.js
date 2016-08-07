@@ -93,5 +93,4 @@ describe('serialize', function () {
         });
     });
 
-
 });
