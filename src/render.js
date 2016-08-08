@@ -6,6 +6,8 @@ var helper = require('./helper');
 
 var render = function (ast, callback, editor) {
 
+    console.log(ast)
+
     var exec = {};
 
     if (!ast.text)
@@ -61,7 +63,7 @@ var render = function (ast, callback, editor) {
                         return (space || '') +
                             (pre || '') +
                             "<cmacc-section file='" +
-                            ast.file +
+                            btoa(ast.file) +
                             "'>" + cont.trim() +
                             "</cmacc-section>" +
                             (cont.match(/(\ \ )?$/)[1] ? '  ' : '');

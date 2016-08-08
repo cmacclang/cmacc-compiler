@@ -16,6 +16,9 @@ var parser = function (file, callback) {
         if (err)
             return callback(err);
 
+        if(file === text)
+            ast.file = undefined;
+
         ast.src = text;
 
         text = text.replace(regex.REGEX_VARIABLE, function (found, key, ref, val) {
