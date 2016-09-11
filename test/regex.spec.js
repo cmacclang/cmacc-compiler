@@ -117,4 +117,23 @@ describe('regex', function () {
         });
     });
 
+
+    describe('Comment.cmacc', function () {
+        it('should remove comments from file', function (done) {
+            var file = path.join(root, 'Comment.cmacc');
+            fs.readFile(file, 'utf8', function (err, text) {
+                //console.log("text", text);
+
+                var match;
+
+                match = regex.REGEX_COMMENT.exec(text)
+                assert.equal(match[0], '//adfadff');
+
+                match = regex.REGEX_COMMENT.exec(text)
+                assert.equal(match[0], '// test');
+                done()
+            });
+        });
+    });
+
 });

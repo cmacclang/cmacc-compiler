@@ -28,4 +28,22 @@ describe('regex', function () {
         });
     });
 
+
+    describe('Comment.md', function () {
+        it('should parse variable hello World', function (done) {
+            var file = path.join(__dirname, 'regex', 'Comment.cmacc');
+            parser("file://" + file, function (err, doc) {
+
+                console.log(doc);
+
+                assert.equal(doc.variables[0].key, 'hello');
+                assert.equal(doc.variables[0].val, '"Test"');
+
+                assert.equal(doc.text, '{{hello}}\n');
+                done();
+
+            });
+        });
+    });
+
 });

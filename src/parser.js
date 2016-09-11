@@ -21,6 +21,10 @@ var parser = function (file, callback) {
 
         ast.src = text;
 
+        text = text.replace(regex.REGEX_COMMENT, function (found) {
+            return '';
+        });
+
         text = text.replace(regex.REGEX_VARIABLE, function (found, key, ref, val) {
             ast.variables.push({
                 key: key,
