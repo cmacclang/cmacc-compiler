@@ -1,83 +1,59 @@
-var path = require('path');
-var async = require('async');
+function resolve(obj) {
+    if (obj && obj.$$text$$) {
+        var keys = Object.keys(obj);
+        for (var i = 0; i < keys.length; i++) {
 
-var regex = require('./regex');
-var helper = require('./helper');
+            if (obj[keys[i]] && obj[keys[i]]) {
 
-var resolve = function (variable, ast, callback) {
+                // replace vars in vars
+                var vars = Object.keys(obj[keys[i]]);
+                for (var j = 0; j < vars.length; j++) {
+                    if (typeof obj[keys[i]][vars[j]] === 'string') {
+                        obj[keys[i]][vars[j]] = replaceVars(obj[keys[i]][vars[j]], obj[keys[i]]);
+                    }
+                }
 
-    if(variable.type)
-        return callback(null, variable);
+                obj[keys[i]] = resolve(obj[keys[i]]);
 
-    if(ast.loc)
-        variable.loc = ast.loc + "." + variable.key
-    else
-        variable.loc = variable.key
+            }
 
-    if (!variable.val) {
-        variable.val = null;
-        variable.type = 'null';
-        return callback(null, variable);
-    }
+            // replace vars in text
+            obj.$$text$$ = replaceVars(obj.$$text$$, obj);
 
-    if (variable.val.match(regex.REGEX_STRING)) {
-        variable.val = variable.val.match(regex.REGEX_STRING)[1];
-        variable.type = 'string';
-        return callback(null, variable);
-    }
-
-    variable.val.replace(regex.REGEX_KEYVALUE, function (found, key, val) {
-
-        variable = variable || {};
-        variable.type = 'object';
-        variable.variables = variable.variables || [];
-
-        var key = key.match(regex.REGEX_STRING)[1];
-
-        if (val === "null") {
-            variable.variables.push({
-                type:'null',
-                key: key,
-                val: null,
-                loc: ast.loc + "." + key,
-                over: true
-            });
-            return found;
         }
+        return obj.$$text$$;
+    }
+    return obj;
+}
 
-        if (val.match(regex.REGEX_STRING)) {
-            var val = val.match(regex.REGEX_STRING)[1];
-            variable.variables.push({
-                type:'string',
-                key: key,
-                val: val,
-                loc: variable.loc + "." + key,
-                over: true
-            });
-            return found;
-        }
+function replaceVars(str, obj) {
 
-
-
-        var res = helper.queryAst(ast, val, true);
-
-        if(!res)
-            return callback('cannot find variable: ' + val)
-
-        variable.variables.push({
-            type:'ref',
-            key: key,
-            val: val,
-            loc: variable.loc + "." + key,
-            link: res,
-            over: true
-        });
-
-        return found;
-
+    return str.replace(/{{\w+.\w+}}/g, function (x) {
+        var qry = x.slice(2, -2);
+        var val = findInAst(qry, obj);
+        return resolve(val);
     });
 
-    callback(null, variable)
-};
+}
+
+function findInAst(qry, ast) {
+
+    var spl = qry.split('.');
+    var cur = ast;
+
+    spl.forEach(function (str) {
+
+        if (cur && cur[str])
+            return cur = cur[str];
+
+        return cur = null
+    });
+
+    if (!cur)
+        cur = '!!' + qry + '!!';
+
+    return cur;
+
+}
 
 module.exports = resolve;

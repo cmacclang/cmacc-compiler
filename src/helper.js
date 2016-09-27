@@ -1,5 +1,3 @@
-var mergeJson = require("./merge");
-
 var helper = {
 
     mergeJson: function (obj1, obj2) {
@@ -15,7 +13,6 @@ var helper = {
         for (var i in keys) {
             var key = keys[i];
             if (current.variables) {
-                var found = false;
                 current.variables.forEach(function (v, k) {
                     if (v.key === key) {
                         var variable = current.variables[k]
@@ -25,17 +22,13 @@ var helper = {
                                 res = variable;
                                 current = variable;
                             }
-                            found = true;
                         } else {
                             res = variable;
                             current = variable;
-                            found = true;
                         }
 
                     }
                 });
-                if(!found)
-                    res = null
             }
         }
 
