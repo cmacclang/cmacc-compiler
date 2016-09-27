@@ -1,29 +1,30 @@
 function resolve(obj) {
-    if (obj && obj.$$text$$) {
-        var keys = Object.keys(obj);
-        for (var i = 0; i < keys.length; i++) {
 
-            if (obj[keys[i]] && obj[keys[i]]) {
 
-                // replace vars in vars
-                var vars = Object.keys(obj[keys[i]]);
-                for (var j = 0; j < vars.length; j++) {
-                    if (typeof obj[keys[i]][vars[j]] === 'string') {
-                        obj[keys[i]][vars[j]] = replaceVars(obj[keys[i]][vars[j]], obj[keys[i]]);
-                    }
-                }
+    var keys = Object.keys(obj);
 
-                obj[keys[i]] = resolve(obj[keys[i]]);
+    for (var i = 0; i < keys.length; i++) {
 
-            }
+        var key = keys[i];
 
-            // replace vars in text
-            obj.$$text$$ = replaceVars(obj.$$text$$, obj);
-
+        if (obj[key] && typeof obj[key] === 'string' && key !== '$$file$$' && key !== '$$text$$') {
+            obj[key] = replaceVars(obj[key], obj);
         }
-        return obj.$$text$$;
+
+        if (obj[key] && typeof obj[key] === 'string' && key === '$$text$$') {
+            obj[key] = replaceVars(obj[key], obj);
+        }
+
+        if (typeof obj[key] === 'object') {
+            obj[key] = resolve(obj[key]);
+        }
+
     }
-    return obj;
+
+    if (obj.$$text$$)
+        return obj.$$text$$;
+    else
+        return obj;
 }
 
 function replaceVars(str, obj) {
@@ -31,7 +32,7 @@ function replaceVars(str, obj) {
     return str.replace(/{{\w+.\w+}}/g, function (x) {
         var qry = x.slice(2, -2);
         var val = findInAst(qry, obj);
-        return resolve(val);
+        return val;
     });
 
 }
@@ -43,8 +44,10 @@ function findInAst(qry, ast) {
 
     spl.forEach(function (str) {
 
-        if (cur && cur[str])
-            return cur = cur[str];
+        if (cur && cur[str]) {
+            cur = cur[str];
+            return;
+        }
 
         return cur = null
     });

@@ -262,7 +262,7 @@ describe('parse', function () {
 
     describe('Set', function () {
         describe('SetVariable.cmacc', function () {
-            it('should parse SetVariable.cmacc', function (done) {
+            xit('should parse SetVariable.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'SetVariable.cmacc');
 
                 var result = convert(file);

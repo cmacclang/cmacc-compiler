@@ -15,7 +15,7 @@ describe('parse', function () {
     var run = function (file) {
         var ast = convert(file);
 
-        console.log(ast)
+        console.log()
         var result = resolve(ast);
         return result;
     };
@@ -23,21 +23,16 @@ describe('parse', function () {
     describe('id', function () {
         it('should parse doc.cmacc', function (done) {
             var file = path.join(__dirname, 'case', './id/doc.cmacc');
-
                 var result = run(file);
-
                 assert.equal(result, "Name: Willem Veelenturf Willem Veelenturf");
-                done()
-
+                done();
         });
 
         it('should parse doc_overwrite.cmacc', function (done) {
             var file = path.join(__dirname, 'case', './id/doc_overwrite.cmacc');
-
             var result = run(file);
-
             assert.equal(result, "Name: Willem Veelenturf Veelenturf Willem 1234");
-            done()
+            done();
 
         });
     });
