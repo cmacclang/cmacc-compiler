@@ -260,4 +260,20 @@ describe('parse', function () {
 
     });
 
+    describe('Set', function () {
+        describe('SetVariable.cmacc', function () {
+            it('should parse SetVariable.cmacc', function (done) {
+                var file = path.join(__dirname, 'parse', 'SetVariable.cmacc');
+
+                var result = convert(file);
+
+                console.log(JSON.stringify(result, null, 4));
+                assert.equal(result.test.test, 'World1');
+                assert.equal(result.obj.hello1.hello1, 'World1');
+                done()
+            });
+        });
+
+    });
+
 });

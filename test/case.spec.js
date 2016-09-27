@@ -14,6 +14,8 @@ describe('parse', function () {
 
     var run = function (file) {
         var ast = convert(file);
+
+        console.log(ast)
         var result = resolve(ast);
         return result;
     };
@@ -35,6 +37,18 @@ describe('parse', function () {
             var result = run(file);
 
             assert.equal(result, "Name: Willem Veelenturf Veelenturf Willem 1234");
+            done()
+
+        });
+    });
+
+    describe('person_double_import', function () {
+        it('should parse doc.cmacc', function (done) {
+            var file = path.join(__dirname, 'case', './person_double_import/doc.cmacc');
+
+            var result = run(file);
+
+            assert.equal(result, "This agreement is between name_First name_Last and name_First name_Last.");
             done()
 
         });
