@@ -4,32 +4,26 @@ var request = require("request");
 
 var imp = {
 
-
-    readFile: function (file, callback) {
+    readFileSync: function (file) {
 
         var parse = url.parse(file);
 
-        if (!parse.protocol)
-            return callback(null, file);
+        if (!parse.protocol) {
+            return file;
+        }
 
         if (typeof window != 'undefined' && window.document) {
 
             var call = '';
-
             if (parse.protocol === "ipfs:")
                 call += '/ipfs/' + file.replace('ipfs://', '');
-            else
-                call += parse.path || '/';
+
+            call += parse.path || '/';
 
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
-                if (xhttp.readyState == 4) {
-                    if (xhttp.status == 200) {
-                        callback(null, xhttp.responseText)
-                    } else {
-                        console.log('Error::');
-                        callback('Cannot load file:' + call)
-                    }
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+                    callback(null, xhttp.responseText)
                 }
             };
             xhttp.open("GET", call, true);
@@ -38,11 +32,8 @@ var imp = {
         }
 
         if (parse.protocol === "http:") {
-            request(file, function (err, response, body) {
-                if(err){
-                    return callback(err)
-                }
-                if (response.statusCode == 200) {
+            request(file, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
                     callback(null, body)
                 }
             });
@@ -54,9 +45,8 @@ var imp = {
         }
 
         if (parse.protocol === "file:") {
-            fs.readFile(parse.path, 'utf8', callback);
+            return fs.readFileSync(parse.path, 'utf8');
         }
-
 
     }
 

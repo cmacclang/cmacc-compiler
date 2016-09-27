@@ -1,0 +1,10 @@
+$ party1 = [./MarcDangeard.cmacc];
+
+$ signParty1 = [./_sign.cmacc] => {
+	"role" : "Party1",
+	"person" : party1
+};
+
+IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.
+
+{{signParty1}}

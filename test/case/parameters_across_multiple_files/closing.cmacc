@@ -1,0 +1,32 @@
+$ party1 = [./_person.cmacc];
+
+$ party2 = [./_person.cmacc];
+
+$ signParty1 = [./_sign.cmacc] => {
+	"role" : "Party1",
+	"person" : party1
+};
+
+$ signParty2 = [./_sign.cmacc] => {
+	"role" : "Party2",
+	"person" : party2
+};
+
+IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.
+
+
+<table width="100%">
+<tr>
+<td>{{signParty1}}</td>
+<td>{{signParty2}}</td>
+</tr>
+</table>
+
+
+
+
+
+
+
+
+
