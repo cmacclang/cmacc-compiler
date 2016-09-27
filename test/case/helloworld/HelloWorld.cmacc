@@ -2,5 +2,3 @@ $ person = [./_person.cmacc];
 
 
 {{person.gender.His_Her}} name is {{person.name_Full}} and {{person.gender.he_she}} lives in {{person.city}}
-
-

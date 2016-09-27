@@ -27,8 +27,9 @@ function resolve(obj) {
 
 function replaceVars(str, obj) {
 
-    return str.replace(/{{\w+.\w+}}/g, function (x) {
-        var qry = x.slice(2, -2);
+    var REGEX = /\{\{([\w\.\_]+)\}\}/g
+
+    return str.replace(REGEX, function (match, qry) {
         var val = findInAst(qry, obj);
         return val;
     });

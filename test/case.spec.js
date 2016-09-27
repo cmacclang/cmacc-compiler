@@ -14,8 +14,6 @@ describe('parse', function () {
 
     var run = function (file) {
         var ast = convert(file);
-
-        console.log()
         var result = resolve(ast);
         return result;
     };
@@ -44,6 +42,28 @@ describe('parse', function () {
             var result = run(file);
 
             assert.equal(result, "This agreement is between name_First name_Last and name_First name_Last.");
+            done()
+
+        });
+    });
+
+    describe('helloworld', function () {
+        it('should parse helloworld/HelloWorld.cmacc', function (done) {
+            var file = path.join(__dirname, 'case', './helloworld/HelloWorld.cmacc');
+
+            var result = run(file);
+
+            assert.equal(result, "His/Her name is name_First name_Last and he/she lives in city\n");
+            done()
+
+        });
+    });
+
+    describe('multiple_parameters_passed', function () {
+        it('should parse multiple_parameters_passed/_test_sign.cmacc', function (done) {
+            var file = path.join(__dirname, 'case', './multiple_parameters_passed/_test_sign.cmacc');
+            var result = run(file);
+            assert.equal(result, "IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\nRole: Party1\n\nName: Marc Dangeard  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n\n\n");
             done()
 
         });

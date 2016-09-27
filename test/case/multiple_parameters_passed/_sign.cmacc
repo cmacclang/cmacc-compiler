@@ -1,7 +1,6 @@
 $ role = "role";
 
-$ person = [../ID/_person.cmacc] => {
-};
+$ person = [../ID/_person.cmacc]
 
 $ sign_Place = "sign_Place";
 
@@ -13,16 +12,4 @@ Name: {{person.name_Full}}
 Place: {{sign_Place}}
 Date: {{sign_Date}}
 -------------------------
-
-
-
-
-
-
-
-
-
-
-
-
 
