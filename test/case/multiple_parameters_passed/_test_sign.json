@@ -1,0 +1,64 @@
+{
+    "party1": {
+        "name_First": "Marc",
+        "name_Last": "Dangeard",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Paris",
+        "gender": {
+            "he_she": "he",
+            "his_her": "his",
+            "He_She": "He",
+            "His_Her": "His",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/he.cmacc"
+        },
+        "pron": {
+            "meus": "me",
+            "Iwe": "I",
+            "myour": "my",
+            "IWe": "I",
+            "MyOur": "My",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/_sing.cmacc"
+        },
+        "$$text$$": "",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/MarcDangeard.cmacc"
+    },
+    "signParty1": {
+        "role": "Party1",
+        "person": {
+            "firstName": "firstName",
+            "lastName": "lastName",
+            "fullName": "{{firstName}} {{lastName}}",
+            "city": "Paris",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/MarcDangeard.cmacc",
+            "name_First": "Marc",
+            "name_Last": "Dangeard",
+            "name_Full": "{{name_First}} {{name_Last}}",
+            "gender": {
+                "he_she": "he",
+                "his_her": "his",
+                "He_She": "He",
+                "His_Her": "His",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/he.cmacc"
+            },
+            "pron": {
+                "meus": "me",
+                "Iwe": "I",
+                "myour": "my",
+                "IWe": "I",
+                "MyOur": "My",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/_sing.cmacc"
+            }
+        },
+        "sign_Place": "sign_Place",
+        "sign_Date": "sign_Date",
+        "$$text$$": "Role: {{role}}\n\nName: {{person.name_Full}}  \nPlace: {{sign_Place}}\nDate: {{sign_Date}}\n-------------------------\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/_sign.cmacc"
+    },
+    "$$text$$": "IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\n\n{{signParty1}}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/multiple_parameters_passed/_test_sign.cmacc"
+}
