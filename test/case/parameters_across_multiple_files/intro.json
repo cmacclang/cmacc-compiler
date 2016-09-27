@@ -1,6 +1,0 @@
-{
-    "title": "Test Agreement",
-    "intro_content": "This is where you explain what this agreement is about",
-    "$$text$$": "**{{title}}**\n\n{{intro_content}}",
-    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/intro.cmacc"
-}

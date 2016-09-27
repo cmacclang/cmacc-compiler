@@ -14,19 +14,9 @@ $ signParty2 = [./_sign.cmacc] => {
 
 IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.
 
-
 <table width="100%">
 <tr>
 <td>{{signParty1}}</td>
 <td>{{signParty2}}</td>
 </tr>
 </table>
-
-
-
-
-
-
-
-
-

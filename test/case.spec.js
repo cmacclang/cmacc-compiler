@@ -14,6 +14,9 @@ describe('parse', function () {
 
     var run = function (file) {
         var ast = convert(file);
+
+        console.log(JSON.stringify(ast, null, 4));
+
         var result = resolve(ast);
         return result;
     };
@@ -64,6 +67,16 @@ describe('parse', function () {
             var file = path.join(__dirname, 'case', './multiple_parameters_passed/_test_sign.cmacc');
             var result = run(file);
             assert.equal(result, "IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\nRole: Party1\n\nName: Marc Dangeard  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n\n\n");
+            done()
+
+        });
+    });
+
+    describe('parameters_across_multiple_files', function () {
+        it('should parse parameters_across_multiple_files/draft1.cmacc', function (done) {
+            var file = path.join(__dirname, 'case', './parameters_across_multiple_files/draft1.cmacc');
+            var result = run(file);
+            assert.equal(result, "**Test Agreement**\n\nThis is where you explain what this agreement is about\n\n\n 1. This agreement is between Marc Dangeard and James Hazard\n\n\n 2. The goal of this agreement is to define the modalities for testing a new editing solution for CommonAccord project\n\n\n 3. The agreement will be structured based on standard clauses to be defined.\n\nIN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\n\n<table width=\"100%\">\n<tr>\n<td>Role: Party1\n\nName: name_First name_Last  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n</td>\n<td>Role: Party2\n\nName: name_First name_Last  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n</td>\n</tr>\n</table>\n\n")
             done()
 
         });
