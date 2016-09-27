@@ -11,20 +11,18 @@ function resolve(obj) {
             obj[key] = replaceVars(obj[key], obj);
         }
 
-        if (obj[key] && typeof obj[key] === 'string' && key === '$$text$$') {
-            obj[key] = replaceVars(obj[key], obj);
-        }
-
         if (typeof obj[key] === 'object') {
             obj[key] = resolve(obj[key]);
         }
 
     }
 
-    if (obj.$$text$$)
+    if (obj['$$text$$']) {
+        obj['$$text$$'] = replaceVars(obj['$$text$$'], obj);
         return obj.$$text$$;
-    else
-        return obj;
+    }
+
+    return obj;
 }
 
 function replaceVars(str, obj) {
