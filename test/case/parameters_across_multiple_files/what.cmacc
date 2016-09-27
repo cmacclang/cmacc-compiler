@@ -1,0 +1,3 @@
+$ company = [./CommonAccord.cmacc];
+
+The goal of this agreement is to define the modalities for testing a new editing solution for {{company.name}}
