@@ -38,9 +38,9 @@ function convert(file) {
             }
 
             if (val) {
-                res += 'merge.merge(' + JSON.stringify(convert(resolve)) + ',' + val + ')';
+                res += 'merge(convert('+JSON.stringify(resolve)+'), '+ val +')';
             } else {
-                res += JSON.stringify(convert(resolve));
+                res += 'convert('+JSON.stringify(resolve)+')';
             }
 
         } else if (!ref) {

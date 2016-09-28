@@ -54,7 +54,6 @@ describe('regex', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(root, 'RegexVariable.md');
             fs.readFile(file, function (err, text) {
-                console.log(text);
                 regex.REGEX_VARIABLE.lastIndex = 0;
                 check(text, done)
             });
@@ -65,7 +64,6 @@ describe('regex', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(root, 'RegexVariableNoEnter.md');
             fs.readFile(file, function (err, text) {
-                console.log("text", text);
                 regex.REGEX_VARIABLE.lastIndex = 0;
                 check(text, done)
             });
@@ -76,7 +74,6 @@ describe('regex', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(root, 'RegexVariableNoSpace.md');
             fs.readFile(file, function (err, text) {
-                console.log("text", text);
                 regex.REGEX_VARIABLE.lastIndex = 0;
                 check(text, done)
             });
@@ -87,7 +84,6 @@ describe('regex', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(root, 'RegexVariableOneLine.md');
             fs.readFile(file, function (err, text) {
-                console.log("text", text);
                 regex.REGEX_VARIABLE.lastIndex = 0;
                 check(text, done)
             });
@@ -98,17 +94,14 @@ describe('regex', function () {
         it('should parse variable hello World', function (done) {
             var file = path.join(root, 'RegexKeyValue.md');
             fs.readFile(file, 'utf8', function (err, text) {
-                console.log("text", text);
 
                 var match;
 
                 match = regex.REGEX_KEYVALUE.exec(text)
-                console.log("match", match);
                 assert.equal(match[1], '"hello"');
                 assert.equal(match[2], 'world');
 
                 match = regex.REGEX_KEYVALUE.exec(text)
-                console.log("match", match);
                 assert.equal(match[1], '"hello"');
                 assert.equal(match[2], '"World"');
 

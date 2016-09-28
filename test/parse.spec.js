@@ -17,10 +17,7 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'VariableEmpty.cmacc');
 
                 var result = convert(file);
-
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.hello1, null);
-
                 done()
             });
         });
@@ -30,8 +27,6 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'VariableNull.cmacc');
 
                 var result = convert(file);
-
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.hello1, null);
 
                 done()
@@ -43,8 +38,6 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'VariableString.cmacc');
 
                 var result = convert(file);
-
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.hello1, 'World1');
 
                 done()
@@ -56,8 +49,6 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'VariableObject.cmacc');
 
                 var result = convert(file);
-
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.hello1.hello1, 'World1');
 
                 done()
@@ -74,7 +65,7 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
+                
                 assert.equal(result.obj2.hello1.hello1, 'World1');
                 done()
             });
@@ -86,7 +77,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.obj2.obj1.hello1, 'World2');
                 assert.equal(result.obj2.hello1.hello1, 'World1');
                 done()
@@ -99,11 +89,8 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
-
                 assert.equal(result.obj3.obj1.hello1, 'World3');
                 assert.equal(result.obj3.hello1.hello1, 'World1');
-
                 assert.equal(result.obj2.hello1.obj1.hello1, 'World3');
                 assert.equal(result.obj2.hello1.hello1.hello1, 'World1');
 
@@ -117,10 +104,7 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
-
                 assert.equal(result.obj3.obj2.obj1.hello1, 'World3');
-
                 assert.equal(result.obj3.obj3.obj1.hello1, 'World3');
                 assert.equal(result.obj3.obj3.hello1.hello1, 'World1');
 
@@ -137,7 +121,7 @@ describe('parse', function () {
                 var result = convert(file);
 
                 result.obj2.hello1 = 'World5';
-                console.log(JSON.stringify(result, null, 4));
+                
                 assert.equal(result.obj2.hello1, 'World5');
 
                 done()
@@ -153,7 +137,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.obj.hello2, 'World1');
                 assert.equal(result.obj.hello1.hello1, 'World1');
                 done()
@@ -166,7 +149,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.obj.hello1.hello2, 'World2');
                 done()
             });
@@ -178,7 +160,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.obj.hello1.hello1, 'World2');
                 done()
             });
@@ -193,7 +174,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.obj.hello2, 'World1');
                 assert.equal(result.obj.hello1.hello1, 'World1');
                 done()
@@ -206,7 +186,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.obj.hello1.hello2, 'World2');
                 done()
             });
@@ -221,7 +200,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.test, 'Hello');
                 assert.equal(result.$$text$$, '{{test}} World');
                 done()
@@ -233,8 +211,6 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'TextImport.cmacc');
 
                 var result = convert(file);
-
-                console.log(JSON.stringify(result, null, 4));
 
                 assert.equal(result.test.test, 'Hello');
                 assert.equal(result.test.$$text$$, '{{test}} World');
@@ -251,7 +227,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.test.test, 'World1');
                 assert.equal(result.obj.hello1.hello1, 'World1');
                 done()
@@ -267,7 +242,6 @@ describe('parse', function () {
 
                 var result = convert(file);
 
-                console.log(JSON.stringify(result, null, 4));
                 assert.equal(result.test.test, 'World1');
                 assert.equal(result.obj.hello1.hello1, 'World1');
                 done()

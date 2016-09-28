@@ -102,12 +102,11 @@ function testInvalidFile(done, file, assertString) {
         log(result);
         done()
     } catch (e) {
-        console.log(e);
         assert.equal(e.message, assertString);
     }
     done();
 }
 
 function log(obj) {
-    console.log(JSON.stringify(obj, null, 4));
+    //console.log(JSON.stringify(obj, null, 4));
 }

@@ -1,6 +1,7 @@
+var assert = require('assert');
 var merge = require('../src/merge');
 
-describe('merge', function () {
+describe('merge0', function () {
     it('flat', function () {
         var obj1 = {
             test1 : 'test1'
@@ -10,7 +11,10 @@ describe('merge', function () {
             test2 : 'test2'
         };
 
-        console.log(merge.merge(obj1, obj2))
+        var res = merge(obj1, obj2)
+
+        assert.deepEqual(res, { test1: 'test1', test2: 'test2' });
+
     });
 
     it('deep', function () {
@@ -26,6 +30,8 @@ describe('merge', function () {
             }
         };
 
-        console.log(merge.merge(obj1, obj2))
+        var res = merge(obj1, obj2)
+
+        assert.deepEqual(res, { test1: { hoi: 'test1', doei: 'test2' } });
     });
 });

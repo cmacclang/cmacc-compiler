@@ -7,10 +7,7 @@ var isJSON = function (json) {
     } else {
         return false;
     }
-}
-
-exports.isJSON = isJSON;
-
+};
 
 var mergeJSON = function (json1, json2) {
     var result = null;
@@ -44,4 +41,4 @@ var mergeJSON = function (json1, json2) {
     return result;
 }
 
-exports.merge = mergeJSON;
+module.exports = mergeJSON;
