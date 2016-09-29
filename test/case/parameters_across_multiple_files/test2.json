@@ -1,0 +1,326 @@
+{
+    "party1": {
+        "name_First": "James",
+        "name_Last": "Hazard",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Boston",
+        "gender": {
+            "he_she": "he",
+            "his_her": "his",
+            "He_She": "He",
+            "His_Her": "His",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+        },
+        "pron": {
+            "meus": "me",
+            "Iwe": "I",
+            "myour": "my",
+            "IWe": "I",
+            "MyOur": "My",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+        },
+        "$$text$$": "",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/JamesHazard.cmacc"
+    },
+    "party2": {
+        "name_First": "Willem",
+        "name_Last": "Veelenturf",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Utrecht",
+        "gender": {
+            "he_she": "he",
+            "his_her": "his",
+            "He_She": "He",
+            "His_Her": "His",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+        },
+        "pron": {
+            "meus": "me",
+            "Iwe": "I",
+            "myour": "my",
+            "IWe": "I",
+            "MyOur": "My",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+        },
+        "$$text$$": "",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/WillemVeelenturf.cmacc"
+    },
+    "content": {
+        "party1": {
+            "name_First": "Marc",
+            "name_Last": "Dangeard",
+            "name_Full": "{{name_First}} {{name_Last}}",
+            "city": "Paris",
+            "gender": {
+                "he_she": "he",
+                "his_her": "his",
+                "He_She": "He",
+                "His_Her": "His",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+            },
+            "pron": {
+                "meus": "me",
+                "Iwe": "I",
+                "myour": "my",
+                "IWe": "I",
+                "MyOur": "My",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+            },
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/MarcDangeard.cmacc"
+        },
+        "party2": {
+            "name_First": "James",
+            "name_Last": "Hazard",
+            "name_Full": "{{name_First}} {{name_Last}}",
+            "city": "Boston",
+            "gender": {
+                "he_she": "he",
+                "his_her": "his",
+                "He_She": "He",
+                "His_Her": "His",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+            },
+            "pron": {
+                "meus": "me",
+                "Iwe": "I",
+                "myour": "my",
+                "IWe": "I",
+                "MyOur": "My",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+            },
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/JamesHazard.cmacc"
+        },
+        "intro": {
+            "title": "Test Agreement",
+            "intro_content": "This is where you explain what this agreement is about",
+            "$$text$$": "**{{title}}**\n\n{{intro_content}}\n",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/intro.cmacc"
+        },
+        "what": {
+            "company": {
+                "name": "CommonAccord project",
+                "type": "Open source project",
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/CommonAccord.cmacc"
+            },
+            "$$text$$": "The goal of this agreement is to define the modalities for testing a new editing solution for {{company.name}}\n",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/what.cmacc"
+        },
+        "misc": {
+            "clause1": "The agreement will be structured based on standard clauses to be defined.",
+            "clause2": "This is clause number 2",
+            "clause3": "This is clause number 3",
+            "clause4": "This is clause number 4",
+            "clause5": "This is clause number 5",
+            "$$text$$": "",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/general_clauses.cmacc"
+        },
+        "who": {
+            "party1": {
+                "name_First": "James",
+                "name_Last": "Hazard",
+                "name_Full": "{{name_First}} {{name_Last}}",
+                "city": "Boston",
+                "gender": {
+                    "he_she": "he",
+                    "his_her": "his",
+                    "He_She": "He",
+                    "His_Her": "His",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+                },
+                "pron": {
+                    "meus": "me",
+                    "Iwe": "I",
+                    "myour": "my",
+                    "IWe": "I",
+                    "MyOur": "My",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+                },
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/JamesHazard.cmacc"
+            },
+            "party2": {
+                "name_First": "Willem",
+                "name_Last": "Veelenturf",
+                "name_Full": "{{name_First}} {{name_Last}}",
+                "city": "Utrecht",
+                "gender": {
+                    "he_she": "he",
+                    "his_her": "his",
+                    "He_She": "He",
+                    "His_Her": "His",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+                },
+                "pron": {
+                    "meus": "me",
+                    "Iwe": "I",
+                    "myour": "my",
+                    "IWe": "I",
+                    "MyOur": "My",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+                },
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/WillemVeelenturf.cmacc"
+            },
+            "$$text$$": "This agreement is between {{party1.name_Full}} and {{party2.name_Full}}\n",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/who.cmacc"
+        },
+        "closing": {
+            "party1": {
+                "name_First": "name_First",
+                "name_Last": "name_Last",
+                "name_Full": "{{name_First}} {{name_Last}}",
+                "city": "city",
+                "gender": {
+                    "he_she": "he/she",
+                    "his_her": "his/her",
+                    "He_She": "He/She",
+                    "His_Her": "His/Her",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+                },
+                "pron": {
+                    "meus": "me/us",
+                    "Iwe": "I/we",
+                    "myour": "my/our",
+                    "IWe": "I/We",
+                    "MyOur": "My/Our",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+                },
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+            },
+            "party2": {
+                "name_First": "name_First",
+                "name_Last": "name_Last",
+                "name_Full": "{{name_First}} {{name_Last}}",
+                "city": "city",
+                "gender": {
+                    "he_she": "he/she",
+                    "his_her": "his/her",
+                    "He_She": "He/She",
+                    "His_Her": "His/Her",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+                },
+                "pron": {
+                    "meus": "me/us",
+                    "Iwe": "I/we",
+                    "myour": "my/our",
+                    "IWe": "I/We",
+                    "MyOur": "My/Our",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+                },
+                "$$text$$": "",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+            },
+            "signParty1": {
+                "role": "Party1",
+                "person": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "fullName": "{{firstName}} {{lastName}}",
+                    "city": "Boston",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/JamesHazard.cmacc",
+                    "name_First": "James",
+                    "name_Last": "Hazard",
+                    "name_Full": "{{name_First}} {{name_Last}}",
+                    "gender": {
+                        "he_she": "he",
+                        "his_her": "his",
+                        "He_She": "He",
+                        "His_Her": "His",
+                        "$$text$$": "",
+                        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+                    },
+                    "pron": {
+                        "meus": "me",
+                        "Iwe": "I",
+                        "myour": "my",
+                        "IWe": "I",
+                        "MyOur": "My",
+                        "$$text$$": "",
+                        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+                    }
+                },
+                "sign_Place": "sign_Place",
+                "sign_Date": "sign_Date",
+                "$$text$$": "Role: {{role}}\n\nName: {{person.name_Full}}  \nPlace: {{sign_Place}}\nDate: {{sign_Date}}\n-------------------------\n",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sign.cmacc"
+            },
+            "signParty2": {
+                "role": "Party2",
+                "person": {
+                    "firstName": "firstName",
+                    "lastName": "lastName",
+                    "fullName": "{{firstName}} {{lastName}}",
+                    "city": "Utrecht",
+                    "$$text$$": "",
+                    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/WillemVeelenturf.cmacc",
+                    "name_First": "Willem",
+                    "name_Last": "Veelenturf",
+                    "name_Full": "{{name_First}} {{name_Last}}",
+                    "gender": {
+                        "he_she": "he",
+                        "his_her": "his",
+                        "He_She": "He",
+                        "His_Her": "His",
+                        "$$text$$": "",
+                        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+                    },
+                    "pron": {
+                        "meus": "me",
+                        "Iwe": "I",
+                        "myour": "my",
+                        "IWe": "I",
+                        "MyOur": "My",
+                        "$$text$$": "",
+                        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+                    }
+                },
+                "sign_Place": "sign_Place",
+                "sign_Date": "sign_Date",
+                "$$text$$": "Role: {{role}}\n\nName: {{person.name_Full}}  \nPlace: {{sign_Place}}\nDate: {{sign_Date}}\n-------------------------\n",
+                "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sign.cmacc"
+            },
+            "$$text$$": "IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\n<table width=\"100%\">\n<tr>\n<td>{{signParty1}}</td>\n<td>{{signParty2}}</td>\n</tr>\n</table>\n",
+            "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/closing.cmacc"
+        },
+        "$$text$$": "{{intro}}\n\n 1. {{who}}\n\n 2. {{what}}\n\n 3. {{misc.clause1}}\n\n{{closing}}\n",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/test1.cmacc"
+    },
+    "intro": {
+        "title": "Test Agreement",
+        "intro_content": "This is where you explain what this agreement is about",
+        "$$text$$": "**{{title}}**\n\n{{intro_content}}\n",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/intro.cmacc"
+    },
+    "misc": {
+        "clause1": "The agreement will be structured based on standard clauses to be defined.",
+        "clause2": "This is clause number 2",
+        "clause3": "This is clause number 3",
+        "clause4": "This is clause number 4",
+        "clause5": "This is clause number 5",
+        "$$text$$": "",
+        "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/general_clauses.cmacc"
+    },
+    "$$text$$": "{{intro}}\n\n 1. {{content.who}}\n\n 2. {{misc.clause2}}\n\n 3. {{misc.clause4}}\n\n{{content.closing}}\n\n\n\n\n",
+    "$$file$$": "/Users/Marc/SkyDrive/Documents/CommonAccord/cmacc-compiler/test/case/parameters_across_multiple_files/test2.cmacc"
+}

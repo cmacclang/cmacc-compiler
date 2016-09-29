@@ -1,0 +1,13 @@
+$ name_First = "Willem";
+
+$ name_Last = "Veelenturf";
+
+$ name_Full = "{{name_First}} {{name_Last}}";
+
+$ city = "Utrecht";
+
+$ gender = [./he.cmacc];
+
+$ pron = [./_sing.cmacc];
+
+
