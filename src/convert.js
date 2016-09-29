@@ -20,6 +20,7 @@ function convert(file) {
     }
 
     var md = text.replace(regex.REGEX_VARIABLE, function (match, key, ref, val) {
+
         vars.push(key);
         res += 'var ' + key + ' = ';
         if (ref) {
@@ -59,9 +60,14 @@ function convert(file) {
     res += vars.map(function (vari) {
             return '\t' + vari + ' : ' + vari
         }).join(',') + ',';
-    res += '$$text$$ : ' + JSON.stringify(md) + ',';
+
+    if(md)
+        res += '$$text$$ : ' + JSON.stringify(md) + ',';
+
     res += '$$file$$ : ' + JSON.stringify(file);
     res += '};';
+
+
 
     try {
         return eval(res);

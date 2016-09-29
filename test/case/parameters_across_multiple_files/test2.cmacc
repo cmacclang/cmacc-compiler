@@ -8,6 +8,8 @@ $ content = [./test1.cmacc] => {
 		"party2": party2
 	},
 	"closing" :{
+	    "party1": party1,
+    	"party2": party2,
 	    "signParty1":{
 			"person": party1
 	    },

@@ -1,0 +1,7 @@
+$ obj = [./data.cmacc] => {};
+
+$ layer1 = [./layer1.cmacc] => {
+    obj : obj
+};
+
+{{layer1}}
