@@ -1,5 +1,4 @@
 var cmacc = {
-    helper: require('./helper'),
     convert: require('./convert'),
     merge: require('./merge'),
     parse: require('./parse'),
