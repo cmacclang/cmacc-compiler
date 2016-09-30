@@ -34,4 +34,47 @@ describe('merge0', function () {
 
         assert.deepEqual(res, { test1: { hoi: 'test1', doei: 'test2' } });
     });
+
+    it('change', function () {
+        var obj1 = {
+            test1 : {
+                hoi: 'test1'
+            }
+        };
+
+        var obj2 = {
+            test1 : {
+                hoi: 'test2'
+            }
+        };
+
+        var res = merge(obj1, obj2)
+        assert.deepEqual(res, { test1: { hoi: 'test2' } });
+
+        res.test1.hoi = 'test3';
+
+        assert.deepEqual(res, { test1: { hoi: 'test3' } });
+    });
+
+
+    it('double', function () {
+        var obj1 = {
+            test1 : {
+                hoi: 'test1'
+            }
+        };
+
+        var obj2 = {
+            test1 : {
+                hoi: 'test2'
+            }
+        };
+
+        var res = merge(obj1, obj2)
+        assert.deepEqual(res, { test1: { hoi: 'test2' } });
+
+        res.test1.hoi = 'test3';
+
+        assert.deepEqual(res, { test1: { hoi: 'test3' } });
+    });
 });
