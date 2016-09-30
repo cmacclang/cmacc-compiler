@@ -5,7 +5,6 @@ var url = require('url');
 var marked = require('marked');
 var regex = require('./regex');
 var merge = require('./merge');
-var imp = require('./import');
 
 function convert(file) {
     var res = '';
@@ -24,14 +23,15 @@ function convert(file) {
         vars.push(key);
         res += 'var ' + key + ' = ';
         if (ref) {
-            var obj = url.parse(ref);
+
+            var urlObj = url.parse(ref);
             var resolve;
 
             // absolute path
-            if (obj.protocol) {
+            if (urlObj.protocol) {
                 resolve = ref;
-
             }
+
             // relative path
             else {
                 var dir = path.dirname(file);
@@ -39,9 +39,9 @@ function convert(file) {
             }
 
             if (val) {
-                res += 'merge(convert('+JSON.stringify(resolve)+'), '+ val +')';
+                res += 'parse(' + JSON.stringify(resolve) + ',' + val + ')';
             } else {
-                res += 'convert('+JSON.stringify(resolve)+')';
+                res += 'parse(' + JSON.stringify(resolve) + ')';
             }
 
         } else if (!ref) {
@@ -61,16 +61,15 @@ function convert(file) {
             return '\t' + vari + ' : ' + vari
         }).join(',') + ',';
 
-    if(md)
+    if (md)
         res += '$$text$$ : ' + JSON.stringify(md) + ',';
 
     res += '$$file$$ : ' + JSON.stringify(file);
     res += '};';
 
 
-
     try {
-        return eval(res);
+        return res;
     } catch (e) {
         e.res = res;
         e.file = file;

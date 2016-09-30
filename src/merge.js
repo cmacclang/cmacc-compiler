@@ -1,44 +1,30 @@
-// JSON Konstruktor für die Überprüfung ob ein Objekt JSON ist
-var jsonC = {}.constructor;
+var merge = function (json1, json2) {
 
-var isJSON = function (json) {
-    if (json && json.constructor === jsonC) {
-        return true;
-    } else {
-        return false;
+    json1 = json1 || {}
+
+    //console.log(json1);
+
+    if (typeof json1 !== 'object') {
+        json1 = json2;
+        return json1;
     }
+
+    for (var i in json2) {
+
+        if (typeof json2[i] === 'object')
+            json1[i] = merge(json1[i], json2[i]);
+        else {
+            if (i !== '$$file$$') {
+                json1[i] = json2[i];
+            }
+        }
+
+    }
+
+    console.log(json1);
+
+    return json1
+
 };
 
-var mergeJSON = function (json1, json2) {
-    var result = null;
-    if (isJSON(json2)) {
-        result = {};
-        if (isJSON(json1)) {
-            for (var key in json1) {
-                result[key] = json1[key];
-            }
-        }
-
-        for (var key in json2) {
-            if (typeof result[key] === "object" && typeof json2 === "object") {
-                result[key] = mergeJSON(result[key], json2[key]);
-            } else {
-                result[key] = json2[key];
-            }
-        }
-    } else if (Array.isArray(json1) && Array.isArray(json2)) {
-        result = json1;
-
-        for (var i = 0; i < json2.length; i++) {
-            if (result.indexOf(json2[i]) === -1) {
-                result[result.length] = json2[i];
-            }
-        }
-    } else {
-        result = json2;
-    }
-
-    return result;
-}
-
-module.exports = mergeJSON;
+module.exports = merge;

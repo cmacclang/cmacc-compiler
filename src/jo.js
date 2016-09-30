@@ -1,20 +1,10 @@
-var obj = {"name": "Piet"};
+var test1 = "1"
+var test2 = test1
+var test3 = test2
 
-var layer2 = {
-    "layer1": {
-        "obj": {
-            "protocol": null,
-            "slashes": null,
-            "auth": null,
-            "host": null,
-            "port": null,
-            "hostname": null,
-            "hash": null,
-            "search": null,
-            "query": null,
-            "pathname": "./layer2.cmacc",
-            "path": "./layer2.cmacc",
-            "href": "./layer2.cmacc"
-        }
-    }
-};
+
+test1 = 8
+
+console.log(test1)
+console.log(test2)
+console.log(test3)

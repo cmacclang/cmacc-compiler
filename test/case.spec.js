@@ -5,19 +5,19 @@ var path = require('path');
 
 var marked = require('marked');
 
-describe('parse', function () {
+describe('case', function () {
 
     var cmacc = require('../src/index');
 
-    var convert = cmacc.convert;
+    var parse = cmacc.parse;
     var resolve = cmacc.resolve;
 
     var run = function (file) {
         try {
-            var ast = convert(file);
-            //console.log(JSON.stringify(ast, null, 4))
+            var ast = parse(file);
+            console.log(JSON.stringify(ast, null, 4))
             var result = resolve(ast);
-        }catch(e){
+        } catch (e) {
             console.log(e)
         }
         return result;
@@ -131,6 +131,14 @@ describe('parse', function () {
 
         it('should parse overwrite_root_vars/layer3.cmacc', function (done) {
             var file = path.join(__dirname, 'case', './overwrite_root_vars/layer3.cmacc');
+            var result = run(file);
+            assert.equal(result, "Piet Piet\n")
+            done()
+
+        });
+
+        it('should parse overwrite_root_vars/layerx.cmacc', function (done) {
+            var file = path.join(__dirname, 'case', './overwrite_root_vars/layerx.cmacc');
             var result = run(file);
             assert.equal(result, "Piet Piet\n")
             done()

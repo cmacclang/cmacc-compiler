@@ -9,11 +9,11 @@ describe('parse', function () {
 
     var cmacc = require('../src/index');
 
-    var convert = cmacc.convert;
+    var parse = cmacc.parse;
     var resolve = cmacc.resolve;
 
     var run = function (file) {
-        var ast = convert(file);
+        var ast = parse(file);
         var result = resolve(ast);
         return result;
     };
