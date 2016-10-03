@@ -1,6 +1,6 @@
 $ role = "role";
 
-$ person = [../ID/_person.cmacc] => {
+$ person = [./_person.cmacc] => {
 };
 
 $ sign_Place = "sign_Place";

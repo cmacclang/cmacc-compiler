@@ -1,7 +1,7 @@
-$ fullName = "{{lastName}} {{firstName}} 1234";
+$ full_Name = "{{last_Name}} {{first_Name}} 1234";
 
 $ person = [./WillemVeelenturf.cmacc] => {
-    fullName : fullName
+    full_Name : full_Name
 };
 
 $ person_na = [./_person_na.cmacc] => {

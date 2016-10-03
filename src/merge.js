@@ -1,16 +1,20 @@
-var merge = function (json1, json2) {
 
-    json1 = json1 || {};
+function merge(obj1, obj2) {
 
-    for (var i in json2) {
+        for (var i in obj2) {
 
-        if (typeof json2[i] === 'object') {
-            json1[i] = merge(json1[i], json2[i]);
-        } else
-            json1[i] = json2[i];
-    }
+            obj1[i] = obj1[i] || {}
 
-    return json1;
+            if(typeof obj2[i] === 'string') {
+                obj1[i] = obj2[i];
+            }
+
+            if(typeof obj2[i] === 'object') {
+                merge(obj1[i], obj2[i])
+            }
+        }
+
+    return obj1
 
 };
 

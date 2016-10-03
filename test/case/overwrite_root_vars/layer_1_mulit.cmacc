@@ -1,0 +1,5 @@
+$ type = 'TYPE_X';
+
+$ obj = [./class.cmacc];
+
+{{type}} {{obj}}

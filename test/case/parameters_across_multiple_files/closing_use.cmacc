@@ -1,0 +1,10 @@
+$ party1 = [./JamesHazard.cmacc];
+
+$ party2 = [./MarcDangeard.cmacc];
+
+$ closing = [./closing.cmacc] => {
+    party1: party1,
+    party2: party2
+};
+
+{{closing}}

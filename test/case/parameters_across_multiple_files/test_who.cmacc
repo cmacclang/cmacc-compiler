@@ -1,0 +1,10 @@
+$ party1 = [./MarcDangeard.cmacc];
+
+$ party2 = [./JamesHazard.cmacc];
+
+$ who = [./who.cmacc] => {
+	"party1" : party1,
+	"party2" : party2
+};
+
+{{who}}

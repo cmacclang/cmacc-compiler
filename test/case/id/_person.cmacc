@@ -1,7 +1,7 @@
-$ firstName = "firstName";
+$ first_Name = "firstName";
 
-$ lastName = "lastName";
+$ last_Name = "lastName";
 
-$ fullName = "{{firstName}} {{lastName}}";
+$ full_Name = "{{first_Name}} {{last_Name}}";
 
 $ city = "city";

@@ -1,5 +1,5 @@
-$ firstName = "Willem";
+$ first_Name = "Willem";
 
-$ lastName = "Veelenturf";
+$ last_Name = "Veelenturf";
 
 $ city = "Utrecht";

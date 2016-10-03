@@ -1,0 +1,10 @@
+$ party1 = [./_person.cmacc];
+
+$ sign = [./_sign.cmacc] => {
+    person: party1,
+    role : 'ROLE_A',
+    sign_Place : 'sign_Place_A',
+    sign_Date : 'sign_Date_A'
+};
+
+{{sign}}

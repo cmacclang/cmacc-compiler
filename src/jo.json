@@ -1,0 +1,350 @@
+{
+  "party1": {
+    "name_First": "LALA",
+    "name_Last": "name_Last",
+    "name_Full": "{{name_First}} {{name_Last}}",
+    "city": "city",
+    "gender": {
+      "he_she": "he/she",
+      "his_her": "his/her",
+      "He_She": "He/She",
+      "His_Her": "His/Her",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+    },
+    "pron": {
+      "meus": "me/us",
+      "Iwe": "I/we",
+      "myour": "my/our",
+      "IWe": "I/We",
+      "MyOur": "My/Our",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+    },
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+  },
+  "party2": {
+    "name_First": "name_First",
+    "name_Last": "name_Last",
+    "name_Full": "{{name_First}} {{name_Last}}",
+    "city": "city",
+    "gender": {
+      "he_she": "he/she",
+      "his_her": "his/her",
+      "He_She": "He/She",
+      "His_Her": "His/Her",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+    },
+    "pron": {
+      "meus": "me/us",
+      "Iwe": "I/we",
+      "myour": "my/our",
+      "IWe": "I/We",
+      "MyOur": "My/Our",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+    },
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+  },
+  "intro": {
+    "title": "Test Agreement",
+    "intro_content": "This is where you explain what this agreement is about",
+    "$$text$$": "**{{title}}**\n\n{{intro_content}}\n",
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/intro.cmacc"
+  },
+  "what": {
+    "company": {
+      "name": "CommonAccord project",
+      "type": "Open source project",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/CommonAccord.cmacc"
+    },
+    "$$text$$": "The goal of this agreement is to define the modalities for testing a new editing solution for {{company.name}}\n",
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/what.cmacc"
+  },
+  "misc": {
+    "clause1": "The agreement will be structured based on standard clauses to be defined.",
+    "clause2": "This is clause number 2",
+    "clause3": "This is clause number 3",
+    "clause4": "This is clause number 4",
+    "clause5": "This is clause number 5",
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/general_clauses.cmacc"
+  },
+  "who": {
+    "party1": {
+      "name_First": "name_First",
+      "name_Last": "name_Last",
+      "name_Full": "{{name_First}} {{name_Last}}",
+      "city": "city",
+      "gender": {
+        "he_she": "he/she",
+        "his_her": "his/her",
+        "He_She": "He/She",
+        "His_Her": "His/Her",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+      },
+      "pron": {
+        "meus": "me/us",
+        "Iwe": "I/we",
+        "myour": "my/our",
+        "IWe": "I/We",
+        "MyOur": "My/Our",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+      },
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc",
+      "$$obj$$": {}
+    },
+    "party2": {
+      "name_First": "name_First",
+      "name_Last": "name_Last",
+      "name_Full": "{{name_First}} {{name_Last}}",
+      "city": "city",
+      "gender": {
+        "he_she": "he/she",
+        "his_her": "his/her",
+        "He_She": "He/She",
+        "His_Her": "His/Her",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+      },
+      "pron": {
+        "meus": "me/us",
+        "Iwe": "I/we",
+        "myour": "my/our",
+        "IWe": "I/We",
+        "MyOur": "My/Our",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+      },
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc",
+      "$$obj$$": {}
+    },
+    "$$text$$": "This agreement is between {{party1.name_Full}} and {{party2.name_Full}}\n",
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/who.cmacc",
+    "$$obj$$": {
+      "party1": {
+        "name_First": "Marc",
+        "name_Last": "Dangeard",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Paris",
+        "gender": {
+          "he_she": "he",
+          "his_her": "his",
+          "He_She": "He",
+          "His_Her": "His",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+        },
+        "pron": {
+          "meus": "me",
+          "Iwe": "I",
+          "myour": "my",
+          "IWe": "I",
+          "MyOur": "My",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+        },
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/MarcDangeard.cmacc"
+      },
+      "party2": {
+        "name_First": "James",
+        "name_Last": "Hazard",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Boston",
+        "gender": {
+          "he_she": "he",
+          "his_her": "his",
+          "He_She": "He",
+          "His_Her": "His",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+        },
+        "pron": {
+          "meus": "me",
+          "Iwe": "I",
+          "myour": "my",
+          "IWe": "I",
+          "MyOur": "My",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+        },
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/JamesHazard.cmacc"
+      }
+    }
+  },
+  "closing": {
+    "party1": {
+      "name_First": "LALA",
+      "name_Last": "name_Last",
+      "name_Full": "{{name_First}} {{name_Last}}",
+      "city": "city",
+      "gender": {
+        "he_she": "he/she",
+        "his_her": "his/her",
+        "He_She": "He/She",
+        "His_Her": "His/Her",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+      },
+      "pron": {
+        "meus": "me/us",
+        "Iwe": "I/we",
+        "myour": "my/our",
+        "IWe": "I/We",
+        "MyOur": "My/Our",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+      },
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+    },
+    "party2": {
+      "name_First": "name_First",
+      "name_Last": "name_Last",
+      "name_Full": "{{name_First}} {{name_Last}}",
+      "city": "city",
+      "gender": {
+        "he_she": "he/she",
+        "his_her": "his/her",
+        "He_She": "He/She",
+        "His_Her": "His/Her",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+      },
+      "pron": {
+        "meus": "me/us",
+        "Iwe": "I/we",
+        "myour": "my/our",
+        "IWe": "I/We",
+        "MyOur": "My/Our",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+      },
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+    },
+    "signParty1": {
+      "role": "role",
+      "person": {
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "fullName": "{{firstName}} {{lastName}}",
+        "city": "city",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/ID/_person.cmacc",
+        "$$obj$$": {}
+      },
+      "sign_Place": "sign_Place",
+      "sign_Date": "sign_Date",
+      "$$text$$": "Role: {{role}}\n\nName: {{person.name_Full}}  \nPlace: {{sign_Place}}\nDate: {{sign_Date}}\n-------------------------\n",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sign.cmacc",
+      "$$obj$$": {
+        "role": "Party1",
+        "person": {
+          "name_First": "LALA",
+          "name_Last": "name_Last",
+          "name_Full": "{{name_First}} {{name_Last}}",
+          "city": "city",
+          "gender": {
+            "he_she": "he/she",
+            "his_her": "his/her",
+            "He_She": "He/She",
+            "His_Her": "His/Her",
+            "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+          },
+          "pron": {
+            "meus": "me/us",
+            "Iwe": "I/we",
+            "myour": "my/our",
+            "IWe": "I/We",
+            "MyOur": "My/Our",
+            "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+          },
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+        }
+      }
+    },
+    "signParty2": {
+      "role": "role",
+      "person": {
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "fullName": "{{firstName}} {{lastName}}",
+        "city": "city",
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/ID/_person.cmacc",
+        "$$obj$$": {}
+      },
+      "sign_Place": "sign_Place",
+      "sign_Date": "sign_Date",
+      "$$text$$": "Role: {{role}}\n\nName: {{person.name_Full}}  \nPlace: {{sign_Place}}\nDate: {{sign_Date}}\n-------------------------\n",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sign.cmacc",
+      "$$obj$$": {
+        "role": "Party2",
+        "person": {
+          "name_First": "name_First",
+          "name_Last": "name_Last",
+          "name_Full": "{{name_First}} {{name_Last}}",
+          "city": "city",
+          "gender": {
+            "he_she": "he/she",
+            "his_her": "his/her",
+            "He_She": "He/She",
+            "His_Her": "His/Her",
+            "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_gender.cmacc"
+          },
+          "pron": {
+            "meus": "me/us",
+            "Iwe": "I/we",
+            "myour": "my/our",
+            "IWe": "I/We",
+            "MyOur": "My/Our",
+            "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_pron.cmacc"
+          },
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_person.cmacc"
+        }
+      }
+    },
+    "$$text$$": "IN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\n<table width=\"100%\">\n<tr>\n<td>{{signParty1}}</td>\n<td>{{signParty2}}</td>\n</tr>\n</table>\n",
+    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/closing.cmacc",
+    "role": "role",
+    "person": {
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "fullName": "{{firstName}} {{lastName}}",
+      "city": "city",
+      "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/ID/_person.cmacc",
+      "$$obj$$": {}
+    },
+    "$$obj$$": {
+      "party1": {
+        "name_First": "Marc",
+        "name_Last": "Dangeard",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Paris",
+        "gender": {
+          "he_she": "he",
+          "his_her": "his",
+          "He_She": "He",
+          "His_Her": "His",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+        },
+        "pron": {
+          "meus": "me",
+          "Iwe": "I",
+          "myour": "my",
+          "IWe": "I",
+          "MyOur": "My",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+        },
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/MarcDangeard.cmacc"
+      },
+      "party2": {
+        "name_First": "James",
+        "name_Last": "Hazard",
+        "name_Full": "{{name_First}} {{name_Last}}",
+        "city": "Boston",
+        "gender": {
+          "he_she": "he",
+          "his_her": "his",
+          "He_She": "He",
+          "His_Her": "His",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+        },
+        "pron": {
+          "meus": "me",
+          "Iwe": "I",
+          "myour": "my",
+          "IWe": "I",
+          "MyOur": "My",
+          "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+        },
+        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/JamesHazard.cmacc"
+      }
+    }
+  },
+  "$$text$$": "{{intro}}\n\n 1. {{who}}\n\n 2. {{what}}\n\n 3. {{misc.clause1}}\n\n{{closing}}\n",
+  "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/test1.cmacc"
+}

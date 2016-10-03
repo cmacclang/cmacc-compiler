@@ -2,7 +2,6 @@ var path = require('path');
 var async = require('async');
 
 var regex = require('./regex');
-var helper = require('./helper');
 
 var serialize = function (ast, callback) {
 

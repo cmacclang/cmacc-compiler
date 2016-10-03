@@ -1,0 +1,9 @@
+$ obi = [./data.cmacc] => {
+    name: "Joop"
+};
+
+$ layer2 = [./layer2.cmacc] => {
+    obj : obi
+};
+
+{{layer2}}

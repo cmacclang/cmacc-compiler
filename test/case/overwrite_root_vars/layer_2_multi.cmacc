@@ -1,0 +1,19 @@
+$ obx = [./data.cmacc] => {
+    name: "Peter"
+};
+
+$ oby = [./data.cmacc] => {
+};
+
+
+$ a = [./layer_1_mulit.cmacc] => {
+    type: 'TYPE_R',
+    obj : obx
+};
+
+$ b = [./layer_1_mulit.cmacc] => {
+    type: 'TYPE_X',
+    obj : oby
+};
+
+{{a}} {{b}}

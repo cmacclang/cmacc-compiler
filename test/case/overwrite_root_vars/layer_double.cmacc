@@ -1,0 +1,13 @@
+$ obx = [./data.cmacc] => {
+    name: "Peter"
+};
+
+$ layer2 = [./layer2.cmacc] => {
+    obj : obx
+};
+
+$ layer3 = [./layer3.cmacc] => {
+    obj : obx
+};
+
+{{layer2}} {{layer3}}

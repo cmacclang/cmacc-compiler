@@ -3,7 +3,9 @@ $ obj = [./data.cmacc] => {
 };
 
 $ layer2 = [./layer2.cmacc] => {
-    obj : obj
+    layer1:{
+        obj : obj
+    }
 };
 
 {{layer2}}

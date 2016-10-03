@@ -1,15 +1,20 @@
 var merge = require('./merge');
+var bind = require('./bind');
 var convert = require('./convert');
 
-function parse(file, $$ob$$) {
+function parse($$file$$, $$obj$$) {
 
-    var src = convert(file);
-    var js = eval(src)
+    var $$src$$ = eval(convert($$file$$))
 
-    if($$ob$$)
-        return merge(js, $$ob$$);
-    else
-        return js;
+    bind($$src$$);
+
+    if ($$obj$$)
+        $$src$$['$$obj$$'] = $$obj$$;
+
+    merge($$src$$, $$src$$['$$obj$$'])
+
+
+    return $$src$$;
 
 }
 
