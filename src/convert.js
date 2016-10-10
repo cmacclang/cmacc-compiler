@@ -39,16 +39,17 @@ function convert(file) {
             }
 
             if (val) {
-                res += 'parse(' + JSON.stringify(resolve) + ',' + val + ')';
+                res += 'parse(' + JSON.stringify(resolve) + ',string(' + val + '));';
             } else {
-                res += 'parse(' + JSON.stringify(resolve) + ')';
+                res += 'parse(' + JSON.stringify(resolve) + ');';
             }
 
         } else if (!ref) {
-            if (val)
-                res += val;
-            else
+            if (val) {
+                res += 'string(' + val + ');';
+            }else {
                 res += 'null';
+            }
         }
         res += ';\n\n';
         return '';

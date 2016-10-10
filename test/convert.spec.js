@@ -16,7 +16,7 @@ describe('Convert', function () {
                 var file = path.join(__dirname, 'convert', 'Variable.cmacc');
                 var result = convert(file);
                 // log(result);
-                assert.equal(result, 'var hello1 = \"World1\";\n\nmodule.exports = {\thello1 : hello1,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Variable.cmacc\"};');
+                assert.equal(result, 'var hello1 = string(\"World1\");;\n\nmodule.exports = {\thello1 : hello1,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Variable.cmacc\"};');
                 done()
             });
         });
@@ -26,7 +26,7 @@ describe('Convert', function () {
                 var file = path.join(__dirname, 'convert', 'Object.cmacc');
                 var result = convert(file);
                 log(result);
-                assert.equal(result, 'var str = \"Lala\";\n\nvar obj1 = {\n    \"hello1\" : str\n}\n;\n\nmodule.exports = {\tstr : str,\tobj1 : obj1,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Object.cmacc\"};');
+                assert.equal(result, 'var str = string(\"Lala\");;\n\nvar obj1 = string({\n    \"hello1\" : str\n}\n);;\n\nmodule.exports = {\tstr : str,\tobj1 : obj1,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Object.cmacc\"};')
                 done();
             });
         });
@@ -36,7 +36,7 @@ describe('Convert', function () {
                 var file = path.join(__dirname, 'convert', 'ObjectNested.cmacc');
                 var result = convert(file);
                 log(result);
-                assert.equal(result, 'var str = \"Lala\";\n\nvar obj1 = {\n    \"hello1\" : {\n        \"str\": str\n    }\n}\n;\n\nmodule.exports = {\tstr : str,\tobj1 : obj1,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ObjectNested.cmacc\"};');
+                assert.equal(result, 'var str = string(\"Lala\");;\n\nvar obj1 = string({\n    \"hello1\" : {\n        \"str\": str\n    }\n}\n);;\n\nmodule.exports = {\tstr : str,\tobj1 : obj1,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ObjectNested.cmacc\"};');
                 done()
             });
         });
@@ -45,19 +45,19 @@ describe('Convert', function () {
     describe('and import', function () {
         it('should convert ImportFile.cmacc', function (done) {
             var file = 'ImportFile.cmacc';
-            var shouldBe = 'var obj = parse(\"file:///User/name/test.cmacc\");\n\nmodule.exports = {\tobj : obj,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ImportFile.cmacc\"};';
+            var shouldBe = 'var obj = parse(\"file:///User/name/test.cmacc\");;\n\nmodule.exports = {\tobj : obj,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ImportFile.cmacc\"};';
             importAndConvert(done, file, shouldBe);
         });
 
         it('should convert ImportHttp.cmacc', function (done) {
             var file = 'ImportHttp.cmacc';
-            var shouldBe = 'var obj = parse(\"http://test.nl/test.cmacc\");\n\nmodule.exports = {\tobj : obj,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ImportHttp.cmacc\"};';
+            var shouldBe = 'var obj = parse(\"http://test.nl/test.cmacc\");;\n\nmodule.exports = {\tobj : obj,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ImportHttp.cmacc\"};';
             importAndConvert(done, file, shouldBe);
         });
 
         it('should convert ImportRel.cmacc', function (done) {
             var file = 'ImportRel.cmacc';
-            var shouldBe = 'var obj = parse(\"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Test.md\");\n\nmodule.exports = {\tobj : obj,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ImportRel.cmacc\"};';
+            var shouldBe = 'var obj = parse(\"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Test.md\");;\n\nmodule.exports = {\tobj : obj,$$file$$ : \"/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/ImportRel.cmacc\"};';
             importAndConvert(done, file, shouldBe);
 
         });

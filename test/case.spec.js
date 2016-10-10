@@ -11,11 +11,11 @@ describe('case', function () {
 
     var parse = cmacc.parse;
     var resolve = cmacc.resolve;
+    var compile = cmacc.compile;
 
     var run = function (file) {
         try {
-            var ast = parse(file);
-            console.log(JSON.stringify(ast, null, 4))
+            var ast = compile(file);
             var result = resolve(ast);
         } catch (e) {
             console.log(e)

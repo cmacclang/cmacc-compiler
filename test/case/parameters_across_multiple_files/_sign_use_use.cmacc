@@ -3,11 +3,11 @@ $ party1 = [./JamesHazard.cmacc];
 $ party2 = [./MarcDangeard.cmacc];
 
 $ sign1 = [./_sign_use.cmacc] => {
-    person: party1
+    party: party1
 };
 
 $ sign2 = [./_sign_use.cmacc] => {
-    person: party2
+    party: party2
 };
 
 {{sign1}}

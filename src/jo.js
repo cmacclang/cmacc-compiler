@@ -1,8 +1,10 @@
-var data = {
-    str: "Lala",
-    obj1: {"hello1": data},
-    $$text$$: "undefined\\undefined",
-    $$file$$: "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/Object.cmacc"
+var data = new function string (){
+
+    this.test = 1
+
 };
 
-console.log(data)
+
+
+console.log(typeof data);
+console.log(data.constructor.name );

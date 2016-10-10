@@ -1,8 +1,12 @@
-var merge = require('./src/merge');
-var convert = require('./src/convert');
+var parse = require('./parse');
+var bind = require('./bind');
 
 function compile(file) {
-    var res = convert()
+    var ast = parse(file);
+    console.log(JSON.stringify(ast, null, 4));
+    bind(ast)
+    console.log(JSON.stringify(ast, null, 4));
+    return ast;
 }
 
-module.exports = convert;
+module.exports = compile;

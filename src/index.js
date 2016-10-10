@@ -4,6 +4,7 @@ var cmacc = {
     parse: require('./parse'),
     resolve: require('./resolve'),
     serialize: require('./serialize'),
+    compile: require('./compile'),
     marked: require('marked')
 };
 

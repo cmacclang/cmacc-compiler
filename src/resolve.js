@@ -7,9 +7,6 @@ function resolve(obj) {
 
         var key = keys[i];
 
-        if (obj[key] && typeof obj[key] === 'string' && key !== '$$file$$' && key !== '$$text$$') {
-            obj[key] = replaceVars(obj[key], obj);
-        }
 
         if (typeof obj[key] === 'object') {
             obj[key] = resolve(obj[key]);
@@ -38,23 +35,22 @@ function replaceVars(str, obj) {
 
 function findInAst(qry, ast) {
 
+    var i = 0
+    var stack = [];
     var spl = qry.split('.');
-    var cur = ast;
 
-    spl.forEach(function (str) {
+    stack.push(ast);
 
-        if (cur && cur[str]) {
-            cur = cur[str];
-            return;
-        }
-
-        return cur = null
+    spl.forEach(function (key) {
+        stack.push(stack[i][key]);
+        i++;
     });
 
-    if (!cur)
-        cur = '!!' + qry + '!!';
+    if(stack[i] && stack[i].str) {
+        return replaceVars(stack[i].str, stack[i - 1])
+    }
 
-    return cur;
+    return stack[i];
 
 }
 
