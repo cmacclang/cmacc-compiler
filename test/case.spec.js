@@ -23,7 +23,7 @@ describe('case', function () {
         return result;
     };
 
-    describe('id', function () {
+    describe.only('id', function () {
         it('should parse doc.cmacc', function (done) {
             var file = path.join(__dirname, 'case', './id/doc.cmacc');
             var result = run(file);

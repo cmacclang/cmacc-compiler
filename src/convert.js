@@ -55,7 +55,7 @@ function convert(file) {
         return '';
     });
 
-    md = md.replace(/^[\;\n]*/, '')
+    md = md.replace(/^[\;\n]*/, '');
 
     res += 'module.exports = {';
     res += vars.map(function (vari) {

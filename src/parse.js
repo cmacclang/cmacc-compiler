@@ -3,11 +3,11 @@ var convert = require('./convert');
 
 function parse($$file$$, $$mrg$$) {
 
-    var $$src$$ = eval(convert($$file$$))
+    var $$src$$ = eval(convert($$file$$));
 
-    if($$mrg$$)
-        $$src$$.$$mrg$$ = $$mrg$$
-
+    if($$mrg$$) {
+        $$src$$.$$mrg$$ = $$mrg$$;
+    }
     return $$src$$;
 
 }
