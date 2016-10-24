@@ -5,7 +5,7 @@ function string($$str$$) {
 
         return new function str(){
             ier++;
-            this.$$i$$ = ier
+            //this.$$i$$ = ier
             this.$$str$$ = $$str$$
         };
     }
