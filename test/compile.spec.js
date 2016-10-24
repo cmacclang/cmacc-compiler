@@ -71,10 +71,7 @@ describe('compile', function () {
             });
 
 
-
-
-
-            it('should compile ImportObjectSubstitutionImport.cmacc 1', function () {
+            xit('should compile ImportObjectSubstitutionImport.cmacc 1', function () {
                 var file = path.join(__dirname, 'parse', 'ImportObjectSubstitutionImport.cmacc');
 
                 var result = compile(file);
@@ -123,7 +120,54 @@ describe('compile', function () {
             var file = path.join(__dirname, 'case', './parameters_across_multiple_files/draft1.cmacc');
             var result = compile(file);
             console.log(JSON.stringify(result, null, 4));
-            assert.deepEqual(result,{})
+            assert.deepEqual(result.party1, {
+                "name_First": {
+                    "$$str$$": "Marc"
+                },
+                "name_Last": {
+                    "$$str$$": "Dangeard"
+                },
+                "name_Full": {
+                    "$$str$$": "{{name_First}} {{name_Last}}"
+                },
+                "city": {
+                    "$$str$$": "Paris"
+                },
+                "gender": {
+                    "he_she": {
+                        "$$str$$": "he"
+                    },
+                    "his_her": {
+                        "$$str$$": "his"
+                    },
+                    "He_She": {
+                        "$$str$$": "He"
+                    },
+                    "His_Her": {
+                        "$$str$$": "His"
+                    },
+                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/he.cmacc"
+                },
+                "pron": {
+                    "meus": {
+                        "$$str$$": "me"
+                    },
+                    "Iwe": {
+                        "$$str$$": "I"
+                    },
+                    "myour": {
+                        "$$str$$": "my"
+                    },
+                    "IWe": {
+                        "$$str$$": "I"
+                    },
+                    "MyOur": {
+                        "$$str$$": "My"
+                    },
+                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/_sing.cmacc"
+                },
+                "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/case/parameters_across_multiple_files/MarcDangeard.cmacc"
+            })
             done()
 
         });

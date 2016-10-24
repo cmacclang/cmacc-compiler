@@ -11,7 +11,7 @@ describe('string', function () {
     it('should single string', function (done) {
         var val = 'test'
         var res = string(val)
-        assert.equal(res(), "123");
+        assert.deepEqual(res, {$$str$$: 'test'});
         done();
     });
 
@@ -20,7 +20,9 @@ describe('string', function () {
             test: 'test'
         };
         var res = string(val)
-        assert.equal(res.test(), "[Function]");
+        assert.deepEqual(res, {
+            test: {$$str$$: 'test'}
+        });
         done();
     });
 
