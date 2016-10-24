@@ -8,6 +8,9 @@ function parse($$file$$, $$mrg$$) {
     if($$mrg$$) {
         $$src$$.$$mrg$$ = $$mrg$$;
     }
+
+    console.log(JSON.stringify($$src$$, null, 4));
+
     return $$src$$;
 
 }
