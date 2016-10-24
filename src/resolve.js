@@ -46,8 +46,8 @@ function findInAst(qry, ast) {
         i++;
     });
 
-    if(stack[i] && stack[i].str) {
-        return replaceVars(stack[i].str, stack[i - 1])
+    if(stack[i] && stack[i].$$str$$) {
+        return replaceVars(stack[i].$$str$$, stack[i - 1])
     }
 
     return stack[i];

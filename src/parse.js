@@ -9,7 +9,7 @@ function parse($$file$$, $$mrg$$) {
         $$src$$.$$mrg$$ = $$mrg$$;
     }
 
-    console.log(JSON.stringify($$src$$, null, 4));
+   // console.log(JSON.stringify($$src$$, null, 4));
 
     return $$src$$;
 

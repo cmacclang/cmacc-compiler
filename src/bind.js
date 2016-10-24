@@ -1,39 +1,19 @@
-var assert = require('assert');
-var resolve = require('./resolve');
-
 var merge = require('./merge');
 
 function bind(ast) {
 
-    if (ast.$$mrg$$) {
-        var keys = Object.keys(ast.$$mrg$$);
-        for (var i = 0; i < keys.length; i++) {
-            ast[keys[i]] = merge(ast[keys[i]], ast.$$mrg$$[keys[i]]);
-            delete ast.$$mrg$$[keys[i]];
+    var keys = Object.keys(ast);
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        if (!key.match(/\$\$(.*)\$\$/) && ast[key].$$mrg$$) {
+            ast[key] = merge(ast[key], ast[key].$$mrg$$);
+            delete ast[key].$$mrg$$;
         }
-        delete ast.$$mrg$$;
 
+        if (!key.match(/\$\$(.*)\$\$/))
+            bind(ast[key])
     }
 
-    if (ast.$$text$$) {
-        var matches = {};
-        ast.$$text$$ = ast.$$text$$.replace(/{{.+?}}/g, function(match) {
-            match = match.slice(2, -2);
-            var key = match.split('.')[0];
-            var result = bind(eval('ast.' + match));
-            matches[match] = result;
-            if (result.$$text$$) {
-                return result.$$text$$
-            } else if (result.$$str$$) {
-                result.$$str$$ = result.$$str$$.replace(/{{.+?}}/g, function(match) {
-                    match = match.slice(2, -2);
-                    var retrieve = key + '.' + match;
-                    return matches[retrieve].$$str$$;
-                });
-                return result.$$str$$;
-            }
-        });
-    }
 
     return ast;
 
