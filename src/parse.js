@@ -5,11 +5,9 @@ function parse($$file$$, $$mrg$$) {
 
     var $$src$$ = eval(convert($$file$$));
 
-    if($$mrg$$) {
+    if ($$mrg$$) {
         $$src$$.$$mrg$$ = $$mrg$$;
     }
-
-   // console.log(JSON.stringify($$src$$, null, 4));
 
     return $$src$$;
 

@@ -29,13 +29,6 @@ describe('compile', function () {
 
                 delete result.obj2.$$mrg$$
 
-                //result.obj3.obj1.hello1.$$str$$ = 123;
-                //result.obj3.hello1.hello1.$$str$$ = 456;
-
-                //result.obj3.hello1.hello1 = obj3.$$mrg$$.obj1
-
-                console.log(JSON.stringify(result, null, 4));
-
                 assert.deepEqual(result, {
                     "obj3": {
                         "hello1": {
@@ -75,9 +68,6 @@ describe('compile', function () {
                 var file = path.join(__dirname, 'parse', 'ImportObjectSubstitutionImport.cmacc');
 
                 var result = compile(file);
-
-
-                console.log(JSON.stringify(result, null, 4));
 
                 assert.deepEqual(result, {
                     "obj3": {
@@ -119,7 +109,7 @@ describe('compile', function () {
         it('should parse parameters_across_multiple_files/draft1.cmacc', function (done) {
             var file = path.join(__dirname, 'case', './parameters_across_multiple_files/draft1.cmacc');
             var result = compile(file);
-            console.log(JSON.stringify(result, null, 4));
+
             assert.deepEqual(result.party1, {
                 "name_First": {
                     "$$str$$": "Marc"

@@ -18,7 +18,7 @@ describe('case', function () {
             var ast = compile(file);
             var result = resolve(ast);
         } catch (e) {
-            console.log(e)
+            console.error(e)
         }
         return result;
     };
