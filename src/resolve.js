@@ -1,22 +1,11 @@
 function resolve(obj) {
 
-
-    var keys = Object.keys(obj);
-
-    for (var i = 0; i < keys.length; i++) {
-
-        var key = keys[i];
-
-        if (typeof obj[key] === 'object') {
-            obj[key] = resolve(obj[key]);
-        }
-    }
-
     if (obj['$$text$$']) {
         return replaceVars(obj['$$text$$'], obj);
     }
 
     return obj;
+
 }
 
 function replaceVars(str, obj) {
@@ -25,14 +14,14 @@ function replaceVars(str, obj) {
 
     return str.replace(REGEX, function (match, qry) {
         var val = findInAst(qry, obj);
-        return val;
+        return resolve(val);
     });
 
 }
 
 function findInAst(qry, ast) {
 
-    var i = 0
+    var i = 0;
     var stack = [];
     var spl = qry.split('.');
 
@@ -42,11 +31,6 @@ function findInAst(qry, ast) {
         stack.push(stack[i][key]);
         i++;
     });
-
-    if(qry === 'content.who' ){
-        console.log('content.who')
-        console.log(stack)
-    }
 
     if(stack[i] && stack[i].$$str$$) {
         return replaceVars(stack[i].$$str$$, stack[i - 1])

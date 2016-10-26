@@ -157,14 +157,11 @@ describe('case', function () {
 
             var ast = compile(file);
 
-            console.log(JSON.stringify(ast.content.who.$$text$$, null, 4));
-
             var result = resolve(ast);
 
+            assert.equal(result, "**Test Agreement**\n\nThis is where you explain what this agreement is about\n\n\n 1. This agreement is between Marc Dangeard and James Hazard\n\n\n 2. This is clause number 2\n\n 3. This is clause number 4\n\nIN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\n<table width=\"100%\">\n<tr>\n<td>Role: Party1\n\nName: Marc Dangeard  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n</td>\n<td>Role: Party2\n\nName: James Hazard  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n</td>\n</tr>\n</table>\n\n\n\n\n\n")
 
-
-            assert.equal(result, "**Test Agreement**\n\nThis is where you explain what this agreement is about\n\n\n 1. This agreement is between Marc Dangeard and James Hazard\n\n\n 2. The goal of this agreement is to define the modalities for testing a new editing solution for CommonAccord project\n\n\n 3. The agreement will be structured based on standard clauses to be defined.\n\nIN WITNESS WHEREOF, the undersigned have caused this instrument to be duly executed and delivered.\n\n<table width=\"100%\">\n<tr>\n<td>Role: Party1\n\nName: Marc Dangeard  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n</td>\n<td>Role: Party2\n\nName: James Hazard  \nPlace: sign_Place\nDate: sign_Date\n-------------------------\n</td>\n</tr>\n</table>\n\n")
-
+            done();
         });
     });
 
