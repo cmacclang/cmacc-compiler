@@ -7,16 +7,13 @@ function resolve(obj) {
 
         var key = keys[i];
 
-
         if (typeof obj[key] === 'object') {
             obj[key] = resolve(obj[key]);
         }
-
     }
 
     if (obj['$$text$$']) {
-        obj['$$text$$'] = replaceVars(obj['$$text$$'], obj);
-        return obj.$$text$$;
+        return replaceVars(obj['$$text$$'], obj);
     }
 
     return obj;
@@ -46,9 +43,15 @@ function findInAst(qry, ast) {
         i++;
     });
 
+    if(qry === 'content.who' ){
+        console.log('content.who')
+        console.log(stack)
+    }
+
     if(stack[i] && stack[i].$$str$$) {
         return replaceVars(stack[i].$$str$$, stack[i - 1])
     }
+
 
     return stack[i];
 

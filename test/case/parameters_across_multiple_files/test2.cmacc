@@ -19,7 +19,6 @@ $ content = [./test1.cmacc] => {
 	}
 };
 
-
 $ intro = [./intro.cmacc];
 
 $ misc = [./general_clauses.cmacc];
