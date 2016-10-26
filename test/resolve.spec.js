@@ -13,7 +13,7 @@ describe('parse', function () {
     var resolve = cmacc.resolve;
 
     var run = function (file) {
-        var ast = parse(file);
+        var ast = parse('file://' + file);
         var result = resolve(ast);
         return result;
     };

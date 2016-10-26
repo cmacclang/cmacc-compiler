@@ -5,6 +5,8 @@ var path = require('path');
 
 var marked = require('marked');
 
+var dir = 'file://' + __dirname;
+
 describe('parse', function () {
 
     var cmacc = require('../src/index');
@@ -16,11 +18,11 @@ describe('parse', function () {
             it('should parse VariableEmpty.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'VariableEmpty.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "hello1": null,
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableEmpty.cmacc"
+                    "$$file$$": dir + "/parse/VariableEmpty.cmacc"
                 });
             });
         });
@@ -29,11 +31,11 @@ describe('parse', function () {
             it('should parse VariableNull.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'VariableNull.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "hello1": null,
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableNull.cmacc"
+                    "$$file$$": dir + "/parse/VariableNull.cmacc"
                 });
             });
         });
@@ -42,13 +44,13 @@ describe('parse', function () {
             it('should parse VariableString.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'VariableString.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "hello1": {
                         "$$str$$": "World1"
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableString.cmacc"
+                    "$$file$$": dir + "/parse/VariableString.cmacc"
                 });
             });
         });
@@ -57,7 +59,7 @@ describe('parse', function () {
             it('should parse VariableObject.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'VariableObject.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "hello1": {
@@ -65,7 +67,7 @@ describe('parse', function () {
                             "$$str$$": "World1"
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc"
+                    "$$file$$": dir + "/parse/VariableObject.cmacc"
                 });
             });
         });
@@ -77,7 +79,7 @@ describe('parse', function () {
             it('should parse ImportObject.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'ImportObject.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj2": {
@@ -86,9 +88,9 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc"
+                        "$$file$$": dir + "/parse/VariableObject.cmacc"
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/ImportObject.cmacc"
+                    "$$file$$": dir + "/parse/ImportObject.cmacc"
                 });
             });
         });
@@ -97,7 +99,7 @@ describe('parse', function () {
             it('should parse ImportObjectOverwrite.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'ImportObjectOverwrite.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj2": {
@@ -106,7 +108,7 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "obj1": {
                                 "hello1": {
@@ -115,7 +117,7 @@ describe('parse', function () {
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/ImportObjectOverwrite.cmacc"
+                    "$$file$$": dir + "/parse/ImportObjectOverwrite.cmacc"
                 });
             });
         });
@@ -124,7 +126,7 @@ describe('parse', function () {
             it('should parse ImportObjectSubstitutionImport.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'ImportObjectSubstitutionImport.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj3": {
@@ -133,7 +135,7 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "obj1": {
                                 "hello1": {
@@ -146,7 +148,7 @@ describe('parse', function () {
                         "hello1": {
                             "$$str$$": "World1"
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableString.cmacc",
+                        "$$file$$": dir + "/parse/VariableString.cmacc",
                         "$$mrg$$": {
                             "hello1": {
                                 "hello1": {
@@ -154,7 +156,7 @@ describe('parse', function () {
                                         "$$str$$": "World1"
                                     }
                                 },
-                                "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                                "$$file$$": dir + "/parse/VariableObject.cmacc",
                                 "$$mrg$$": {
                                     "obj1": {
                                         "hello1": {
@@ -165,7 +167,7 @@ describe('parse', function () {
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/ImportObjectSubstitutionImport.cmacc"
+                    "$$file$$": dir + "/parse/ImportObjectSubstitutionImport.cmacc"
                 });
             });
         });
@@ -174,7 +176,7 @@ describe('parse', function () {
             it('should parse ImportObjectSubstitutionImportDouble.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'ImportObjectSubstitutionImportDouble.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj3": {
@@ -184,7 +186,7 @@ describe('parse', function () {
                                     "$$str$$": "World1"
                                 }
                             },
-                            "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                            "$$file$$": dir + "/parse/VariableObject.cmacc",
                             "$$mrg$$": {
                                 "obj1": {
                                     "hello1": {
@@ -197,7 +199,7 @@ describe('parse', function () {
                             "hello1": {
                                 "$$str$$": "World1"
                             },
-                            "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableString.cmacc",
+                            "$$file$$": dir + "/parse/VariableString.cmacc",
                             "$$mrg$$": {
                                 "hello1": {
                                     "hello1": {
@@ -205,7 +207,7 @@ describe('parse', function () {
                                             "$$str$$": "World1"
                                         }
                                     },
-                                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                                    "$$file$$": dir + "/parse/VariableObject.cmacc",
                                     "$$mrg$$": {
                                         "obj1": {
                                             "hello1": {
@@ -216,7 +218,7 @@ describe('parse', function () {
                                 }
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/ImportObjectSubstitutionImport.cmacc",
+                        "$$file$$": dir + "/parse/ImportObjectSubstitutionImport.cmacc",
                         "$$mrg$$": {
                             "obj2": {
                                 "obj1": {
@@ -228,7 +230,7 @@ describe('parse', function () {
                         }
                     },
                     "$$text$$": "{{obj}}",
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/ImportObjectSubstitutionImportDouble.cmacc"
+                    "$$file$$": dir + "/parse/ImportObjectSubstitutionImportDouble.cmacc"
                 });
             });
         });
@@ -240,7 +242,7 @@ describe('parse', function () {
             it('should parse MergeSimple.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'MergeSimple.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj": {
@@ -249,14 +251,14 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "hello2": {
                                 "$$str$$": "World1"
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/MergeSimple.cmacc"
+                    "$$file$$": dir + "/parse/MergeSimple.cmacc"
                 });
             });
         });
@@ -265,7 +267,7 @@ describe('parse', function () {
             it('should parse MergeDepth.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'MergeDepth.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj": {
@@ -274,7 +276,7 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "hello1": {
                                 "hello2": {
@@ -283,7 +285,7 @@ describe('parse', function () {
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/MergeDepth.cmacc"
+                    "$$file$$": dir + "/parse/MergeDepth.cmacc"
                 });
             });
         });
@@ -292,7 +294,7 @@ describe('parse', function () {
             it('should parse MergeOverwrite.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'MergeOverwrite.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj": {
@@ -301,7 +303,7 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "hello1": {
                                 "hello1": {
@@ -310,7 +312,7 @@ describe('parse', function () {
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/MergeOverwrite.cmacc"
+                    "$$file$$": dir + "/parse/MergeOverwrite.cmacc"
                 });
             });
         });
@@ -319,7 +321,7 @@ describe('parse', function () {
             it('should parse MergeSimple.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'MergeSimple.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj": {
@@ -328,14 +330,14 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "hello2": {
                                 "$$str$$": "World1"
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/MergeSimple.cmacc"
+                    "$$file$$": dir + "/parse/MergeSimple.cmacc"
                 });
             });
         });
@@ -344,7 +346,7 @@ describe('parse', function () {
             it('should parse MergeDepth.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'MergeDepth.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj": {
@@ -353,7 +355,7 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "hello1": {
                                 "hello2": {
@@ -362,7 +364,7 @@ describe('parse', function () {
                             }
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/MergeDepth.cmacc"
+                    "$$file$$": dir + "/parse/MergeDepth.cmacc"
                 });
             });
         });
@@ -373,14 +375,14 @@ describe('parse', function () {
             it('should parse TextSimple.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'TextSimple.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "test": {
                         "$$str$$": "Hello"
                     },
                     "$$text$$": "{{test}} World",
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/TextSimple.cmacc"
+                    "$$file$$": dir + "/parse/TextSimple.cmacc"
                 });
 
                 done();
@@ -392,7 +394,7 @@ describe('parse', function () {
             it('should parse TextImport.cmacc', function (done) {
                 var file = path.join(__dirname, 'parse', 'TextImport.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "test": {
@@ -400,10 +402,10 @@ describe('parse', function () {
                             "$$str$$": "Hello"
                         },
                         "$$text$$": "{{test}} World",
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/TextSimple.cmacc"
+                        "$$file$$": dir + "/parse/TextSimple.cmacc"
                     },
                     "$$text$$": "{{test}}",
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/TextImport.cmacc"
+                    "$$file$$": dir + "/parse/TextImport.cmacc"
                 });
 
                 done();
@@ -417,7 +419,7 @@ describe('parse', function () {
             it('should parse DeeperVars.cmacc', function () {
                 var file = path.join(__dirname, 'parse', 'DeeperVars.cmacc');
 
-                var result = parse(file);
+                var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
                     "obj": {
@@ -426,14 +428,14 @@ describe('parse', function () {
                                 "$$str$$": "World1"
                             }
                         },
-                        "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc"
+                        "$$file$$": dir + "/parse/VariableObject.cmacc"
                     },
                     "test": {
                         "test": {
                             "$$str$$": "World1"
                         }
                     },
-                    "$$file$$": "/Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DeeperVars.cmacc"
+                    "$$file$$": dir + "/parse/DeeperVars.cmacc"
                 });
 
             });
