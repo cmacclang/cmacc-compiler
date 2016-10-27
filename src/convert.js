@@ -5,15 +5,16 @@ var url = require('url');
 var marked = require('marked');
 var regex = require('./regex');
 var merge = require('./merge');
+var fetch = require('./fetch');
 
-function convert(file) {
+function convert(file, options) {
     var res = '';
     var vars = [];
 
     var text = null;
 
     try {
-        text = fs.readFileSync(file, 'utf8');
+        text = fetch(file);
     } catch (e) {
         throw(e)
     }
@@ -24,18 +25,25 @@ function convert(file) {
         res += 'var ' + key + ' = ';
         if (ref) {
 
-            var urlObj = url.parse(ref);
             var resolve;
 
             // absolute path
-            if (urlObj.protocol) {
+            if (url.parse(ref).protocol) {
                 resolve = ref;
             }
 
             // relative path
             else {
-                var dir = path.dirname(file);
-                resolve = path.resolve(dir, ref);
+                var urlObj = url.parse(file);
+
+                if(urlObj.protocol){
+                    var dir = path.dirname(urlObj.pathname);
+                    urlObj.pathname = path.resolve(dir, ref);
+                    resolve = url.format(urlObj);
+                } else{
+                    resolve = options.path + '/' + ref;
+                }
+
             }
 
             if (val) {

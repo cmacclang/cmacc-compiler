@@ -1,8 +1,9 @@
 var parse = require('./parse');
 var bind = require('./bind');
 
-function compile(file) {
-    var ast = parse(file);
+function compile(file, options) {
+
+    var ast = parse(file, null, options);
     var bound = bind(ast);
     return bound;
 }
