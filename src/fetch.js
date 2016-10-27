@@ -13,6 +13,10 @@ function fetch(file) {
 
             if (request.status === 200) {
                 return request.responseText
+            }else {
+                var e = new Error('Cannot load file');
+                e.file = file;
+                throw e
             }
         }else{
             return fs.readFileSync(urlObj.pathname, 'utf8');
