@@ -1,0 +1,4 @@
+$ person = [../ID/_person.cmacc] => {
+}
+
+{{person.name_Formal}}

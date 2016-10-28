@@ -1,0 +1,124 @@
+{
+    "person": {
+        "name_First": {
+            "$$str$$": "Marc"
+        },
+        "name_Last": {
+            "$$str$$": "Dangeard"
+        },
+        "name_Full": {
+            "$$str$$": "{{name_First}} {{name_Last}}"
+        },
+        "city": {
+            "$$str$$": "Paris"
+        },
+        "gender": {
+            "he_she": {
+                "$$str$$": "he"
+            },
+            "his_her": {
+                "$$str$$": "his"
+            },
+            "He_She": {
+                "$$str$$": "He"
+            },
+            "His_Her": {
+                "$$str$$": "His"
+            },
+            "$$file$$": "file:///Users/Marc/SkyDrive/Documents/CommonAccord/cmaccnew/ID/gender/he.cmacc"
+        },
+        "pron": {
+            "meus": {
+                "$$str$$": "me"
+            },
+            "Iwe": {
+                "$$str$$": "I"
+            },
+            "myour": {
+                "$$str$$": "my"
+            },
+            "IWe": {
+                "$$str$$": "I"
+            },
+            "MyOur": {
+                "$$str$$": "My"
+            },
+            "$$file$$": "file:///Users/Marc/SkyDrive/Documents/CommonAccord/cmaccnew/Form/_sing.cmacc"
+        },
+        "$$file$$": "file:///Users/Marc/SkyDrive/Documents/CommonAccord/cmaccnew/ID/MarcDangeard.cmacc"
+    },
+    "ag": {
+        "ag_lieu": {
+            "$$str$$": "Paris"
+        },
+        "ag_date": {
+            "$$str$$": "8 aout 2016"
+        },
+        "ag_heure": {
+            "$$str$$": "16:00"
+        },
+        "ag_societe": {
+            "$$str$$": "Dangeard Group"
+        },
+        "ag_presents": {
+            "$$str$$": "presents"
+        },
+        "ag_rep_actionnaires": {
+            "$$str$$": "100%"
+        },
+        "ag_rep_capital": {
+            "$$str$$": "100%"
+        },
+        "ag_president_nom": {
+            "$$str$$": "{{name_First}} {{name_Last}}"
+        },
+        "ag_president_titre": {
+            "$$str$$": "ag_president_titre"
+        },
+        "ag_heure_ouverture": {
+            "$$str$$": "ag_heure_ouverture"
+        },
+        "ag_ordre_du_jour": {
+            "$$str$$": "ag_ordre_du_jour"
+        },
+        "ag_vote": {
+            "$$str$$": "ag_vote"
+        },
+        "ag_heure_cloture": {
+            "$$str$$": "ag_heure_cloture"
+        },
+        "ag_signature": {
+            "$$str$$": "ag_signature"
+        },
+        "$$text$$": "Procès verbal de l’assemblée générale ordinaire tenue à {{ag_lieu}} le {{ag_date}}\n\nLe {{ag_date}} à {{ag_heure}} heures, les associés de  la {{ag_societe}} se sont réunis  à {{ag_lieu}} en assemblée générale ordinaire.\nLa convocation a été faite régulièrement par le président.\n\nSont présents :\n{{ag_presents}}\n\nSoit au total {{ag_rep_actionnaires}} des actionnaires représentant {{ag_rep_capital}} du capital social de la société.\n\nL’assemblée est présidée par {{ag_president_nom}}, {{ag_president_titre}}.\nAprès avoir constaté que l’Assemblée était en nombre pour siéger et vérifié les procurations, le président ouvre la séance à {{ag_heure_ouverture}} heures.\n\nLe président rappelle que l’ordre du jour de la présente assemblée est le suivant :\n{{ag_ordre_du_jour}}\n\nLe président met aux voies les résolutions suivantes à l’ordre du jour :\n{{ag_vote}}\n\nPlus aucune question ne restant à examiner et personne ne demandant plus la parole, la séance est levée à {{ag_heure_cloture}} heures.\nSuite à tout ce qui a été cité ci-dessus, il a été dressé le présent procès verbal qui, après lecture, a été signé par le président.\n\n{{ag_signature}}\n",
+        "$$file$$": "file:///Users/Marc/SkyDrive/Documents/CommonAccord/cmaccnew/FR/proces_verbal_form.cmacc",
+        "$$mrg$$": {
+            "ag_lieu": {
+                "$$str$$": "Paris"
+            },
+            "ag_date": {
+                "$$str$$": "8 aout 2016"
+            },
+            "ag_heure": {
+                "$$str$$": "16:00"
+            },
+            "ag_societe": {
+                "$$str$$": "Dangeard Group"
+            },
+            "ag_presents": {
+                "$$str$$": "presents"
+            },
+            "ag_rep_actionnaires": {
+                "$$str$$": "100%"
+            },
+            "ag_rep_capital": {
+                "$$str$$": "100%"
+            },
+            "ag_president_nom": {
+                "$$str$$": "{{name_First}} {{name_Last}}"
+            }
+        }
+    },
+    "$$text$$": "{{ag}}\n\n\n\n\n\n\n\n\n\n\n",
+    "$$file$$": "file:///Users/Marc/SkyDrive/Documents/CommonAccord/cmaccnew/FR/proces_verbal_ag.cmacc"
+}

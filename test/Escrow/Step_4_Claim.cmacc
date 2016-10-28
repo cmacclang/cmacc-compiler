@@ -1,0 +1,43 @@
+$ shipper = [../ID/fabulous_express_inc.cmacc] => {
+}
+
+$ signed = [./Step_3_Signature.cmacc] => {
+}
+
+$ claim = [./Claim.cmacc] => {
+	"seller" : signed.ordered.order.seller
+	"purchaser" : signed.ordered.order.purchaser
+	"escrow" : signed.ordered.order.escrow
+	"shipper" : shipper
+	"Claim_YMD" : "2014-08-16"
+	"Delivery_YMD" : "2014-08-15"
+	"Parcel_num" : "S-98765"
+	"Product_Description" : signed.ordered.Product_Description
+	"Escrow_Effective_YMD" : signed.ordered.Escrow_Effective_YMD
+	"Purchaser_Claim_Description" : "Three cases were of the wrong type and one case had three broken jars that leaked on the packaging."
+	"Seller_Claim_Response_Delay" : "two business days"
+	"Purchaser_Remedy_Description" : "Two new cases of grape preserves."
+	"sign_Place" : signed.ordered.roberta_robinson.adr.street.city.name
+	"sign_Date" : "2014-08-16"
+}
+
+{{claim}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

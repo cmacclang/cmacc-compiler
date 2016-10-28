@@ -1,0 +1,20 @@
+$ name_Full = "name_Full";
+
+$ name_Dear = "name_Dear";
+
+$ gov_ID_Num = "gov_ID_Num";
+
+$ entity_a = "entity_a";
+
+$ adr = [../Geo/country/state/county/city/street/streetnum/_geo.cmacc];
+
+$ adr_Type = "adr_Type";
+
+$ contact_Name_Formal = "contact_Name_Formal";
+
+$ sign_Rep = [../FR/_individual.cmacc];
+
+$ sign_Title = "sign_Title";
+
+$ pron = [../Form/_pron.cmacc];
+

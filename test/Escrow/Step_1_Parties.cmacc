@@ -1,0 +1,84 @@
+$ Dispute_Notice_Within_Days = "5 days";
+
+$ DeliveryClaim_Delay = "24 hours";
+
+$ DeliveryPayment_TimeSpan = "48 hours";
+
+$ Escrow_Fee_USD = "$1.50";
+
+$ seller = [../ID/gerrys_grapes_llc.cmacc];
+
+$ escrow = [../ID/safe_hands_inc.cmacc];
+
+$ solomon_shirley = [../ID/solomon_shirley.cmacc];
+
+$ arbitrator = [../US/_entity_Individual.cmacc] => {
+	"person" : solomon_shirley,
+	"adr" : solomon_shirley.adr,
+	"sign_Rep" : solomon_shirley
+};
+
+$ shipper = [../ID/fabulous_express_inc.cmacc];
+
+$ arb = [./JAMS_Arbitration_Chicago.cmacc];
+
+$ purchaser = [../US/_entity.cmacc];
+
+$ Pickup_Time_Max = "Pickup_Time_Max";
+
+$ Price_USD = "Price_USD";
+
+$ Escrow_Sign_YMD = "Escrow_Sign_YMD";
+
+$ Escrow_Effective_YMD = "Escrow_Effective_YMD";
+
+$ Product_Description = "Product_Description";
+
+$ sign_Party1_Place = "sign_Party1_Place";
+
+$ sign_Party1_Date = "sign_Party1_Date";
+
+$ sign_Party2_Place = "sign_Party2_Place";
+
+$ sign_Party2_Date = "sign_Party2_Date";
+
+$ sign_Party3_Place = "sign_Party3_Place";
+
+$ sign_Party3_Date = "sign_Party3_Date";
+
+$ sign_Party4_Place = "sign_Party4_Place";
+
+$ sign_Party4_Date = "sign_Party4_Date";
+
+$ offer = [./Escrow.cmacc] => {
+	"seller" : seller,
+	"purchaser" : purchaser,
+	"escrow" : escrow,
+	"arbitrator" : arbitrator,
+	"sign_Party1_Place" : sign_Party1_Place,
+	"sign_Party1_Date" : sign_Party1_Date,
+	"sign_Party2_Place" : sign_Party2_Place,
+	"sign_Party2_Date" : sign_Party2_Date,
+	"sign_Party3_Place" : sign_Party3_Place,
+	"sign_Party3_Date" : sign_Party3_Date,
+	"sign_Party4_Place" : sign_Party4_Place,
+	"sign_Party4_Date" : sign_Party4_Date,
+	"shipper" : shipper,
+	"Product_Description" : Product_Description,
+	"Price_USD" : Price_USD,
+	"Pickup_Time_Max" : Pickup_Time_Max,
+	"DeliveryClaim_Delay" : DeliveryClaim_Delay,
+	"DeliveryPayment_TimeSpan" : DeliveryPayment_TimeSpan,
+	"Escrow_Fee_USD" : Escrow_Fee_USD,
+	"Escrow_Sign_YMD" : Escrow_Sign_YMD,
+	"Escrow_Effective_YMD" : Escrow_Effective_YMD,
+	"Arb_Fee_USD" : arb.fee_USD,
+	"Dispute_Notice_Within_Days" : Dispute_Notice_Within_Days,
+	"Arb_Seat_City" : arb.seat_city,
+	"Arb_Org" : arb.org,
+	"Arb_Court_CountyState" : arb.state,
+};
+
+
+{{offer}}
+

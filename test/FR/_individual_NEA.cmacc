@@ -1,0 +1,21 @@
+$ entity = [../FR/_individual.cmacc];
+
+$ adr_12 = [../Geo/FR/_adr_12.cmacc] => {
+	"adr" : entity.adr
+};
+
+{{entity.name_Full}}, an individual whose {{entity.adr_Type}} address is {{adr_12}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+$ claim = [./Step_4_Claim.cmacc] => {
+}
+
+$ AcceptReject = [./Response_Accept.cmacc] => {
+}
+
+$ response = [./Response.cmacc] => {
+	"seller" : claim.claim.seller
+	"purchaser" : claim.claim.purchaser
+	"escrow" : claim.claim.escrow
+	"Claim_YMD" : claim.claim.Claim_YMD
+	"Response_YMD" : "2014-08-17:12:01"
+	"Product_Description" : claim.claim.Product_Description
+	"Purchaser_Remedy_Description" : claim.claim.Purchaser_Remedy_Description
+	"AcceptReject" : AcceptReject
+	"sign_Place" : claim.claim.seller.adr.street.city.name
+	"sign_Date" : "2014-08-17"
+}
+
+{{response}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

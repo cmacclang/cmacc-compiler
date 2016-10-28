@@ -1,0 +1,64 @@
+$ seller = [../US/_entity.cmacc];
+
+$ Seller_NA = [../US/_entity_NA.cmacc] => {
+	"entity" : seller
+};
+
+$ purchaser = [../US/_entity.cmacc];
+
+$ Purchaser_NA = [../US/_entity_NA.cmacc] => {
+	"entity" : purchaser
+};
+
+$ escrow = [../US/_entity.cmacc];
+
+$ Escrow_NA = [../US/_entity_NA.cmacc] => {
+	"entity" : escrow
+};
+
+$ Claim_YMD = "Claim_YMD";
+
+$ Response_YMD = "Response_YMD";
+
+$ Product_Description = "Product_Description";
+
+$ Purchaser_Remedy_Description = "Purchaser_Remedy_Description";
+
+$ AcceptReject = "AcceptReject";
+
+$ sign_Place = "sign_Party_Place";
+
+$ sign_Date = "sign_Party_Date";
+
+$ signParty = [../Form/_sign.cmacc] => {
+	"role" : "Seller",
+	"person" : seller.sign_Rep,
+	"sign_Place" : sign_Place,
+	"sign_Date" : sign_Date
+};
+
+Seller's Response to Notice of Claim:
+
+To: {{Purchaser_NA}},"Purchaser"
+
+From: {{Seller_NA}}, "Seller"
+
+CC: {{Escrow_NA}}, "Escrow Agent"
+
+Date: {{Response_YMD}}
+
+Claim Date: {{Claim_YMD}}
+
+Re: Claim
+	
+{{purchaser.name_Dear}}
+
+Thank you for your Notice of Claim.  {{seller.pron.IWe}} greatly regret that you had a problem with our shipment of {{Product_Description}} 
+
+Thank you also for your offer to settle this matter by: {{Purchaser_Remedy_Description}}  
+
+{{AcceptReject}}
+
+{{signParty}}
+      
+

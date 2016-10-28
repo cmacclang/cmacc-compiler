@@ -1,0 +1,95 @@
+$ seller = [../US/_entity.cmacc];
+
+$ Seller_NA = [../US/_entity_NA.cmacc] => {
+	"entity" : seller
+};
+
+$ purchaser = [../US/_entity.cmacc];
+
+$ Purchaser_NA = [../US/_entity_NA.cmacc] => {
+	"entity" : purchaser
+};
+
+$ escrow = [../US/_entity.cmacc];
+
+$ Escrow_NA = [../US/_entity_NA.cmacc] => {
+	"entity" : escrow
+};
+
+$ shipper = [../US/_entity.cmacc];
+
+$ Claim_YMD = "Claim_YMD";
+
+$ Delivery_YMD = "Delivery_YMD";
+
+$ Parcel_num = "Parcel_num";
+
+$ Product_Description = "Product_Description";
+
+$ Escrow_Effective_YMD = "Escrow_Effective_YMD";
+
+$ Purchaser_Claim_Description = "Purchaser_Claim_Description";
+
+$ Seller_Claim_Response_Delay = "Seller_Claim_Response_Delay";
+
+$ Purchaser_Remedy_Description = "Purchaser_Remedy_Description";
+
+$ sign_Place = "sign_Party_Place";
+
+$ sign_Date = "sign_Party_Date";
+
+$ signParty = [../Form/_sign.cmacc] => {
+	"role" : "Purchaser",
+	"person" : purchaser.sign_Rep,
+	"sign_Place" : sign_Place,
+	"sign_Date" : sign_Date
+};
+
+Notice of Claim:
+
+To: {{Seller_NA}}, "Seller"
+
+From: {{Purchaser_NA}}, "Purchaser"
+
+CC: {{Escrow_NA}}, "Escrow Agent"
+
+Date: {{Claim_YMD}}
+
+Re: Claim
+
+
+Dear {{seller.name_Dear}}:
+
+This will inform you that on {{Delivery_YMD}}, {{shipper.name_Full}} delivered package {{Parcel_num}} to {{purchaser.pron.meus}}. The contents were sent by you and described as:
+
+{{Product_Description}}.
+
+This notifies you and the Escrow Agent under the terms of our Escrow Agreement dated {{Escrow_Effective_YMD}} of {{purchaser.pron.myour}} "Claim."
+
+The Claim is:
+{{Purchaser_Claim_Description}}
+
+{{purchaser.pron.IWe}} would appreciate it if you would remedy this problem by:
+
+{{Purchaser_Remedy_Description}}
+
+Your response is required by {{Seller_Claim_Response_Delay}}.
+
+{{signParty}}
+	
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,8 @@
+$ seller = [../US/_entity.cmacc] => {
+}
+
+$ seller_Counterproposal = "Seller_Counterproposal"
+
+{{seller.pron.IWe}} would like to propose that instead of your offer, {{seller.pron.Iwe}} will {{seller_Counterproposal}}  
+
+

@@ -1,0 +1,76 @@
+$ sign_Party1_Place = "sign_Party1_Place"
+
+$ sign_Party1_Date = "sign_Party1_Date"
+
+$ sign_Party2_Place = "sign_Party2_Place"
+
+$ sign_Party2_Date = "sign_Party2_Date"
+
+$ sign_Party3_Place = "sign_Party3_Place"
+
+$ sign_Party3_Date = "sign_Party3_Date"
+
+$ sign_Party4_Place = "sign_Party4_Place"
+
+$ sign_Party4_Date = "sign_Party4_Date"
+
+$ Product_Description = "eighteen cases of grape preserves"
+
+$ Price_USD = "$650.00"
+
+$ Pickup_Time_Max = "2014-08-15"
+
+$ Escrow_Sign_YMD = "2014-08-13"
+
+$ Escrow_Effective_YMD = "2014-08-13"
+
+$ roberta_robinson = [../ID/roberta_robinson.cmacc] => {
+}
+
+$ purchaser = [../US/_entity_Individual.cmacc] => {
+	"person" : roberta_robinson
+	"adr" : roberta_robinson.adr
+	"sign_Rep" : roberta_robinson
+}
+
+$ order = [./Step_1_Parties.cmacc] => {
+	"purchaser" : purchaser
+	"Pickup_Time_Max" : Pickup_Time_Max
+	"Price_USD" : Price_USD
+	"Escrow_Sign_YMD" : Escrow_Sign_YMD
+	"Escrow_Effective_YMD" : Escrow_Effective_YMD
+	"Product_Description" : Product_Description
+	"sign_Party1_Place" : sign_Party1_Place
+	"sign_Party1_Date" : sign_Party1_Date
+	"sign_Party2_Place" : sign_Party2_Place
+	"sign_Party2_Date" : sign_Party2_Date
+	"sign_Party3_Place" : sign_Party3_Place
+	"sign_Party3_Date" : sign_Party3_Date
+	"sign_Party4_Place" : sign_Party4_Place
+	"sign_Party4_Date" : sign_Party4_Date
+}
+
+{{order}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+$ entity = [../FR/_entity.cmacc];
+
+$ adr_12 = [../Geo/FR/_adr_12.cmacc] => {
+	"adr" : entity.adr
+};
+
+{{entity.name_Full}}, {{adr_12}}
+
+
+
+
+
+

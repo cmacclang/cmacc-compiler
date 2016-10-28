@@ -1,0 +1,177 @@
+$ seller = [../US/_entity.cmacc];
+
+$ purchaser = [../US/_entity.cmacc];
+
+$ escrow = [../US/_entity.cmacc];
+
+$ arbitrator = [../US/_entity.cmacc];
+
+$ shipper = [../US/_entity.cmacc];
+
+$ Seller_NEA = [../US/_entity_NEA.cmacc] => {
+	"entity" : seller
+};
+
+$ Purchaser_NEA = [../US/_entity_NEA.cmacc] => {
+	"entity" : purchaser
+};
+
+$ Escrow_NEA = [../US/_entity_NEA.cmacc] => {
+	"entity" : escrow
+};
+
+$ Shipper_NEA = [../US/_entity_NEA.cmacc] => {
+	"entity" : shipper
+};
+
+$ Arbitrator_NEA = [../US/_entity_NEA.cmacc] => {
+	"entity" : arbitrator
+};
+
+$ Product_Description = "Product_Description";
+
+$ Price_USD = "Price_USD";
+
+$ Pickup_Time_Max = "Pickup_Time_Max";
+
+$ DeliveryClaim_Delay = "DeliveryClaim_Delay";
+
+$ DeliveryPayment_TimeSpan = "DeliveryPayment_TimeSpan";
+
+$ Escrow_Fee_USD = "Escrow_Fee_USD";
+
+$ Escrow_Sign_YMD = "Escrow_Sign_YMD";
+
+$ Escrow_Effective_YMD = ""Escrow_Effective_YMD";
+
+$ Arb_Fee_USD = "ARB_Fee_USD";
+
+$ Dispute_Notice_Within_Days = "Dispute_Notice_Within_Days";
+
+$ Arb_Seat_City = "Arb_Seat_City";
+
+$ Arb_Org = "Arb_Org";
+
+$ Arb_Court_CountyState = "Arb_Court_CountyState";
+
+
+ESCROW AGREEMENT
+
+This escrow agreement ("Escrow Agreement") is made and entered into on {{Escrow_Effective_YMD}} by and among:
+
+ {{Purchaser_NEA}}, ("Purchaser"),
+
+ {{Escrow_NEA}}, ("Escrow Agent"),
+
+ {{Seller_NEA}} ("Seller"),
+
+as of {{Escrow_Sign_YMD}}.
+
+Additional persons referenced in this Agreement are:
+
+ {{Shipper_NEA}} ("Shipper"); and
+ {{Arbitrator_NEA}} ("Arbitrator").
+
+WHEREAS, the Purchaser and the Seller have entered into a purchase agreement ("Purchase Agreement") for the sale to the Purchaser of {{Product_Description}} (the "Products") owned by the Seller in exchange for {{Price_USD}} (the "Purchase Price") (altogether, the "Transaction");
+
+WHEREAS, pursuant to said Purchase Agreement, the Purchaser has agreed to deposit the Purchase Price into an Escrow Account ("the Escrow Account");
+
+WHEREAS, the Purchaser and the Seller have agreed to use the Escrow Agent to hold the Purchase Price and act as Escrow Agent;
+
+WHEREAS, the Escrow Agent has agreed to act in such capacity upon the terms and conditions contained herein; and
+
+WHEREAS, the Seller, Purchaser and Escrow Agent agree to use {{Arbitrator_NEA}} (the "Arbitrator") to resolve any disputes among them regarding the meaning of this Agreement or the performance of this Agreement, including any "Claim" as defined below.
+
+NOW, THEREFORE, in consideration of the mutual premises and conditions contained herein, the Purchaser, the Seller and the Escrow Agent do hereby agree as follows:
+
+Deposit of Funds. The Purchaser has delivered funds equal to the Purchase Price to the Escrow Agent and the Escrow Agent acknowledges receipt of the Purchase Price.
+
+Pickup. The Seller promises to deliver the Products to the Shipper on or before {{Pickup_Time_Max}}.
+
+Release of Payment. The Escrow Agent shall release the Purchase Price to the Seller not less than {{DeliveryClaim_Delay}} and nor more than {{DeliveryPayment_TimeSpan}} after notification from the Shipper that it has delivered the Products to the Purchaser.
+
+Cancellation. If the Seller fails to deliver the Products to the Shipper by {{Pickup_Time_Max}}, the Purchaser shall have the option to cancel the Transaction ("Cancellation") at any time after {{Pickup_Time_Max}} and before the Shipper notifies the Escrow Agent that Shipper has received the Products from Seller. If there is a Cancellation, the Escrow Agent shall return the Purchase Price to the Purchaser and the Purchaser shall have no other obligation to the Seller.
+
+Claim. If the Purchaser notifies the Escrow Agent of a claim of defect in the Product (a "Claim") not later than {{DeliveryClaim_Delay}} after notification by the Shipper of delivery to the Purchaser, then the Escrow Agent shall not release the Purchase Price to the Seller while the Claim is being handled. The Escrow Agent shall notify the Seller, the Purchaser, and the Arbitrator of the existence of the Claim.
+
+Reliance by Escrow Agent. The Escrow Agent may act in reliance upon any writing, instrument, or signature that the Escrow Agent, in good faith, believes to be genuine; and may assume any person purporting to give any notice, writing, advice, or instructions in connection with any provision herein has been duly authorized to do so.
+
+Indemnification of Escrow Agent. The Purchaser and the Seller agree to indemnify and hold harmless the Escrow Agent from any and all claims, liabilities, losses, expenses, actions, suits, or proceedings at law or in equity, or any other expense, fees, or charges of any character or nature whatever that it may incur by reason of acting as the Escrow Agent under this Escrow Agreement except for the Escrow Agent’s gross negligence, bad faith or willful misconduct. The Escrow Agent shall not be required to institute or maintain any litigation unless indemnified to its satisfaction for its counsel fees, costs, disbursements and all other expenses and liabilities that it may be subjected to in connection with the aforesaid action.
+
+Submission of Dispute by Escrow Agent. If the Seller and the Purchaser disagree about the interpretation of this Escrow Agreement, about the rights and obligations of the parties, or the propriety of any action contemplated by the Escrow Agent hereunder, the Escrow Agent may submit such dispute to the Arbitrator. The Escrow Agent shall be indemnified for any costs, including reasonable attorney fees in connection with the aforesaid action.
+
+Fee for Escrow Agent. For its services, the Escrow Agent shall receive {{Escrow_Fee_USD}}.
+
+Fee for Arbitrator. In the event that the Arbitrator is notified of a Claim or otherwise informed of a dispute, the Arbitrator shall receive {{Arb_Fee_USD}}.
+
+Successors. The rights created by this Escrow Agreement shall inure to the benefit of, and the obligations created hereby shall be binding upon the successors and assigns of the Escrow Agent and all parties to this Escrow Agreement.
+
+Limit on Liability of Escrow Agent. The Escrow Agent shall not be obligated to take any action that is not specifically set forth herein. In the event of a disagreement or dispute concerning the validity or interpretation of any condition of this Escrow Agreement, the dispute shall be resolved by the Arbitrator. In such event, the Escrow Agent shall be relieved of any other and further liability under this Escrow Agreement.
+
+Arbitration. PLEASE READ THE FOLLOWING PARAGRAPH CAREFULLY BECAUSE IT REQUIRES THE PARTIES TO ARBITRATE DISPUTES AND LIMITS THE MANNER IN WHICH THE PARTIES CAN SEEK RELIEF.
+
+The parties agree to arbitrate any dispute arising from these Terms or relating to the Site, except that the parties are not required to arbitrate any dispute in which either party seeks equitable or other relief for the alleged unlawful use of copyrights, trademarks, trade names, logos, trade secrets or patents. ARBITRATION PREVENTS THE PARTIES FROM SUING IN COURT OR FROM HAVING A JURY TRIAL. The parties agree that the parties will notify each other of any dispute within {{Dispute_Notice_Within_Days}} of when it arises, that the parties will attempt informal resolution prior to any demand for arbitration, that any arbitration will occur in {{Arb_Seat_City}} and that arbitration will be conducted confidentially by a single arbitrator in accordance with the rules of {{Arb_Org}}. The parties also agree that the state or federal courts in {{Arb_Court_CountyState}} have exclusive jurisdiction over any appeals of an arbitration award and over any suit between the parties not subject to arbitration. In any arbitration, the parties will not seek discovery from each other, and the arbitrator shall not allow parties to engage in discovery; rather, each party shall disclose the evidence supporting their positions at some mutually agreeable time and date prior to the final hearing. Other than class procedures and remedies discussed below, the arbitrator has the authority to grant any remedy that would otherwise be available in court. Neither party will participate in a class action or class-wide arbitration for any claims covered by these Terms. The parties also agree not to participate in claims brought in an private attorney general or representative capacity, or consolidated claims involving another person, if the other party is a party to the proceeding. If the prohibition against class actions and other claims brought on behalf of third parties contained above is found to be unenforceable, then that language shall be deemed to have been dropped from the Terms and the remaining obligations relating to arbitration shall continue in full force and effect.
+
+Governing Law
+    This Escrow Agreement shall be construed and enforced in accordance with the laws of {{Arb_Court_CountyState}} without reference to its internal choice of law rules.
+
+Notices.
+    All notices under this Agreement shall be delivered by electronic message using the "blockchain" technology through which this Agreement was entered.
+
+Construction to Conform to Technical Implementation
+    The provisions of this Agreement are intended to express in legal language ("Text") the functioning of the software code that performs the transaction. Each party represents that it has access to the source code ("Code") and has made such inspection and analysis as it deems appropriate. In the event of any ambiguity in the text or conflict between the text and operation of the Code, the Code will be the definitive version.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

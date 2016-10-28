@@ -1,0 +1,61 @@
+$ MessageToUser = "Signed!"
+
+$ Seller_xSignature = "xGERRY"
+
+$ Seller_Sign_YMD = "2014-08-13:12:01"
+
+$ Purchaser_xSignature = "xROBERTA ROBINSON"
+
+$ Purchaser_Sign_YMD = "2014-08-13:12:04"
+
+$ Escrow_xSignature = "xSAFE HANDS"
+
+$ Escrow_Sign_YMD = "2014-08-13:12:05"
+
+$ Arbitrator_xSignature = "xSOLOMON SHIRLEY"
+
+$ Arbitrator_Sign_YMD = "2014-08-13:12:03"
+
+$ ordered = [./Step_2_Order.cmacc] => {
+}
+
+$ sign_Block = [../Form/_sign4.cmacc] => {
+	"party1" : ordered.order.seller
+	"party2" : ordered.order.purchaser
+	"party3" : ordered.order.escrow
+	"party4" : ordered.order.arbitrator
+	"sign_Party1_Place" : ordered.order.seller.adr.street.city.name
+	"sign_Party1_Date" : Seller_Sign_YMD
+	"sign_Party2_Place" : ordered.order.purchaser.adr.street.city.name
+	"sign_Party2_Date" : Purchaser_Sign_YMD
+	"sign_Party3_Place" : ordered.order.escrow.adr.street.city.name
+	"sign_Party3_Date" : Escrow_Sign_YMD
+	"sign_Party4_Place" : ordered.order.arbitrator.adr.street.city.name
+	"sign_Party4_Date" : Arbitrator_Sign_YMD
+}
+
+{{ordered}}
+
+{{sign_Block}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+$ entity = [../FR/_individual.cmacc];
+
+$ entity_name_Full = [../Form/_person_full.cmacc] => {
+	"person" : entity
+};
+
+$ adr_12 = [../Geo/FR/_adr_12.cmacc] => {
+	"adr" : entity.adr
+};
+
+{{entity_name_Full}}, {{adr_12}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
