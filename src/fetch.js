@@ -6,7 +6,7 @@ function fetch(file) {
     var urlObj = url.parse(file);
 
     if(urlObj.protocol){
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' || !window.location.host) {
             var request = new XMLHttpRequest();
             request.open('GET', file, false);
             request.send(null);
