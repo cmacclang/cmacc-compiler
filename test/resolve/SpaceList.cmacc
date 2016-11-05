@@ -1,0 +1,4 @@
+$item = [./SpaceItem.cmacc];
+
+1. Item 1
+2. {{item}}

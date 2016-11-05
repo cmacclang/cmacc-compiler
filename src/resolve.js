@@ -1,21 +1,64 @@
-function resolve(obj) {
+function resolve(obj, opts) {
+
+    var options = opts || {};
 
     if (obj['$$text$$']) {
-        return replaceVars(obj['$$text$$'], obj);
+        return replaceVars(obj['$$text$$'], obj, options);
     }
 
     return obj;
 
 }
 
-function replaceVars(str, obj) {
+function spacesString(num) {
+    var res = ''
+    for(var i=0;i<num;i++){
+        res += ' ';
+    }
+    return res;
+}
 
-    var REGEX = /\{\{([\w\.\_]+)\}\}/g
+function replaceVars(str, obj, opts) {
 
-    return str.replace(REGEX, function (match, qry) {
-        var val = findInAst(qry, obj);
-        return resolve(val);
-    });
+    var REGEX_EOL = /\n/;
+    var REGEX_VAR = /\{\{([\w\.\_]+)\}\}/g;
+    var REGEX_NUM = /^(\s*)([\-\d\+]\.\s)(.*)/;
+
+    var lolo = str.split(REGEX_EOL).map(function (line) {
+        return line.replace(REGEX_VAR, function (match, qry, pos) {
+
+            var val = findInAst(qry, obj);
+            var res = resolve(val);
+            var firstLine = true;
+
+            return res.split(/\n/).map(function (line) {
+                var match = line.match(REGEX_NUM);
+
+                var spaces = firstLine ? '' : spacesString(pos);
+                firstLine = false;
+
+                if (opts && opts.debug) {
+                    if (match && match.length >= 3)
+                        return spaces + match[1] + match[2] + '<cmacc-variable name="' + qry + '">' + match[3] + '</cmacc-variable>';
+                    else
+                        return spaces + '<cmacc-variable name="' + qry + '">' + line + '</cmacc-variable>';
+                }
+
+                console.log(firstLine, line, pos);
+
+                return spaces + line;
+
+
+            }).join('\n');
+
+        });
+
+    }).join('\n');
+
+    //console.log('lolo', lolo)
+
+    return lolo
+
 
 }
 
@@ -32,7 +75,7 @@ function findInAst(qry, ast) {
         i++;
     });
 
-    if(stack[i] && stack[i].$$str$$) {
+    if (stack[i] && stack[i].$$str$$) {
         return replaceVars(stack[i].$$str$$, stack[i - 1])
     }
 
