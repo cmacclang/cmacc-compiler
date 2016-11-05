@@ -24,7 +24,7 @@ function replaceVars(str, obj, opts) {
     var REGEX_VAR = /\{\{([\w\.\_]+)\}\}/g;
     var REGEX_NUM = /^(\s*)([\-\d\+]\.\s)(.*)/;
 
-    var lolo = str.split(REGEX_EOL).map(function (line) {
+    return str.split(REGEX_EOL).map(function (line) {
         return line.replace(REGEX_VAR, function (match, qry, pos) {
 
             var val = findInAst(qry, obj);
@@ -44,8 +44,6 @@ function replaceVars(str, obj, opts) {
                         return spaces + '<cmacc-variable name="' + qry + '">' + line + '</cmacc-variable>';
                 }
 
-                console.log(firstLine, line, pos);
-
                 return spaces + line;
 
 
@@ -54,11 +52,6 @@ function replaceVars(str, obj, opts) {
         });
 
     }).join('\n');
-
-    //console.log('lolo', lolo)
-
-    return lolo
-
 
 }
 
