@@ -6,7 +6,8 @@ function fetch(file) {
     var urlObj = url.parse(file);
 
     if(urlObj.protocol){
-        if (typeof window !== 'undefined' || !window.location.host) {
+
+        if (typeof window !== 'undefined' && !window.location.host) {
             var request = new XMLHttpRequest();
             request.open('GET', file, false);
             request.send(null);
@@ -21,6 +22,7 @@ function fetch(file) {
         }else{
             return fs.readFileSync(urlObj.pathname, 'utf8');
         }
+
     }
 
     return file;
