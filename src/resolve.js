@@ -1,9 +1,9 @@
 function resolve(obj, opts) {
 
-    var options = opts || {};
+    opts = opts || {};
 
-    if (obj['$$text$$']) {
-        return replaceVars(obj['$$text$$'], obj, options);
+    if (obj && obj['$$text$$']) {
+        return replaceVars(obj['$$text$$'], obj, opts);
     }
 
     return obj;
@@ -12,7 +12,7 @@ function resolve(obj, opts) {
 
 function spacesString(num) {
     var res = ''
-    for(var i=0;i<num;i++){
+    for (var i = 0; i < num; i++) {
         res += ' ';
     }
     return res;
@@ -28,26 +28,35 @@ function replaceVars(str, obj, opts) {
         return line.replace(REGEX_VAR, function (match, qry, pos) {
 
             var val = findInAst(qry, obj);
-            var res = resolve(val);
-            var firstLine = true;
 
-            return res.split(/\n/).map(function (line) {
-                var match = line.match(REGEX_NUM);
+            if (typeof val === 'object') {
 
-                var spaces = firstLine ? '' : spacesString(pos);
-                firstLine = false;
+                var res = resolve(val);
+                var firstLine = true;
 
-                if (opts && opts.debug) {
-                    if (match && match.length >= 3)
-                        return spaces + match[1] + match[2] + '<cmacc-variable name="' + qry + '">' + match[3] + '</cmacc-variable>';
-                    else
-                        return spaces + '<cmacc-variable name="' + qry + '">' + line + '</cmacc-variable>';
-                }
+                return res.split(REGEX_EOL).map(function (line) {
 
-                return spaces + line;
+                    var match = line.match(REGEX_NUM);
+
+                    var spaces = firstLine ? '' : spacesString(pos);
+                    firstLine = false;
+
+                    if (opts && opts.debug) {
+                        if (match && match.length >= 3)
+                            return spaces + match[1] + match[2] + '<cmacc-variable name="' + qry + '">' + match[3] + '</cmacc-variable>';
+                        else
+                            return spaces + '<cmacc-variable name="' + qry + '">' + line + '</cmacc-variable>';
+                    }
+
+                    return spaces + line;
 
 
-            }).join('\n');
+                }).join('\n');
+            }
+
+            else{
+                return val;
+            }
 
         });
 
@@ -60,7 +69,6 @@ function findInAst(qry, ast) {
     var i = 0;
     var stack = [];
     var spl = qry.split('.');
-
     stack.push(ast);
 
     spl.forEach(function (key) {
