@@ -1,6 +1,8 @@
-function resolve(obj, opts) {
+var REGEX_EOL = /\n/;
+var REGEX_VAR = /\{\{([\w\.\_]+)\}\}/g;
+var REGEX_NUM = /^(\s*)([\-\d\+]\.\s)(.*)/;
 
-    opts = opts || {};
+function resolve(obj, opts) {
 
     if (obj && obj['$$text$$']) {
         return replaceVars(obj['$$text$$'], obj, opts);
@@ -20,10 +22,6 @@ function spacesString(num) {
 
 function replaceVars(str, obj, opts) {
 
-    var REGEX_EOL = /\n/;
-    var REGEX_VAR = /\{\{([\w\.\_]+)\}\}/g;
-    var REGEX_NUM = /^(\s*)([\-\d\+]\.\s)(.*)/;
-
     return str.split(REGEX_EOL).map(function (line) {
         return line.replace(REGEX_VAR, function (match, qry, pos) {
 
@@ -32,30 +30,12 @@ function replaceVars(str, obj, opts) {
             if (typeof val === 'object') {
 
                 var res = resolve(val);
-                var firstLine = true;
+                return concatString(res, qry, pos, opts)
 
-                return res.split(REGEX_EOL).map(function (line) {
-
-                    var match = line.match(REGEX_NUM);
-
-                    var spaces = firstLine ? '' : spacesString(pos);
-                    firstLine = false;
-
-                    if (opts && opts.debug) {
-                        if (match && match.length >= 3)
-                            return spaces + match[1] + match[2] + '<cmacc-variable name="' + qry + '">' + match[3] + '</cmacc-variable>';
-                        else
-                            return spaces + '<cmacc-variable name="' + qry + '">' + line + '</cmacc-variable>';
-                    }
-
-                    return spaces + line;
-
-
-                }).join('\n');
             }
 
             else{
-                return val;
+                return concatString(val, qry, pos, opts)
             }
 
         });
@@ -82,6 +62,31 @@ function findInAst(qry, ast) {
 
 
     return stack[i];
+
+}
+
+function concatString(res, qry, pos, opts) {
+
+    var firstLine = true;
+
+    return res.split(REGEX_EOL).map(function (line) {
+
+        var match = line.match(REGEX_NUM);
+
+        var spaces = firstLine ? '' : spacesString(pos);
+        firstLine = false;
+
+        if (opts && opts.debug) {
+            if (match && match.length >= 3)
+                return spaces + match[1] + match[2] + '<cmacc-variable name="' + qry + '">' + match[3] + '</cmacc-variable>';
+            else
+                return spaces + '<cmacc-variable name="' + qry + '">' + line + '</cmacc-variable>';
+        }
+
+        return spaces + line;
+
+
+    }).join('\n');
 
 }
 
