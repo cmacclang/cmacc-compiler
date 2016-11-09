@@ -12,6 +12,22 @@ describe('parse', function () {
     var cmacc = require('../src/index');
     var parse = cmacc.parse;
 
+    describe('Text', function () {
+        describe('TextOnly.cmacc', function () {
+            it('should parse TextOnly.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'TextOnly.cmacc');
+
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result, {
+                    '$$text$$': 'Hello World',
+                    "$$file$$": dir + "/parse/TextOnly.cmacc"
+                });
+            });
+        });
+    });
+
+
     describe('Variable', function () {
 
         describe('VariableEmpty.cmacc', function () {

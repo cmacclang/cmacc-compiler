@@ -36,11 +36,11 @@ function convert(file, options) {
             else {
                 var urlObj = url.parse(file);
 
-                if(urlObj.protocol){
+                if (urlObj.protocol) {
                     var dir = path.dirname(urlObj.pathname);
                     urlObj.pathname = path.resolve(dir, ref);
                     resolve = url.format(urlObj);
-                } else{
+                } else {
                     resolve = options.path + '/' + ref;
                 }
 
@@ -55,7 +55,7 @@ function convert(file, options) {
         } else if (!ref) {
             if (val) {
                 res += 'string(' + val + ');';
-            }else {
+            } else {
                 res += 'null';
             }
         }
@@ -66,17 +66,21 @@ function convert(file, options) {
     md = md.replace(/^[\;\n]*/, '');
 
     res += 'module.exports = {';
-    res += vars.map(function (vari) {
-            return '\t' + vari + ' : ' + vari
-        }).join(',') + ',';
 
-    if (md)
+    if (vars.length > 0) {
+        res += vars.map(function (vari) {
+                return '\t' + vari + ' : ' + vari
+            }).join(',') + ',';
+    }
+
+    if (md) {
         res += '$$text$$ : ' + JSON.stringify(md) + ',';
+    }
 
     res += '$$file$$ : ' + JSON.stringify(file);
     res += '};';
 
-
+    console.log(res)
     try {
         return res;
     } catch (e) {
