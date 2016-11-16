@@ -3,8 +3,13 @@ var convert = require('./convert');
 
 function parse($$file$$, $$mrg$$, $$opts$$) {
 
-    var $$src$$ = eval(convert($$file$$, $$opts$$));
-
+    try {
+        var $$cnv$$ = convert($$file$$, $$opts$$);
+        var $$src$$ = eval($$cnv$$);
+    } catch (e) {
+        e.file = $$file$$
+        throw e
+    }
     if ($$mrg$$) {
         $$src$$.$$mrg$$ = $$mrg$$;
     }

@@ -80,7 +80,6 @@ function convert(file, options) {
     res += '$$file$$ : ' + JSON.stringify(file);
     res += '};';
 
-    console.log(res)
     try {
         return res;
     } catch (e) {

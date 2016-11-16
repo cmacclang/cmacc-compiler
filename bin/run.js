@@ -19,8 +19,9 @@ try{
     var resolved = resolve(ast);
     var rendered = md(resolved);
 }catch (e){
-    console.error(e.message);
-    console.error(e.file);
+    console.error('Message:', e.message);
+    console.error('Stack:', e.stack);
+    console.error('File:', e.file);
 }
 
 fs.writeFileSync(path.resolve(process.cwd(), output+ '.html'), rendered);
