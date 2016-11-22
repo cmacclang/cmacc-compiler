@@ -27,6 +27,9 @@ function replaceVars(str, obj, opts) {
 
             var val = findInAst(qry, obj);
 
+            if(!val)
+                return '!!' + qry + '!!'
+
             if (typeof val === 'object') {
 
                 var res = resolve(val);
@@ -34,7 +37,7 @@ function replaceVars(str, obj, opts) {
 
             }
 
-            else{
+            else {
                 return concatString(val, qry, pos, opts)
             }
 
@@ -68,7 +71,7 @@ function findInAst(qry, ast) {
 function concatString(res, qry, pos, opts) {
 
     var firstLine = true;
-
+    console.log(res, qry, pos, opts)
     return res.split(REGEX_EOL).map(function (line) {
 
         var match = line.match(REGEX_NUM);

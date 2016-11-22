@@ -138,7 +138,7 @@ describe('resolve', function () {
             it('should parse HelloWorld.cmacc', function (done) {
                 var file = path.join(__dirname, 'resolve', 'HelloWorld.cmacc');
                 var ast = compile('file://' + file);
-                var result = resolve(ast, {debug:true});
+                var result = resolve(ast, {debug: true});
 
                 assert.equal(result, '<cmacc-variable name="hello">Hello</cmacc-variable> World');
 
@@ -150,7 +150,7 @@ describe('resolve', function () {
             it('should parse Object.cmacc', function (done) {
                 var file = path.join(__dirname, 'resolve', 'Object.cmacc');
                 var ast = compile('file://' + file);
-                var result = resolve(ast, {debug:true});
+                var result = resolve(ast, {debug: true});
 
                 assert.equal(result, '<cmacc-variable name="obj.hello">Hello</cmacc-variable> <cmacc-variable name="obj.world">World</cmacc-variable>');
 
@@ -160,5 +160,20 @@ describe('resolve', function () {
 
     });
 
+    describe('missing', function () {
+
+        describe('MissingVar.cmacc', function () {
+            it('should parse MissingVar.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'MissingVar.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'Hello !!hello!!');
+
+                done();
+            });
+        });
+
+    });
 
 });
