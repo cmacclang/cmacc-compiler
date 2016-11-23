@@ -73,6 +73,19 @@ describe('Convert', function () {
         });
 
     });
+
+    describe('Set variable', function () {
+
+        it('should set variable', function (done) {
+            var file = path.join(__dirname, 'convert/SetVar.cmacc');
+            var result = convert('file://' + file);
+            console.log(result)
+            var expect = 'var obj2 = parse("file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/VariableObject.cmacc");;\n\nobj2.hello1 = string("Test");;\n\nmodule.exports = {	obj2 : obj2,$$file$$ : "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/SetVar.cmacc"};'
+            assert.equal(result, expect);
+            done()
+        });
+
+    });
 });
 
 //helper functions:

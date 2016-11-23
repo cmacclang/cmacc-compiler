@@ -430,6 +430,29 @@ describe('parse', function () {
         });
     });
 
+    describe('Set', function () {
+        describe('SetVariable.cmacc', function () {
+            it('should parse DeeperVars.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'SetVariable.cmacc');
+
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result, {
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/SetVariable.cmacc",
+                        "obj2": {
+                            "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                            "hello1": {
+                                "$$str$$": "Test123"
+                            }
+                        }
+                    }
+                );
+
+            });
+        });
+
+    });
+
     describe('Deep', function () {
         describe('DeeperVars.cmacc', function () {
             it('should parse DeeperVars.cmacc', function () {

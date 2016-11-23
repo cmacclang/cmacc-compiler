@@ -21,8 +21,12 @@ function convert(file, options) {
 
     var md = text.replace(regex.REGEX_VARIABLE, function (match, key, ref, val) {
 
-        vars.push(key);
-        res += 'var ' + key + ' = ';
+        if(key.match(/\./)) {
+            res += key + ' = ';
+        }else{
+            vars.push(key);
+            res += 'var ' + key + ' = ';
+        }
         if (ref) {
 
             var resolve;
