@@ -67,6 +67,10 @@ function convert(file, options) {
         return '';
     });
 
+    // remove comments
+    md = md.replace(regex.REGEX_COMMENT_SLASH, '');
+
+    // remove enters
     md = md.replace(/^[\;\n]*/, '');
 
     res += 'module.exports = {';

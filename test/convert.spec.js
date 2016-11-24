@@ -12,6 +12,17 @@ var convert = cmacc.convert;
 
 describe('Convert', function () {
 
+    describe('Comment', function () {
+        describe('CommentSlash.cmacc', function () {
+            it('should convert CommentSlash.cmacc', function (done) {
+                var file = path.join(__dirname, 'convert', 'CommentSlash.cmacc');
+                var result = convert('file://' + file);
+                assert.equal(result, 'var world = string(\"World\");;\n\nmodule.exports = {\tworld : world,$$text$$ : \"Hello {{world}}\\n\",$$file$$ : \"file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/convert/CommentSlash.cmacc\"};');
+                done()
+            });
+        });
+    });
+
     describe('Variable', function () {
         describe('Variable.cmacc', function () {
             it('should convert Variable.cmacc', function (done) {
