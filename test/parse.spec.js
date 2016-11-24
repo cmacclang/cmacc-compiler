@@ -482,5 +482,25 @@ describe('parse', function () {
 
     });
 
+    describe('Empty', function () {
+        describe('EmptyString.cmacc', function () {
+            it('should parse DeeperVars.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'EmptyString.cmacc');
+
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result, {
+                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyString.cmacc",
+                    "$$text$$": "Hello {{world}}",
+                    "world": {
+                        "$$str$$": ""
+                    }
+                });
+
+            });
+        });
+
+    });
+
 
 });

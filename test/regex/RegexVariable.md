@@ -2,6 +2,8 @@ $ hello;
 
 $ hello = null;
 
+$ hello = "";
+
 $ hello = "World";
 
 $ obj = {

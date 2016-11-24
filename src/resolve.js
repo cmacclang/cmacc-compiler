@@ -27,19 +27,15 @@ function replaceVars(str, obj, opts) {
 
             var val = findInAst(qry, obj);
 
-            if(!val)
+            if(!val && val !== '')
                 return '!!' + qry + '!!'
 
             if (typeof val === 'object') {
-
                 var res = resolve(val);
                 return concatString(res, qry, pos, opts)
-
             }
 
-            else {
-                return concatString(val, qry, pos, opts)
-            }
+            return concatString(val, qry, pos, opts)
 
         });
 
@@ -59,7 +55,7 @@ function findInAst(qry, ast) {
         i++;
     });
 
-    if (stack[i] && stack[i].$$str$$) {
+    if (stack[i] && (stack[i].$$str$$ || stack[i].$$str$$ === '')) {
         return replaceVars(stack[i].$$str$$, stack[i - 1])
     }
 
@@ -71,7 +67,7 @@ function findInAst(qry, ast) {
 function concatString(res, qry, pos, opts) {
 
     var firstLine = true;
-    console.log(res, qry, pos, opts)
+
     return res.split(REGEX_EOL).map(function (line) {
 
         var match = line.match(REGEX_NUM);

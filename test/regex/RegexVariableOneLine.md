@@ -1,5 +1,6 @@
 $hello;
 $hello=null;
+$hello="";
 $hello="World";
 $obj={"hello" : "World"};
 $imp=[./doc.md];

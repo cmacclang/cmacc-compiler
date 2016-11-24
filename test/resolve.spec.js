@@ -176,4 +176,20 @@ describe('resolve', function () {
 
     });
 
+    describe('empty', function () {
+
+        describe('EmptyString.cmacc', function () {
+            it('should parse EmptyString.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'EmptyString.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'Hello ');
+
+                done();
+            });
+        });
+
+    });
+
 });

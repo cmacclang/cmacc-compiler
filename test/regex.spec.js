@@ -25,6 +25,11 @@ describe('regex', function () {
         match = regex.REGEX_VARIABLE.exec(text)
         assert.equal(match[1], 'hello');
         assert.equal(match[2], undefined);
+        assert.equal(match[3], '""');
+
+        match = regex.REGEX_VARIABLE.exec(text)
+        assert.equal(match[1], 'hello');
+        assert.equal(match[2], undefined);
         assert.equal(match[3], '"World"');
 
         match = regex.REGEX_VARIABLE.exec(text);
