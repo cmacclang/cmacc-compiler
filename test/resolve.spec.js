@@ -192,4 +192,20 @@ describe('resolve', function () {
 
     });
 
+    describe('overload', function () {
+
+        describe('OverloadVariable.cmacc', function () {
+            it('should parse OverloadVariable.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'OverloadVariable.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'World1');
+
+                done();
+            });
+        });
+
+    });
+
 });
