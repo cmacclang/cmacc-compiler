@@ -496,11 +496,33 @@ describe('parse', function () {
                         "$$str$$": ""
                     }
                 });
-
             });
-        });
-
+        })
     });
 
+    describe('Overload variable', function () {
+        describe('OverloadVariable.cmacc', function () {
+            it('should parse OverloadVariable.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'OverloadVariable.cmacc');
 
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result, {
+                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/OverloadVariable.cmacc",
+                    "$$text$$": "{{hello}}",
+                    "hello": {
+                        "$$str$$": "World1"
+                    },
+                    "obj": {
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "hello1": {
+                            "hello1": {
+                                "$$str$$": "World1"
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    });
 });

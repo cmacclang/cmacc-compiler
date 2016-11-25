@@ -32,6 +32,11 @@ describe('regex', function () {
         assert.equal(match[2], undefined);
         assert.equal(match[3], '"World"');
 
+        match = regex.REGEX_VARIABLE.exec(text)
+        assert.equal(match[1], 'hello');
+        assert.equal(match[2], undefined);
+        assert.equal(match[3], 'hello.world');
+
         match = regex.REGEX_VARIABLE.exec(text);
         assert.equal(match[1], 'obj');
         assert.equal(match[2], undefined);

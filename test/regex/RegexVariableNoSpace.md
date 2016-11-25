@@ -1,10 +1,12 @@
-$ hello;
+$hello;
 
-$ hello=null;
+$hello=null;
 
-$ hello="";
+$hello="";
 
 $hello="World";
+
+$hello=hello.world;
 
 $obj={
     "hello" : "World"

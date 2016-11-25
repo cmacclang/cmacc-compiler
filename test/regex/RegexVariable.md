@@ -6,6 +6,8 @@ $ hello = "";
 
 $ hello = "World";
 
+$ hello = hello.world;
+
 $ obj = {
     "hello" : "World"
 };
