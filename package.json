@@ -16,5 +16,8 @@
   },
   "bin": {
     "cmacc": "./bin/run.js"
+  },
+  "devDependencies": {
+    "cmacc-lib-entity": "^1.0.0"
   }
 }

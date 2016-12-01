@@ -8,7 +8,7 @@ var merge = require('./merge');
 var fetch = require('./fetch');
 
 function convert(file, options) {
-    var res = '';
+    var res = 'var $$obj$$ = {};';
     var vars = [];
 
     var text = null;
@@ -51,14 +51,14 @@ function convert(file, options) {
             }
 
             if (val) {
-                res += 'parse(' + JSON.stringify(resolve) + ',string(' + val + '));';
+                res += 'parse(' + JSON.stringify(resolve) + ', string(' + val + ', $$obj$$));';
             } else {
                 res += 'parse(' + JSON.stringify(resolve) + ');';
             }
 
         } else if (!ref) {
             if (val) {
-                res += 'string(' + val + ');';
+                res += 'string(' + val + ', $$obj$$);';
             } else {
                 res += 'null';
             }
@@ -73,20 +73,20 @@ function convert(file, options) {
     // remove enters
     md = md.replace(/^[\;\n]*/, '');
 
-    res += 'module.exports = {';
 
     if (vars.length > 0) {
-        res += vars.map(function (vari) {
-                return '\t' + vari + ' : ' + vari
-            }).join(',') + ',';
+        vars.forEach(function (vari) {
+            res += '$$obj$$.' + vari + ' =  ' + vari + ' ; '
+            });
     }
 
     if (md) {
-        res += '$$text$$ : ' + JSON.stringify(md) + ',';
+        res += '$$obj$$.$$text$$ = ' + JSON.stringify(md) + ';';
     }
 
-    res += '$$file$$ : ' + JSON.stringify(file);
-    res += '};';
+    res += '$$obj$$.$$file$$ = ' + JSON.stringify(file) + ';';
+
+    res += 'module.exports = $$obj$$;';
 
     try {
         return res;

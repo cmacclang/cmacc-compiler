@@ -31,16 +31,23 @@ describe('compile', function () {
 
                 delete result.obj2.$$mrg$$
 
+                assert.deepEqual(result.obj3.hello1.hello1.$$obj$$, result.obj3);
+                assert.deepEqual(result.obj3.obj1.hello1.$$obj$$, result);
+                assert.deepEqual(result.obj2.hello1.hello1.hello1.$$obj$$, result.obj3);
+                assert.deepEqual(result.obj2.hello1.obj1.hello1.$$obj$$, result);
+
                 assert.deepEqual(result, {
                     "obj3": {
                         "hello1": {
                             "hello1": {
+                                $$obj$$: result.obj3,
                                 "$$str$$": "World1"
                             }
                         },
                         "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "obj1": {
                             "hello1": {
+                                $$obj$$: result,
                                 "$$str$$": "World3"
                             }
                         }
@@ -49,12 +56,14 @@ describe('compile', function () {
                         "hello1": {
                             "hello1": {
                                 "hello1": {
+                                    $$obj$$: result.obj3,
                                     "$$str$$": "World1"
                                 }
                             },
                             "$$file$$": dir + "/parse/VariableObject.cmacc",
                             "obj1": {
                                 "hello1": {
+                                    $$obj$$: result,
                                     "$$str$$": "World3"
                                 }
                             }
@@ -75,12 +84,14 @@ describe('compile', function () {
                     "obj3": {
                         "hello1": {
                             "hello1": {
+                                $$obj$$: result.obj3,
                                 "$$str$$": "World1"
                             }
                         },
                         "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "obj1": {
                             "hello1": {
+                                $$obj$$: result,
                                 "$$str$$": "World3"
                             }
                         }
@@ -89,12 +100,14 @@ describe('compile', function () {
                         "hello1": {
                             "hello1": {
                                 "hello1": {
+                                    $$obj$$: result.obj3,
                                     "$$str$$": "World1"
                                 }
                             },
                             "$$file$$": dir + "/parse/VariableObject.cmacc",
                             "obj1": {
                                 "hello1": {
+                                    $$obj$$: result,
                                     "$$str$$": "World3"
                                 }
                             }
@@ -112,54 +125,70 @@ describe('compile', function () {
             var file = path.join(__dirname, 'case', './parameters_across_multiple_files/draft1.cmacc');
             var result = compile('file://' + file);
 
+            assert.deepEqual(result.party1, result.party1);
+            assert.deepEqual(result.party1.city.$$obj$$, result.party1);
+
             assert.deepEqual(result.party1, {
                 "name_First": {
+                    $$obj$$: result.party1,
                     "$$str$$": "Marc"
                 },
                 "name_Last": {
+                    $$obj$$: result.party1,
                     "$$str$$": "Dangeard"
                 },
                 "name_Full": {
+                    $$obj$$: result.party1,
                     "$$str$$": "{{name_First}} {{name_Last}}"
                 },
                 "city": {
+                    $$obj$$: result.party1,
                     "$$str$$": "Paris"
                 },
                 "gender": {
                     "he_she": {
+                        $$obj$$: result.party1.gender,
                         "$$str$$": "he"
                     },
                     "his_her": {
+                        $$obj$$: result.party1.gender,
                         "$$str$$": "his"
                     },
                     "He_She": {
+                        $$obj$$: result.party1.gender,
                         "$$str$$": "He"
                     },
                     "His_Her": {
+                        $$obj$$: result.party1.gender,
                         "$$str$$": "His"
                     },
                     "$$file$$": dir + "/case/parameters_across_multiple_files/he.cmacc"
                 },
                 "pron": {
                     "meus": {
+                        $$obj$$: result.party1.pron,
                         "$$str$$": "me"
                     },
                     "Iwe": {
+                        $$obj$$: result.party1.pron,
                         "$$str$$": "I"
                     },
                     "myour": {
+                        $$obj$$: result.party1.pron,
                         "$$str$$": "my"
                     },
                     "IWe": {
+                        $$obj$$: result.party1.pron,
                         "$$str$$": "I"
                     },
                     "MyOur": {
+                        $$obj$$: result.party1.pron,
                         "$$str$$": "My"
                     },
                     "$$file$$": dir + "/case/parameters_across_multiple_files/_sing.cmacc"
                 },
                 "$$file$$": dir + "/case/parameters_across_multiple_files/MarcDangeard.cmacc"
-            })
+            });
             done()
 
         });

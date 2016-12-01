@@ -10,19 +10,26 @@ describe('string', function () {
 
     it('should single string', function () {
         var val = 'test';
-        var res = string(val);
+        var obj = {};
+        var res = string(val, obj);
         assert.deepEqual(res, {
-            $$str$$: 'test'}
-        );
+            $$str$$: 'test',
+            $$obj$$: {}
+        });
     });
 
     it('should pojo', function () {
         var val = {
             test: 'test'
         };
-        var res = string(val);
+        var obj = {};
+        var res = string(val, obj);
         assert.deepEqual(res, {
-            test: {$$str$$: 'test'}
+            test: {
+                $$str$$: 'test',
+                $$obj$$: {}
+            }
+
         });
     });
 

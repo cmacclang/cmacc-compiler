@@ -6,6 +6,7 @@ function merge(obj1, obj2) {
 
         if (typeof obj2[i] === 'object' && obj2[i].$$str$$) {
             obj1[i].$$str$$ = obj2[i].$$str$$;
+            obj1[i].$$obj$$ = obj2[i].$$obj$$;
         }
 
         if (typeof obj2[i] === 'object' && !obj2[i].$$str$$) {

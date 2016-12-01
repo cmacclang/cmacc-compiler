@@ -7,7 +7,6 @@ function bind(ast) {
         var key = keys[i];
         if (!key.match(/\$\$(.*)\$\$/) && ast[key].$$mrg$$) {
             ast[key] = merge(ast[key], ast[key].$$mrg$$);
-            //delete ast[key].$$mrg$$;
         }
 
         if (!key.match(/\$\$(.*)\$\$/))

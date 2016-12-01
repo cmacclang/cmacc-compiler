@@ -208,4 +208,20 @@ describe('resolve', function () {
 
     });
 
+    describe('DefinedOptionsUse', function () {
+
+        describe('DefinedOptionsUse.cmacc', function () {
+            it('should parse DefinedOptionsUse.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'DefinedOptionsUse.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'by a Party (the Disclosing Party) to the other Party (the Receiving_Party)');
+
+                done();
+            });
+        });
+
+    });
+
 });

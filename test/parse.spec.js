@@ -64,6 +64,7 @@ describe('parse', function () {
 
                 assert.deepEqual(result, {
                     "hello1": {
+                        "$$obj$$": result,
                         "$$str$$": "World1"
                     },
                     "$$file$$": dir + "/parse/VariableString.cmacc"
@@ -80,6 +81,7 @@ describe('parse', function () {
                 assert.deepEqual(result, {
                     "hello1": {
                         "hello1": {
+                            "$$obj$$": result,
                             "$$str$$": "World1"
                         }
                     },
@@ -101,6 +103,7 @@ describe('parse', function () {
                     "obj2": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj2,
                                 "$$str$$": "World1"
                             }
                         },
@@ -121,6 +124,7 @@ describe('parse', function () {
                     "obj2": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj2,
                                 "$$str$$": "World1"
                             }
                         },
@@ -128,6 +132,7 @@ describe('parse', function () {
                         "$$mrg$$": {
                             "obj1": {
                                 "hello1": {
+                                    "$$obj$$": result,
                                     "$$str$$": "World2"
                                 }
                             }
@@ -144,10 +149,17 @@ describe('parse', function () {
 
                 var result = parse('file://' + file);
 
+                assert.deepEqual(result.obj3.hello1.hello1.$$obj$$, result.obj3);
+                assert.deepEqual(result.obj3.$$mrg$$.obj1.hello1.$$obj$$, result);
+                assert.deepEqual(result.obj2.$$mrg$$.hello1.hello1.hello1.$$obj$$, result.obj3);
+                assert.deepEqual(result.obj2.hello1.$$obj$$, result.obj2);
+                assert.deepEqual(result.obj2.$$mrg$$.hello1.$$mrg$$.obj1.hello1.$$obj$$, result);
+
                 assert.deepEqual(result, {
                     "obj3": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj3,
                                 "$$str$$": "World1"
                             }
                         },
@@ -155,6 +167,7 @@ describe('parse', function () {
                         "$$mrg$$": {
                             "obj1": {
                                 "hello1": {
+                                    "$$obj$$": result,
                                     "$$str$$": "World3"
                                 }
                             }
@@ -162,6 +175,7 @@ describe('parse', function () {
                     },
                     "obj2": {
                         "hello1": {
+                            "$$obj$$": result.obj2,
                             "$$str$$": "World1"
                         },
                         "$$file$$": dir + "/parse/VariableString.cmacc",
@@ -169,6 +183,7 @@ describe('parse', function () {
                             "hello1": {
                                 "hello1": {
                                     "hello1": {
+                                        "$$obj$$": result.obj3,
                                         "$$str$$": "World1"
                                     }
                                 },
@@ -176,6 +191,7 @@ describe('parse', function () {
                                 "$$mrg$$": {
                                     "obj1": {
                                         "hello1": {
+                                            "$$obj$$": result,
                                             "$$str$$": "World3"
                                         }
                                     }
@@ -194,11 +210,18 @@ describe('parse', function () {
 
                 var result = parse('file://' + file);
 
+                assert.deepEqual(result.obj3.obj3.hello1.hello1.$$obj$$, result.obj3.obj3);
+                assert.deepEqual(result.obj3.obj3.$$mrg$$.obj1.hello1.$$obj$$, result.obj3);
+                assert.deepEqual(result.obj3.obj2.$$mrg$$.hello1.hello1.hello1.$$obj$$, result.obj3.obj3);
+                assert.deepEqual(result.obj3.obj2.hello1.$$obj$$, result.obj3.obj2);
+                assert.deepEqual(result.obj3.obj2.$$mrg$$.hello1.$$mrg$$.obj1.hello1.$$obj$$, result.obj3);
+
                 assert.deepEqual(result, {
                     "obj3": {
                         "obj3": {
                             "hello1": {
                                 "hello1": {
+                                    "$$obj$$": result.obj3.obj3,
                                     "$$str$$": "World1"
                                 }
                             },
@@ -206,6 +229,7 @@ describe('parse', function () {
                             "$$mrg$$": {
                                 "obj1": {
                                     "hello1": {
+                                        "$$obj$$": result.obj3,
                                         "$$str$$": "World3"
                                     }
                                 }
@@ -213,6 +237,7 @@ describe('parse', function () {
                         },
                         "obj2": {
                             "hello1": {
+                                "$$obj$$": result.obj3.obj2,
                                 "$$str$$": "World1"
                             },
                             "$$file$$": dir + "/parse/VariableString.cmacc",
@@ -220,6 +245,7 @@ describe('parse', function () {
                                 "hello1": {
                                     "hello1": {
                                         "hello1": {
+                                            "$$obj$$": result.obj3.obj3,
                                             "$$str$$": "World1"
                                         }
                                     },
@@ -227,6 +253,7 @@ describe('parse', function () {
                                     "$$mrg$$": {
                                         "obj1": {
                                             "hello1": {
+                                                "$$obj$$": result.obj3,
                                                 "$$str$$": "World3"
                                             }
                                         }
@@ -239,6 +266,7 @@ describe('parse', function () {
                             "obj2": {
                                 "obj1": {
                                     "hello1": {
+                                        "$$obj$$": result,
                                         "$$str$$": "World3"
                                     }
                                 }
@@ -264,12 +292,14 @@ describe('parse', function () {
                     "obj": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj,
                                 "$$str$$": "World1"
                             }
                         },
                         "$$file$$": dir + "/parse/VariableObject.cmacc",
                         "$$mrg$$": {
                             "hello2": {
+                                "$$obj$$": result,
                                 "$$str$$": "World1"
                             }
                         }
@@ -289,6 +319,7 @@ describe('parse', function () {
                     "obj": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj,
                                 "$$str$$": "World1"
                             }
                         },
@@ -296,6 +327,7 @@ describe('parse', function () {
                         "$$mrg$$": {
                             "hello1": {
                                 "hello2": {
+                                    "$$obj$$": result,
                                     "$$str$$": "World2"
                                 }
                             }
@@ -316,6 +348,7 @@ describe('parse', function () {
                     "obj": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj,
                                 "$$str$$": "World1"
                             }
                         },
@@ -323,6 +356,7 @@ describe('parse', function () {
                         "$$mrg$$": {
                             "hello1": {
                                 "hello1": {
+                                    "$$obj$$": result,
                                     "$$str$$": "World2"
                                 }
                             }
@@ -332,59 +366,8 @@ describe('parse', function () {
                 });
             });
         });
-
-        describe('MergeSimple.cmacc', function () {
-            it('should parse MergeSimple.cmacc', function () {
-                var file = path.join(__dirname, 'parse', 'MergeSimple.cmacc');
-
-                var result = parse('file://' + file);
-
-                assert.deepEqual(result, {
-                    "obj": {
-                        "hello1": {
-                            "hello1": {
-                                "$$str$$": "World1"
-                            }
-                        },
-                        "$$file$$": dir + "/parse/VariableObject.cmacc",
-                        "$$mrg$$": {
-                            "hello2": {
-                                "$$str$$": "World1"
-                            }
-                        }
-                    },
-                    "$$file$$": dir + "/parse/MergeSimple.cmacc"
-                });
-            });
-        });
-
-        describe('MergeDepth.cmacc', function () {
-            it('should parse MergeDepth.cmacc', function () {
-                var file = path.join(__dirname, 'parse', 'MergeDepth.cmacc');
-
-                var result = parse('file://' + file);
-
-                assert.deepEqual(result, {
-                    "obj": {
-                        "hello1": {
-                            "hello1": {
-                                "$$str$$": "World1"
-                            }
-                        },
-                        "$$file$$": dir + "/parse/VariableObject.cmacc",
-                        "$$mrg$$": {
-                            "hello1": {
-                                "hello2": {
-                                    "$$str$$": "World2"
-                                }
-                            }
-                        }
-                    },
-                    "$$file$$": dir + "/parse/MergeDepth.cmacc"
-                });
-            });
-        });
     });
+
 
     describe('Text', function () {
         describe('TextSimple.cmacc', function () {
@@ -395,6 +378,7 @@ describe('parse', function () {
 
                 assert.deepEqual(result, {
                     "test": {
+                        "$$obj$$": result,
                         "$$str$$": "Hello"
                     },
                     "$$text$$": "{{test}} World",
@@ -415,6 +399,7 @@ describe('parse', function () {
                 assert.deepEqual(result, {
                     "test": {
                         "test": {
+                            "$$obj$$": result.test,
                             "$$str$$": "Hello"
                         },
                         "$$text$$": "{{test}} World",
@@ -442,6 +427,7 @@ describe('parse', function () {
                         "obj2": {
                             "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
                             "hello1": {
+                                "$$obj$$": result,
                                 "$$str$$": "Test123"
                             }
                         }
@@ -464,6 +450,7 @@ describe('parse', function () {
                     "obj": {
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj,
                                 "$$str$$": "World1"
                             }
                         },
@@ -471,6 +458,7 @@ describe('parse', function () {
                     },
                     "test": {
                         "test": {
+                            "$$obj$$": result.obj,
                             "$$str$$": "World1"
                         }
                     },
@@ -493,6 +481,7 @@ describe('parse', function () {
                     "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyString.cmacc",
                     "$$text$$": "Hello {{world}}",
                     "world": {
+                        "$$obj$$": result,
                         "$$str$$": ""
                     }
                 });
@@ -511,15 +500,62 @@ describe('parse', function () {
                     "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/OverloadVariable.cmacc",
                     "$$text$$": "{{hello}}",
                     "hello": {
+                        "$$obj$$": result.obj,
                         "$$str$$": "World1"
                     },
                     "obj": {
                         "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
                         "hello1": {
                             "hello1": {
+                                "$$obj$$": result.obj,
                                 "$$str$$": "World1"
                             }
                         }
+                    }
+                });
+            });
+        });
+    });
+
+    describe('Defined Options', function () {
+        describe('DefinedOptionsUse.cmacc', function () {
+            it('should pardefine_Mutualse DefinedOptionsUse.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'DefinedOptionsUse.cmacc');
+
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result.defineOptions.mutual.$$obj$$, result.defineOptions);
+                assert.deepEqual(result.defineOptionsTmp.$$mrg$$.text.$$obj$$, result);
+                assert.deepEqual(result.defineOptionsTmp.text.$$obj$$, result.defineOptionsTmp);
+                assert.deepEqual(result.define_Mutual.$$obj$$, result);
+
+                assert.deepEqual(result, {
+                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DefinedOptionsUse.cmacc",
+                    "$$text$$": "{{defineOptionsTmp}}",
+                    "defineOptions": {
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DefinedOptions.cmacc",
+                        "mutual": {
+                            "$$obj$$": result.defineOptions,
+                            "$$str$$": "by a Party (the Disclosing Party) to the other Party (the Receiving_Party)"
+                        }
+                    },
+                    "defineOptionsTmp": {
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DefinedOptionsTmp.cmacc",
+                        "$$mrg$$": {
+                            "text": {
+                                "$$obj$$": result,
+                                "$$str$$": "{{defineOptions.mutual}}"
+                            }
+                        },
+                        "$$text$$": "{{text}}",
+                        "text": {
+                            "$$obj$$": result.defineOptionsTmp,
+                            "$$str$$": "test"
+                        }
+                    },
+                    "define_Mutual": {
+                        "$$obj$$": result,
+                        "$$str$$": "{{defineOptions.mutual}}"
                     }
                 });
             });

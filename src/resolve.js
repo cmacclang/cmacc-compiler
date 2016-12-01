@@ -56,7 +56,7 @@ function findInAst(qry, ast) {
     });
 
     if (stack[i] && (stack[i].$$str$$ || stack[i].$$str$$ === '')) {
-        return replaceVars(stack[i].$$str$$, stack[i - 1])
+        return replaceVars(stack[i].$$str$$, stack[i].$$obj$$)
     }
 
 

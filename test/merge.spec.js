@@ -19,8 +19,13 @@ describe('merge0', function () {
         var res = merge(obj1, obj2)
 
         assert.deepEqual(res, {
-            test1: {$$str$$: 'test1'},
-            test2: {$$str$$: 'test2'}
+            test1: {
+                $$str$$: 'test1'
+            },
+            test2: {
+                $$obj$$: undefined,
+                $$str$$: 'test2'
+            }
         });
 
     });
@@ -43,8 +48,13 @@ describe('merge0', function () {
 
         assert.deepEqual(res, {
             test1: {
-                hoi: {$$str$$: 'test1'},
-                doei: {$$str$$: 'test2'}
+                hoi: {
+                    $$str$$: 'test1'
+                },
+                doei: {
+                    $$obj$$: undefined,
+                    $$str$$: 'test2'
+                }
             }
         });
 
