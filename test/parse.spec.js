@@ -486,7 +486,30 @@ describe('parse', function () {
                     }
                 });
             });
-        })
+        });
+
+        describe('EmptyStringImport.cmacc', function () {
+            it('should parse EmptyStringImport.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'EmptyStringImport.cmacc');
+
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result, {
+                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyStringImport.cmacc",
+                    "$$text$$": "Hello {{empty.world}}",
+                    "empty": {
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyString.cmacc",
+                        "$$text$$": "Hello {{world}}",
+                        "world": {
+                            "$$obj$$": result.empty,
+                            "$$str$$": ""
+                        }
+                    }
+
+                });
+            });
+
+        });
     });
 
     describe('Overload variable', function () {

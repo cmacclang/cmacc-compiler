@@ -4,6 +4,6 @@
             "hello" : world
         },
 	"hello" : {
-            "hello" : "World"
-        },
+        "hello" : "World"
+    },
 }

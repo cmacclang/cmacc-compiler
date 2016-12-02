@@ -190,6 +190,29 @@ describe('resolve', function () {
             });
         });
 
+        describe('EmptyStringImport.cmacc', function () {
+            it('should parse EmptyStringImport.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'EmptyStringImport.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'Hello ');
+
+                done();
+            });
+        });
+
+        describe('EmptyStringImportOverwrite.cmacc', function () {
+            it('should parse EmptyStringImportOverwrite.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'EmptyStringImportOverwrite.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'Hello ---');
+                done();
+            });
+        });
+
     });
 
     describe('overload', function () {

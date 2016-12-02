@@ -1,0 +1,5 @@
+$ empty = [./EmptyString.cmacc] => {
+    world: '---'
+};
+
+Hello {{empty.world}}

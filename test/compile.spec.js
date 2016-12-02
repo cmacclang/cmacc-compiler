@@ -22,7 +22,7 @@ describe('compile', function () {
 
                 var result = parse('file://' + file);
 
-                result.obj3.obj1 = {}
+                result.obj3.obj1 = {};
                 result.obj3.obj1.hello1 = result.obj3.$$mrg$$.obj1.hello1
 
                 delete result.obj3.$$mrg$$

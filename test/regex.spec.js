@@ -57,6 +57,16 @@ describe('regex', function () {
         assert.equal(match[2], './doc.md');
         assert.deepEqual(JSON.parse(match[3]), { hello: { hello: 'World' } });
 
+        match = regex.REGEX_VARIABLE.exec(text);
+        assert.equal(match[1], 'imp_over_obj');
+        assert.equal(match[2], 'http://cmacc.com/doc.md');
+        assert.deepEqual(JSON.parse(match[3]), { hello: { hello: 'World' } });
+
+        match = regex.REGEX_VARIABLE.exec(text);
+        assert.equal(match[1], 'imp_over_obj');
+        assert.equal(match[2], 'http://cmacc.com/test%20-%20test/doc.md');
+        assert.deepEqual(JSON.parse(match[3]), { hello: { hello: 'World' } });
+
         callback()
     }
 
@@ -107,15 +117,15 @@ describe('regex', function () {
 
                 var match;
 
-                match = regex.REGEX_KEYVALUE.exec(text)
+                match = regex.REGEX_KEYVALUE.exec(text);
                 assert.equal(match[1], '"hello"');
                 assert.equal(match[2], 'world');
 
-                match = regex.REGEX_KEYVALUE.exec(text)
+                match = regex.REGEX_KEYVALUE.exec(text);
                 assert.equal(match[1], '"hello"');
                 assert.equal(match[2], '"World"');
 
-                done()
+                done();
             });
         });
     });
