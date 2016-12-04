@@ -1,0 +1,3 @@
+$ content = [https://raw.githubusercontent.com/wilmveel/cmacc-test/master/Form/HelloWorld.cmacc]
+
+{{content}}

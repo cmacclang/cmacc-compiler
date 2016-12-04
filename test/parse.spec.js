@@ -584,4 +584,117 @@ describe('parse', function () {
             });
         });
     });
+
+    describe('Github', function () {
+        describe('GitHub.cmacc', function () {
+            it('should pardefine_Mutualse GitHub.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'GitHub.cmacc');
+                var result = parse('file://' + file);
+
+                assert.deepEqual(result,{
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/GitHub.cmacc",
+                        "$$text$$": "{{content}}",
+                        "content": {
+                            "$$file$$": "https://raw.githubusercontent.com/wilmveel/cmacc-test/master/Form/HelloWorld.cmacc",
+                            "$$text$$": "{{person.gender.His_Her}} name is {{person.name_Full}} and {{person.gender.he_she}} lives in {{person.city}}\n",
+                            "person": {
+                                "$$file$$": "https://raw.githubusercontent.com/wilmveel/cmacc-test/master/ID/_person.cmacc",
+                                "city": {
+                                    "$$obj$$": result.content.person,
+                                    "$$str$$": "city"
+                                },
+                                "gender": {
+                                    "$$file$$": "https://raw.githubusercontent.com/wilmveel/cmacc-test/master/ID/gender/_gender.cmacc",
+                                    "He_She": {
+                                        "$$obj$$": result.content.person.gender,
+                                        "$$str$$": "He/She"
+                                    },
+                                    "His_Her": {
+                                        "$$obj$$": result.content.person.gender,
+                                        "$$str$$": "His/Her"
+                                    },
+                                    "he_she": {
+                                        "$$obj$$": result.content.person.gender,
+                                        "$$str$$": "he/she"
+                                    },
+                                    "his_her": {
+                                        "$$obj$$": result.content.person.gender,
+                                        "$$str$$": "his/her"
+                                    },
+                                },
+                                "name_First": {
+                                    "$$obj$$": result.content.person,
+                                    "$$str$$": "name_First"
+                                },
+                                "name_Full": {
+                                    "$$obj$$": result.content.person,
+                                    "$$str$$": "{{name_First}} {{name_Last}}"
+                                },
+                                "name_Last": {
+                                    "$$obj$$": result.content.person,
+                                    "$$str$$": "name_Last"
+                                },
+                                "pron": {
+                                    "$$file$$": "https://raw.githubusercontent.com/wilmveel/cmacc-test/master/Form/_pron.cmacc",
+                                    "IWe": {
+                                        "$$obj$$": result.content.person.pron,
+                                        "$$str$$": "I/We"
+                                    },
+                                    "Iwe": {
+                                        "$$obj$$": result.content.person.pron,
+                                        "$$str$$": "I/we"
+                                    },
+                                    "MyOur": {
+                                        "$$obj$$": result.content.person.pron,
+                                        "$$str$$": "My/Our"
+                                    },
+                                    "meus": {
+                                        "$$obj$$": result.content.person.pron,
+                                        "$$str$$": "me/us"
+                                    },
+                                    "myour": {
+                                        "$$obj$$": result.content.person.pron,
+                                        "$$str$$": "my/our"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                )
+            });
+        });
+    });
+
+    describe('Space Folder', function () {
+        describe('Space Folder HelloWorld.cmacc', function () {
+            it('should pardefine_Mutualse HelloWorld.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'Space Folder', 'HelloWorld.cmacc');
+                var result = parse('file://' + file);
+                assert.deepEqual(result,{
+                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/Space Folder/HelloWorld.cmacc",
+                    "$$text$$": "name is {{person.name_Full}} lives in {{person.city}}",
+                    "person": {
+                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/person.cmacc",
+                        "city": {
+                            "$$obj$$": result.person,
+                            "$$str$$": "city"
+                        },
+                        "name_First": {
+                            "$$obj$$": result.person,
+                            "$$str$$": "name_First"
+                        },
+                        "name_Full": {
+                            "$$obj$$": result.person,
+                            "$$str$$": "{{name_First}} {{name_Last}}"
+                        },
+                        "name_Last": {
+                            "$$obj$$": result.person,
+                            "$$str$$": "name_Last"
+                        }
+                    }
+                })
+            });
+        });
+    });
+
 });
