@@ -9,7 +9,7 @@ function merge(obj1, obj2) {
             obj1[i].$$obj$$ = obj2[i].$$obj$$;
         }
 
-        if (typeof obj2[i] === 'object' && !obj2[i].$$str$$) {
+        if (typeof obj2[i] === 'object' && typeof obj2[i].$$str$$ !== 'string') {
             merge(obj1[i], obj2[i]);
         }
     }

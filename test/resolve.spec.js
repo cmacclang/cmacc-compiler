@@ -213,6 +213,17 @@ describe('resolve', function () {
             });
         });
 
+        describe('EmptyStringOverwrite.cmacc', function () {
+            it('should parse EmptyStringOverwrite.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'EmptyStringOverwrite.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'Hello ');
+                done();
+            });
+        });
+
     });
 
     describe('overload', function () {
