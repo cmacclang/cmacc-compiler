@@ -219,6 +219,17 @@ describe('resolve', function () {
                 var ast = compile('file://' + file);
                 var result = resolve(ast);
 
+                assert.equal(result, 'Hello _');
+                done();
+            });
+        });
+
+        describe('EmptyStringOverwriteEmpty.cmacc', function () {
+            it('should parse EmptyStringOverwriteEmpty.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'EmptyStringOverwriteEmpty.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
                 assert.equal(result, 'Hello ');
                 done();
             });
@@ -257,5 +268,4 @@ describe('resolve', function () {
         });
 
     });
-
 });
