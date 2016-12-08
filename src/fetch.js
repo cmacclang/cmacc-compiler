@@ -1,6 +1,8 @@
 var fs = require('fs');
 var url = require('url');
 
+var cash = {}
+
 function fetch(file) {
 
     var urlObj = url.parse(file);
@@ -29,10 +31,18 @@ function fetch(file) {
             }
 
             if(urlObj.protocol === 'http:' || urlObj.protocol === 'https:'){
+
+                var location = url.format(urlObj);
+
+                if(cash[location]){
+                    return cash[location];
+                }
+
                 var request = require('sync-request');
-                var res = request('GET', url.format(urlObj));
+                var res = request('GET', location);
 
                 if(res.statusCode === 200) {
+                    cash[location] = res.getBody().toString('utf8')
                     return res.getBody().toString('utf8');
                 } else{
                     throw new Error('Cannot fetch: ' + url.format(urlObj))
