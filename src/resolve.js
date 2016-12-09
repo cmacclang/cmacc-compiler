@@ -8,7 +8,7 @@ function resolve(obj, opts) {
         return replaceVars(obj['$$text$$'], obj, opts);
     }
 
-    return obj;
+    return '';
 
 }
 

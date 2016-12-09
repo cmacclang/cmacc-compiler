@@ -268,4 +268,20 @@ describe('resolve', function () {
         });
 
     });
+
+    describe('OnlyVars', function () {
+
+        describe('OnlyVars.cmacc', function () {
+            it('should parse OnlyVars.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'OnlyVars.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, '');
+
+                done();
+            });
+        });
+
+    });
 });
