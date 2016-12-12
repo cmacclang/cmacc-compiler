@@ -284,4 +284,37 @@ describe('resolve', function () {
         });
 
     });
+
+    describe('PassPartial', function () {
+
+        describe('PassPartial.cmacc', function () {
+            it('should parse PassPartial.cmacc', function (done) {
+                var file = path.join(__dirname, 'resolve', 'PassPartial.cmacc');
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, 'Text\n\nHello Template\n\nHello WorldOver');
+
+                done();
+            });
+        });
+
+    });
+
+    describe.skip('confid_test', function () {
+
+        describe('confid_test.cmacc', function () {
+            it('should parse PassPartial.cmacc', function (done) {
+                var file = '/Users/willemveelenturf/projects/commonaccord/cmacc-test/NDA/confid_test.cmacc';
+                var ast = compile('file://' + file);
+                var result = resolve(ast);
+
+                assert.equal(result, "info_Types related to subject the Disclosing Party, including without limitation the Disclosing Party's information concerning info_Examples\n\n\n\n<h4>Definition</h4>\n\nAs used herein, the \"Confidential Information\" shall mean any and all technical and non-technical information disclosed\n\nby a Party (the Disclosing Party) to the other Party (the Receiving_Party)\n\nincluding without limitation information regarding\n\n1. patent and patent applications\n\n2. trade secrets\n\n3. info_Types related to subject the Disclosing Party, including without limitation the Disclosing Party's information concerning info_Examples\n   \n\n4. information the Disclosing Party provides regarding third parties\n\n5. all other information that the Receiving Party knew, or reasonably should have known, was the Confidential Information of the_Disclosing Party\n\n");
+
+                done();
+            });
+        });
+
+    });
+
 });
