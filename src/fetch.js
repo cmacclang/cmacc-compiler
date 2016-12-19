@@ -50,7 +50,7 @@ function fetch(file) {
                 }
             }
 
-            if(urlObj.protocol === 'npm:'){
+            if(urlObj.protocol === 'npm:' || urlObj.protocol === 'yarn:'){
                 var nodeModules = path.join(__dirname, '../', 'node_modules')
                 var location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
                 return fs.readFileSync(location, 'utf8');
@@ -61,7 +61,6 @@ function fetch(file) {
     }
 
     return file;
-
 
 }
 

@@ -7,4 +7,5 @@ bower_components
 build
 assets
 
+yarn.lock
 npm-debug.log
