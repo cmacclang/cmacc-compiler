@@ -1,0 +1,3 @@
+$ npmImport = [npm://cmacc-lib-id/test.cmacc]
+
+{{npmImport}}

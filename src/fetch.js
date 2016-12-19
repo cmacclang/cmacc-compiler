@@ -1,5 +1,6 @@
 var fs = require('fs');
 var url = require('url');
+var path = require('path');
 
 var cash = {}
 
@@ -26,8 +27,8 @@ function fetch(file) {
         }else{
 
             if(urlObj.protocol === 'file:'){
-                var path = decodeURI(urlObj.pathname);
-                return fs.readFileSync(path, 'utf8');
+                var location = decodeURI(urlObj.pathname);
+                return fs.readFileSync(location, 'utf8');
             }
 
             if(urlObj.protocol === 'http:' || urlObj.protocol === 'https:'){
@@ -47,6 +48,12 @@ function fetch(file) {
                 } else{
                     throw new Error('Cannot fetch: ' + url.format(urlObj))
                 }
+            }
+
+            if(urlObj.protocol === 'npm:'){
+                var nodeModules = path.join(__dirname, '../', 'node_modules')
+                var location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
+                return fs.readFileSync(location, 'utf8');
             }
 
         }

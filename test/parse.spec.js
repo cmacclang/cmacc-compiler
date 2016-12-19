@@ -697,4 +697,25 @@ describe('parse', function () {
         });
     });
 
+    describe('Npm', function () {
+        describe('NpmImport.cmacc', function () {
+            it('should  import from node_modules NpmImport.cmacc', function () {
+                var file = path.join(__dirname, 'parse', 'NpmImport.cmacc');
+                var result = parse('file://' + file);
+                assert.deepEqual(result, {
+                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/NpmImport.cmacc",
+                    "$$text$$": "{{npmImport}}",
+                    "npmImport": {
+                        "$$file$$": "npm://cmacc-lib-id/test.cmacc",
+                        "$$text$$": "{{test}}",
+                        "test": {
+                            "$$obj$$": result.npmImport,
+                            "$$str$$": "TEST"
+                        }
+                    }
+                })
+            });
+        });
+    });
+
 });
