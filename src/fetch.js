@@ -51,7 +51,9 @@ function fetch(file) {
             }
 
             if(urlObj.protocol === 'npm:' || urlObj.protocol === 'yarn:'){
-                var nodeModules = path.join('./', 'node_modules')
+                var findRoot = require('find-root');
+                var packageRoot = findRoot(process.cwd())
+                var nodeModules = path.join(packageRoot, 'node_modules')
                 var location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
                 return fs.readFileSync(location, 'utf8');
             }

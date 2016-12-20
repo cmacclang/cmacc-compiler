@@ -706,11 +706,22 @@ describe('parse', function () {
                     "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/NpmImport.cmacc",
                     "$$text$$": "{{npmImport}}",
                     "npmImport": {
-                        "$$file$$": "npm://cmacc-lib-id/test.cmacc",
-                        "$$text$$": "{{test}}",
-                        "test": {
+                        "$$file$$": "npm://cmacc-lib-entity/gender/He.cmacc",
+                        "He_She": {
                             "$$obj$$": result.npmImport,
-                            "$$str$$": "TEST"
+                            "$$str$$": "He"
+                        },
+                        "His_Her": {
+                            "$$obj$$": result.npmImport,
+                            "$$str$$": "His"
+                        },
+                        "he_she": {
+                            "$$obj$$": result.npmImport,
+                            "$$str$$": "he"
+                        },
+                        "his_her": {
+                            "$$obj$$": result.npmImport,
+                            "$$str$$": "his"
                         }
                     }
                 })
