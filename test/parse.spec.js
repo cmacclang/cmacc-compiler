@@ -421,11 +421,12 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'SetVariable.cmacc');
 
                 var result = parse('file://' + file);
+                console.log(__dirname)
 
                 assert.deepEqual(result, {
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/SetVariable.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/SetVariable.cmacc",
                         "obj2": {
-                            "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                            "$$file$$": "file://" + __dirname + "/parse/VariableObject.cmacc",
                             "hello1": {
                                 "$$obj$$": result,
                                 "$$str$$": "Test123"
@@ -478,7 +479,7 @@ describe('parse', function () {
                 var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
-                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyString.cmacc",
+                    "$$file$$": "file://" + __dirname + "/parse/EmptyString.cmacc",
                     "$$text$$": "Hello {{world}}",
                     "world": {
                         "$$obj$$": result,
@@ -495,10 +496,10 @@ describe('parse', function () {
                 var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
-                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyStringImport.cmacc",
+                    "$$file$$": "file://" + __dirname + "/parse/EmptyStringImport.cmacc",
                     "$$text$$": "Hello {{empty.world}}",
                     "empty": {
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/EmptyString.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/EmptyString.cmacc",
                         "$$text$$": "Hello {{world}}",
                         "world": {
                             "$$obj$$": result.empty,
@@ -520,14 +521,14 @@ describe('parse', function () {
                 var result = parse('file://' + file);
 
                 assert.deepEqual(result, {
-                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/OverloadVariable.cmacc",
+                    "$$file$$": "file://" + __dirname + "/parse/OverloadVariable.cmacc",
                     "$$text$$": "{{hello}}",
                     "hello": {
                         "$$obj$$": result.obj,
                         "$$str$$": "World1"
                     },
                     "obj": {
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/VariableObject.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/VariableObject.cmacc",
                         "hello1": {
                             "hello1": {
                                 "$$obj$$": result.obj,
@@ -553,17 +554,17 @@ describe('parse', function () {
                 assert.deepEqual(result.define_Mutual.$$obj$$, result);
 
                 assert.deepEqual(result, {
-                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DefinedOptionsUse.cmacc",
+                    "$$file$$": "file://" + __dirname + "/parse/DefinedOptionsUse.cmacc",
                     "$$text$$": "{{defineOptionsTmp}}",
                     "defineOptions": {
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DefinedOptions.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/DefinedOptions.cmacc",
                         "mutual": {
                             "$$obj$$": result.defineOptions,
                             "$$str$$": "by a Party (the Disclosing Party) to the other Party (the Receiving_Party)"
                         }
                     },
                     "defineOptionsTmp": {
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/DefinedOptionsTmp.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/DefinedOptionsTmp.cmacc",
                         "$$mrg$$": {
                             "text": {
                                 "$$obj$$": result,
@@ -592,7 +593,7 @@ describe('parse', function () {
                 var result = parse('file://' + file);
 
                 assert.deepEqual(result,{
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/GitHub.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/GitHub.cmacc",
                         "$$text$$": "{{content}}",
                         "content": {
                             "$$file$$": "https://raw.githubusercontent.com/wilmveel/cmacc-test/master/Form/HelloWorld.cmacc",
@@ -671,10 +672,10 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'Space Folder', 'HelloWorld.cmacc');
                 var result = parse('file://' + file);
                 assert.deepEqual(result,{
-                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/Space Folder/HelloWorld.cmacc",
+                    "$$file$$": "file://" + __dirname + "/parse/Space Folder/HelloWorld.cmacc",
                     "$$text$$": "name is {{person.name_Full}} lives in {{person.city}}",
                     "person": {
-                        "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/person.cmacc",
+                        "$$file$$": "file://" + __dirname + "/parse/person.cmacc",
                         "city": {
                             "$$obj$$": result.person,
                             "$$str$$": "city"
@@ -703,7 +704,7 @@ describe('parse', function () {
                 var file = path.join(__dirname, 'parse', 'NpmImport.cmacc');
                 var result = parse('file://' + file);
                 assert.deepEqual(result, {
-                    "$$file$$": "file:///Users/willemveelenturf/projects/commonaccord/cmacc-compiler/test/parse/NpmImport.cmacc",
+                    "$$file$$": "file://" + __dirname + "/parse/NpmImport.cmacc",
                     "$$text$$": "{{npmImport}}",
                     "npmImport": {
                         "$$file$$": "npm://cmacc-lib-entity/gender/He.cmacc",
