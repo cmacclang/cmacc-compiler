@@ -51,9 +51,9 @@ function convert(file, options) {
             }
 
             if (val) {
-                res += 'parse(' + JSON.stringify(resolve) + ', string(' + val + ', $$obj$$));';
+                res += 'parse(' + JSON.stringify(resolve) + ', string(' + val + ', $$obj$$), ' + JSON.stringify(options) + ');';
             } else {
-                res += 'parse(' + JSON.stringify(resolve) + ');';
+                res += 'parse(' + JSON.stringify(resolve) + ', null, ' + JSON.stringify(options) + ');';
             }
 
         } else if (!ref) {

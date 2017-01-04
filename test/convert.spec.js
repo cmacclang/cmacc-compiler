@@ -57,19 +57,19 @@ describe('Convert', function () {
     describe('and import', function () {
         it('should convert ImportFile.cmacc', function (done) {
             var file = 'ImportFile.cmacc';
-            var shouldBe = 'var $$obj$$ = {};var obj = parse(\"file:///User/name/test.cmacc\");;\n\n$$obj$$.obj =  obj ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/ImportFile.cmacc\";module.exports = $$obj$$;';
+            var shouldBe = 'var $$obj$$ = {};var obj = parse("file:///User/name/test.cmacc", null, undefined);;\n\n$$obj$$.obj =  obj ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/ImportFile.cmacc\";module.exports = $$obj$$;';
             importAndConvert(done, file, shouldBe);
         });
 
         it('should convert ImportHttp.cmacc', function (done) {
             var file = 'ImportHttp.cmacc';
-            var shouldBe = 'var $$obj$$ = {};var obj = parse(\"http://test.nl/test.cmacc\");;\n\n$$obj$$.obj =  obj ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/ImportHttp.cmacc\";module.exports = $$obj$$;';
+            var shouldBe = 'var $$obj$$ = {};var obj = parse(\"http://test.nl/test.cmacc\", null, undefined);;\n\n$$obj$$.obj =  obj ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/ImportHttp.cmacc\";module.exports = $$obj$$;';
             importAndConvert(done, file, shouldBe);
         });
 
         it('should convert ImportRel.cmacc', function (done) {
             var file = 'ImportRel.cmacc';
-            var shouldBe = 'var $$obj$$ = {};var obj = parse(\"file://' + __dirname + '/convert/Test.md\");;\n\n$$obj$$.obj =  obj ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/ImportRel.cmacc\";module.exports = $$obj$$;';
+            var shouldBe = 'var $$obj$$ = {};var obj = parse(\"file://' + __dirname + '/convert/Test.md\", null, undefined);;\n\n$$obj$$.obj =  obj ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/ImportRel.cmacc\";module.exports = $$obj$$;';
             importAndConvert(done, file, shouldBe);
 
         });
@@ -91,7 +91,7 @@ describe('Convert', function () {
             var file = path.join(__dirname, 'convert/SetVar.cmacc');
             var result = convert('file://' + file);
             console.log(result)
-            var expect = 'var $$obj$$ = {};var obj2 = parse(\"file://' + __dirname + '/convert/VariableObject.cmacc\");;\n\nobj2.hello1 = string(\"Test\", $$obj$$);;\n\n$$obj$$.obj2 =  obj2 ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/SetVar.cmacc\";module.exports = $$obj$$;'
+            var expect = 'var $$obj$$ = {};var obj2 = parse("file:///Users/wveelenturf/projects/cmacc/cmacc-compiler/test/convert/VariableObject.cmacc", null, undefined);;\n\nobj2.hello1 = string(\"Test\", $$obj$$);;\n\n$$obj$$.obj2 =  obj2 ; $$obj$$.$$file$$ = \"file://' + __dirname + '/convert/SetVar.cmacc\";module.exports = $$obj$$;'
             assert.equal(result, expect);
             done()
         });
