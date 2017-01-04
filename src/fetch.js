@@ -4,7 +4,7 @@ var path = require('path');
 
 var cash = {}
 
-function fetch(file) {
+function fetch(file, options) {
 
     var urlObj = url.parse(file);
 

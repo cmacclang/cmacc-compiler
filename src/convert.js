@@ -14,7 +14,7 @@ function convert(file, options) {
     var text = null;
 
     try {
-        text = fetch(file);
+        text = fetch(file, options);
     } catch (e) {
         throw(e)
     }
