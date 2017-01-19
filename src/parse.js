@@ -13,6 +13,11 @@ function parse($$file$$, $$mrg$$, $$opts$$) {
     if ($$mrg$$) {
         $$src$$.$$mrg$$ = $$mrg$$;
     }
+    if(/^win/.test(process.platform) ){
+        if($$src$$.$$text$$){
+            $$src$$.$$text$$ = $$src$$.$$text$$.replace(/^((\r\n)|;)*/yg,'')
+        }
+    }
 
     return $$src$$;
 
