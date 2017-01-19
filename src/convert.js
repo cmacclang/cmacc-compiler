@@ -34,17 +34,23 @@ function convert(file, options) {
             // absolute path
             if (url.parse(ref).protocol) {
                 resolve = ref;
+
             }
 
             // relative path
             else {
                 var urlObj = url.parse(file);
 
+
                 if (urlObj.protocol) {
                     var dir = path.dirname(urlObj.pathname);
                     urlObj.pathname = path.resolve(dir, ref);
                     resolve = url.format(urlObj);
+                    if(/^win/.test(process.platform)){
+                        resolve = resolve.replace(/(\w\w\w\w\:\w\:\\)(\w\:\\)/,"file:\\" + '$2')
+                    }
                 } else {
+
                     resolve = options.path + '/' + ref;
                 }
 

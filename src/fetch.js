@@ -10,6 +10,7 @@ function fetch(file, options) {
 
     var urlObj = url.parse(file);
 
+
     if(urlObj.protocol){
 
         if (typeof window !== 'undefined' && !window.location.host) {
@@ -30,6 +31,10 @@ function fetch(file, options) {
 
             if(urlObj.protocol === 'file:'){
                 var location = decodeURI(urlObj.pathname);
+
+                if(/^win/.test(process.platform) ){
+                    location = location.substring(1)
+                }
                 return fs.readFileSync(location, 'utf8');
             }
 
