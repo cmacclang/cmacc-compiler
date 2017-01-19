@@ -8,6 +8,10 @@ function fetch(file, options) {
 
     options = options || {}
 
+    if(/^win/.test(process.platform) ){
+        file = file.replace(/(\w\w\w\w\:\/\/)(\w\:)/, 'file:///' + '$2')
+    }
+
     var urlObj = url.parse(file);
 
 
