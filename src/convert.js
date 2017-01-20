@@ -47,7 +47,14 @@ function convert(file, options) {
                     urlObj.pathname = path.resolve(dir, ref);
                     resolve = url.format(urlObj);
                     if(/^win/.test(process.platform)){
-                        resolve = resolve.replace(/(\w\w\w\w\:\w\:\\)(\w\:\\)/,"file:\\" + '$2')
+                        if(file.match(/\w\w\w\w\:\/\/\/\w\:/) !== null){ resolve = file;}
+                        else{
+                            resolve = resolve.replace(/(\w\w\w\w\:\/\/\w\/)(\w\:)/, "file:///" + "$2")
+                            resolve = resolve.replace(/(\w\w\w\w\:\w\:\\)(\w\:\\)/,"file:\\" + '$2')
+                            
+                        }
+                        resolve = resolve.replace(/(\/(\w\:))(\/(\w\:))+/g, '$1' )
+                   
                     }
                 } else {
 
