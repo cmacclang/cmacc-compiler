@@ -17,6 +17,10 @@ function parse($$file$$, $$mrg$$, $$opts$$) {
         if($$src$$.$$text$$){
             $$src$$.$$text$$ = $$src$$.$$text$$.replace(/^((\r\n)|;)*/yg,'')
         }
+        if($$src$$.$$text$$ === '' || $$src$$.$$text$$ === null){
+            delete $$src$$.$$text$$
+        }
+
     }
 
     return $$src$$;
