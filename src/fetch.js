@@ -8,6 +8,7 @@ function fetch(file, options) {
 
     options = options || {}
 
+    //TODO: Hack for file path windows
     if(/^win/.test(process.platform) ){
         file = file.replace(/(\w\w\w\w\:\/\/)(\w\:)/, 'file:///' + '$2')
     }
@@ -36,6 +37,7 @@ function fetch(file, options) {
             if(urlObj.protocol === 'file:'){
                 var location = decodeURI(urlObj.pathname);
 
+                //TODO: Hack for file path windows
                 if(/^win/.test(process.platform) ){
                     location = location.substring(1)
                 }

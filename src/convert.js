@@ -46,13 +46,13 @@ function convert(file, options) {
                     var dir = path.dirname(urlObj.pathname);
                     urlObj.pathname = path.resolve(dir, ref);
                     resolve = url.format(urlObj);
-                    if(/^win/.test(process.platform)){
 
+                    //TODO: Hack for file path windows
+                    if(/^win/.test(process.platform)){
                         resolve = resolve.replace(/(\w\w\w\w\:\/\/\w\/)(\w\:)/, "file:///" + "$2")
                         resolve = resolve.replace(/(\w\w\w\w\:\w\:\\)(\w\:\\)/,"file:\\" + '$2')
                         resolve = resolve.replace(/(\/(\w\:))(\/(\w\:))+/g, '$1' )
                         resolve = resolve.replace(/(\w\w\w\w\:\/\/\/)(\w\:\\)(\w\:\\)/,'$1' +'$3')
-                   
                     }
                 } else {
 
