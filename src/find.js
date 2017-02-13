@@ -7,8 +7,11 @@ function find(ast) {
 
         var key = keys[i];
 
-        if (!key.match(/\$\$(.*)\$\$/) && !ast[key])
-            res[key] = "";
+        if (!key.match(/\$\$(.*)\$\$/) && ast[key] == null)
+            res[key] = null;
+
+        if (!key.match(/\$\$(.*)\$\$/) && ast[key] && ast[key].$$str$$)
+            res[key] = ast[key].$$str$$;
 
         if (!key.match(/\$\$(.*)\$\$/) && ast[key] && !ast[key].$$str$$)
             res[key] = find(ast[key])
