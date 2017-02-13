@@ -7,8 +7,8 @@ var cmacc = {
     render: require('./resolve'),
     serialize: require('./serialize'),
     compile: require('./compile'),
-    marked: require('marked'),
-    find: require('find')
+    find: require('./find'),
+    marked: require('marked')
 
 };
 
