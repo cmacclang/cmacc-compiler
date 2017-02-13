@@ -7,7 +7,9 @@ var cmacc = {
     render: require('./resolve'),
     serialize: require('./serialize'),
     compile: require('./compile'),
-    marked: require('marked')
+    marked: require('marked'),
+    find: require('find')
+
 };
 
 module.exports = cmacc;
