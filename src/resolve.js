@@ -13,7 +13,7 @@ function resolve(obj, opts) {
 }
 
 function spacesString(num) {
-    var res = ''
+    var res = '';
     for (var i = 0; i < num; i++) {
         res += ' ';
     }
@@ -28,17 +28,17 @@ function replaceVars(str, obj, opts) {
             var val = findInAst(qry, obj);
 
             if(!val && typeof val !== 'string')
-                return '!!' + qry + '!!'
+                return '!!' + qry + '!!';
 
             if (typeof val === 'object') {
                 var res = resolve(val);
                 if(typeof res === 'string') {
-                    return concatString(res, qry, pos, opts)
+                    return concatString(res, qry, pos, opts);
                 }
             }
 
             if(typeof val === 'string')
-                return concatString(val, qry, pos, opts)
+                return concatString(val, qry, pos, opts);
 
             return ''
 
