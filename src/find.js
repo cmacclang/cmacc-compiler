@@ -11,7 +11,7 @@ function find(ast) {
             res[key] = "";
 
         if (!key.match(/\$\$(.*)\$\$/) && ast[key] && !ast[key].$$str$$)
-            res[key] = findEmptyVars(ast[key])
+            res[key] = find(ast[key])
 
     }
 
