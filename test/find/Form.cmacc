@@ -1,0 +1,6 @@
+$ person1 = [./_Person.cmacc];
+
+$ person2 = [./_Person.cmacc];
+
+
+This is an agreement between {{person1.fullName}} and {{person2.fullName}}

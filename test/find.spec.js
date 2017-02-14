@@ -48,7 +48,7 @@ describe('find', function () {
             var doc = cmacc.merge(ast, string);
             var result = cmacc.render(doc);
 
-            assert.deepEqual(result, "Willem Veelenturf");
+            assert.equal(result, "Willem Veelenturf");
 
             done();
 
@@ -69,7 +69,42 @@ describe('find', function () {
             var doc = cmacc.merge(ast, string);
             var result = cmacc.render(doc);
 
-            assert.deepEqual(result, "Willem Veelenturf Willem");
+            assert.equal(result, "Willem Veelenturf Willem");
+
+            done();
+
+        });
+
+
+
+    });
+
+
+    describe('Form.cmacc', function () {
+        it('should render with params change concat', function (done) {
+            var data = {
+                "person1": {
+                    "firstName": "Willem",
+                    "lastName": "Veelenturf",
+                    "fullName": "{{firstName}} {{lastName}}"
+                },
+                "person2": {
+                    "firstName": "Axel",
+                    "lastName": "Scheele",
+                    "fullName": "{{firstName}} {{lastName}} {{firstName}}"
+                }
+            };
+
+
+            var file = path.join(__dirname, 'find', './Form.cmacc');
+            var ast = cmacc.compile('file://' + file);
+
+            var string = cmacc.string(data);
+
+            var doc = cmacc.merge(ast, string);
+            var result = cmacc.render(doc);
+
+            assert.deepEqual(result, "This is an agreement between Willem Veelenturf and Axel Scheele Axel");
 
             done();
 
