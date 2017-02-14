@@ -10,7 +10,8 @@ function merge(obj1, obj2) {
 
         if (typeof obj2[i] === 'object' && obj2[i] && (obj2[i].$$str$$ || typeof obj2[i].$$str$$ === 'string')) {
             obj1[i].$$str$$ = obj2[i].$$str$$;
-            obj1[i].$$obj$$ = obj2[i].$$obj$$;
+            if (obj2[i].$$obj$$)
+                obj1[i].$$obj$$ = obj2[i].$$obj$$;
         }
 
         if (typeof obj2[i] === 'object' && obj2[i] && typeof obj2[i].$$str$$ !== 'string') {

@@ -23,7 +23,6 @@ describe('merge0', function () {
                 $$str$$: 'test1'
             },
             test2: {
-                $$obj$$: undefined,
                 $$str$$: 'test2'
             }
         });
@@ -52,7 +51,6 @@ describe('merge0', function () {
                     $$str$$: 'test1'
                 },
                 doei: {
-                    $$obj$$: undefined,
                     $$str$$: 'test2'
                 }
             }
