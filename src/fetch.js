@@ -18,7 +18,7 @@ function fetch(file, options) {
 
     if(urlObj.protocol){
 
-        if (typeof window !== 'undefined' && !window.location.host) {
+        if (typeof window !== 'undefined' && window.location.host) {
 
             var request = new XMLHttpRequest();
             request.open('GET', file, false);
