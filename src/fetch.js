@@ -20,6 +20,11 @@ function fetch(file, options) {
 
         if (typeof window !== 'undefined' && window.location.host) {
 
+            if(urlObj.protocol === 'npm:' || urlObj.protocol === 'yarn:'){
+                console.log(urlObj)
+                file = path.join('node_modules', urlObj.hostname, urlObj.path)
+            }
+
             var request = new XMLHttpRequest();
             request.open('GET', file, false);
             request.send(null);
