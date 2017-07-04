@@ -1,5 +1,0 @@
-$ name = "__name__";
-
-$ show = "{{name}} {{name}}";
-
-{{show}}

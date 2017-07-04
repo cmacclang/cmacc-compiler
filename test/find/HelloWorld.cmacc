@@ -1,5 +1,0 @@
-$ test = null;
-
-$ world = "World";
-
-Hello {{world}} {{test}}

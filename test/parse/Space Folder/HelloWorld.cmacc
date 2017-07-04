@@ -1,3 +1,0 @@
-$ person = [../person.cmacc];
-
-name is {{person.name_Full}} lives in {{person.city}}

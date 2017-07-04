@@ -1,5 +1,0 @@
-$ obj = [./VariableObject.cmacc]
-
-$ test = {
-    test: obj.hello1.hello1
-}

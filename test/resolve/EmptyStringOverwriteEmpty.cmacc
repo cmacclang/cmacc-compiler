@@ -1,5 +1,0 @@
-$ empty1 = [./EmptyStringSet.cmacc] => {
-    world : ''
-};
-
-Hello {{empty1.world}}

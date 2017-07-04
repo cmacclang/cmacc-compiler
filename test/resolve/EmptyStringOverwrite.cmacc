@@ -1,7 +1,0 @@
-$ emptyString = [./EmptyStringImport.cmacc];
-
-$ empty1 = [./EmptyStringSet.cmacc] => {
-    empty : emptyString
-};
-
-Hello {{empty1.world}}

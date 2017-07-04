@@ -1,9 +1,0 @@
-$ defineOptions = [./DefinedOptions.cmacc];
-
-$ define_Mutual = "{{defineOptions.mutual}}";
-
-$ defineOptionsTmp = [./DefinedOptionsTmp.cmacc] => {
-    text: define_Mutual
-};
-
-{{defineOptionsTmp}}

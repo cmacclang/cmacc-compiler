@@ -1,3 +1,0 @@
-$ world = "_";
-
-Hello {{world}}

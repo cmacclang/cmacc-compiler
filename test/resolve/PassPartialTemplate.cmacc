@@ -1,5 +1,0 @@
-$ text = "test 123";
-
-Hello Template
-
-{{text}}

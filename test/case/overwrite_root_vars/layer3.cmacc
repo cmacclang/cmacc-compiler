@@ -1,9 +1,0 @@
-$ obj = [./data.cmacc] => {
-    name: "Piet"
-};
-
-$ layer2 = [./layer2.cmacc] => {
-    obj : obj
-};
-
-{{layer2}}

@@ -1,11 +1,36 @@
-var parse = require('./parse');
-var bind = require('./bind');
+var loader = require('./loader');
+var parser = require('./parser');
+var variables = require('./variables');
 
-function compile(file, options) {
+function compile(file) {
 
-    var ast = parse(file, null, options);
-    var bound = bind(ast);
-    return bound;
+  return loader(file).then((text) => {
+    const res = parser(text);
+    const vars = variables(res.vars);
+
+    const ast = vars.map((x) => {
+      if (x.type === 'cmacc') {
+        return compile(x.value)
+          .then(res => {
+            x.data = res;
+            return x;
+          })
+      }
+      x.data = x.value
+      return Promise.resolve(x)
+    });
+
+    return Promise.all(ast).then(x => {
+      return {
+        "type": res.type,
+        "md": res.md,
+        "meta": res.meta,
+        "vars": x,
+      };
+    })
+
+  });
+
 }
 
 module.exports = compile;

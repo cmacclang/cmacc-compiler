@@ -1,15 +1,10 @@
 var cmacc = {
-    convert: require('./convert'),
-    merge: require('./merge'),
-    string: require('./string'),
-    parse: require('./parse'),
-    resolve: require('./resolve'),
-    render: require('./resolve'),
-    serialize: require('./serialize'),
-    compile: require('./compile'),
-    find: require('./find'),
-    marked: require('marked')
-
+  parser: require('./parser'),
+  render: require('./render'),
+  loader: require('./loader'),
+  compile: require('./compile'),
+  variables: require('./variables'),
+  reduce: require('./reduce'),
 };
 
 module.exports = cmacc;

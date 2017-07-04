@@ -1,5 +1,0 @@
-$ world = "World";
-
-$ hello = "Hello {{world}}";
-
-{{hello}}

@@ -1,5 +1,0 @@
-$ obj = [./VariableObject.cmacc] => {
-     "hello1" : {
-        "hello1" : "World2"
-     }
-}

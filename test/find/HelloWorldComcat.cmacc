@@ -1,7 +1,0 @@
-$ firstName = "World";
-
-$ lastName = "World";
-
-$ fullName = "{{firstName}} {{lastName}}"
-
-{{fullName}}
