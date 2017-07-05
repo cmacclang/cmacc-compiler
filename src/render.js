@@ -25,7 +25,6 @@ function render(ast) {
   const arr = ast['$md$'].map((x) => {
 
     if (x.type === 'placeholder') {
-      console.log('placeholder')
       x.type = 'htmlblock'
       x = repace(x);
       return x

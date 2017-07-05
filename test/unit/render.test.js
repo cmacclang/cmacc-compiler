@@ -1,59 +1,57 @@
 const assert = require('assert');
+const path = require('path');
+
+const fsMock = require('fs-mock');
+const fetchMock = require('fetch-mock');
+
+const compiler = require('../../src/index').compile;
+const reduce = require('../../src/index').reduce;
 const render = require('../../src/index').render;
 
 
-describe('parse', () => {
+describe('render', () => {
 
+  function fileMock(file, text) {
+    var data = {};
+    data[path.resolve(__dirname, '../../', file)] = text;
+    global.fs = new fsMock(data);
+  }
 
-  it('heading', () => {
+  it('link', (done) => {
 
-
-    const text = `$ world = "world"
+    const cmacc1 = `$ world = "world1"
+    
+$ link = [./test.cmacc]
 
 # Hello {{world}}
+
+{{link}}
+
+## Test`;
+
+    const cmacc2 = `$ world = "world2"
+    
+# Hello {{world}}
+
+Dit is een berichtje`;
+
+    fileMock("./test.cmacc", cmacc2)
+
+    compiler(cmacc1).then((ast) => {
+
+
+      const html = render(ast);
+
+      const val = `<h1>Hello world1</h1>
+<h1>Hello world2</h1>
+<p>Dit is een berichtje</p>
+<h2>Test</h2>
 `;
 
-    const ast = parser(text);
-    const html = render(ast);
-
-    assert.equal(html, "<h1>Hello world</h1>\n");
-
-  });
-
-  it('one paragraph two lines', () => {
-
-
-    const text = `$ hello = "Hello"
-    $ world = "world"
-
-This is a story about {{hello}}
-And {{world}}
-`;
-
-    const ast = parser(text);
-    const html = render(ast);
-
-    assert.equal(html, "<p>This is a story about Hello\nAnd world</p>\n");
+      assert.equal(html, val);
+      done();
+    });
 
   });
-
-  it('two paragraphs', () => {
-
-
-    const text = `$ hello = "Hello"
-    $ world = "world"
-
-This is a story about {{hello}}
-
-And {{world}}
-`;
-
-    const ast = parser(text);
-    const html = render(ast);
-
-    assert.equal(html, "<p>This is a story about Hello</p>\n<p>And world</p>\n");
-
-  });
-
 
 });

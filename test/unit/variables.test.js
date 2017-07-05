@@ -24,8 +24,8 @@ describe('compiler', () => {
     assert.equal(res[1].type, 'string');
     assert.equal(res[2].type, 'string');
     assert.equal(res[3].type, 'variable');
-    assert.equal(res[4].type, 'link');
-    assert.equal(res[5].type, 'link');
+    assert.equal(res[4].type, 'cmacc');
+    assert.equal(res[5].type, 'cmacc');
 
     assert.equal(res[0].value, null);
     assert.equal(res[1].value, "");
