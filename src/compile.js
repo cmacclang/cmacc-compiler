@@ -1,11 +1,10 @@
 var assemble = require('./assemble');
 var reduce = require('./reduce');
 
-function compile(file) {
+function compile(file, opts = {}) {
 
-  return assemble(file).then(res => {
-    return reduce(res);
-  })
+  return assemble(file, opts.base)
+    .then(reduce);
 
 }
 

@@ -14,6 +14,9 @@ const loader = (x, base) => {
     if(!base){
       base = 'file:\/\/' + __dirname;
     }
+    if(path.extname(base) !== ''){
+      base = url.resolve(base, './')
+    }
     x = url.resolve(base, x);
   }
 

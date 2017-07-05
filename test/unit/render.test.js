@@ -2,10 +2,8 @@ const assert = require('assert');
 const path = require('path');
 
 const fsMock = require('fs-mock');
-const fetchMock = require('fetch-mock');
 
 const compiler = require('../../src/index').compile;
-const reduce = require('../../src/index').reduce;
 const render = require('../../src/index').render;
 
 
@@ -13,11 +11,15 @@ describe('render', () => {
 
   function fileMock(file, text) {
     var data = {};
-    data[path.resolve(__dirname, '../../', file)] = text;
+    data[path.resolve(__dirname, '../../../', file)] = text;
     global.fs = new fsMock(data);
   }
 
   it('link', (done) => {
+
+    const base = 'file:\/\/:' + path.resolve(__dirname, '../../');
+
+    const opts = {base};
 
     const cmacc1 = `$ world = "world1"
     
@@ -37,7 +39,7 @@ Dit is een berichtje`;
 
     fileMock("./test.cmacc", cmacc2)
 
-    compiler(cmacc1).then((ast) => {
+    compiler(cmacc1, opts).then((ast) => {
 
 
       const html = render(ast);
