@@ -11,7 +11,7 @@ function parse(text) {
   return {
     type: "cmacc",
     meta : md.meta,
-    vars : md.variables,
+    vars : md.variables || [],
     md : res,
   };
 }

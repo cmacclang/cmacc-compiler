@@ -1,0 +1,4 @@
+$ link = [./simple_variable.cmacc]
+$ link.world = "TEST"
+
+{{link}}

@@ -39,20 +39,23 @@ Dit is een berichtje`;
 
     fileMock("./test.cmacc", cmacc2)
 
-    compiler(cmacc1, opts).then((ast) => {
+    compiler(cmacc1, opts)
+      .then((ast) => {
 
 
-      const html = render(ast);
+        const html = render(ast);
 
-      const val = `<h1>Hello world1</h1>
+        const val = `<h1>Hello world1</h1>
 <h1>Hello world2</h1>
 <p>Dit is een berichtje</p>
 <h2>Test</h2>
 `;
 
-      assert.equal(html, val);
-      done();
-    });
+        assert.equal(html, val);
+        done();
+      })
+      .catch(done);
+    ;
 
   });
 

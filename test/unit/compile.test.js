@@ -17,16 +17,16 @@ describe('compiler', () => {
     
 # Hello {{world}}`;
 
-    compiler(text).then((ast) => {
-      assert.equal(ast['$md$'][0].type, 'heading_open');
-      assert.equal(ast['$md$'][1].content, 'Hello {{world}}');
-      assert.equal(ast['$md$'][2].type, 'heading_close');
-      done();
-    });
+    compiler(text)
+      .then((ast) => {
+        assert.equal(ast['$md$'][0].type, 'heading_open');
+        assert.equal(ast['$md$'][1].content, 'Hello {{world}}');
+        assert.equal(ast['$md$'][2].type, 'heading_close');
+        done();
+      })
+      .catch(done);
 
   });
-
-
 
 
 });
