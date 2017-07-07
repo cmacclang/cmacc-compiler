@@ -33,7 +33,7 @@ const loader = (x, base) => {
         if (err) reject(err);
         resolve({
           file: url.format(urlObj),
-          type: path.extname(urlObj.path).slice(1),
+          type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: data.toString(),
         });
       });

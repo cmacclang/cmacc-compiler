@@ -9,7 +9,12 @@ function reduce(ast) {
       const split = x.name.split('.');
       const last = split.pop();
       const val = split.reduce((acc, val) => acc[val], acc);
-      val[last] = x.data;
+      if(x.data.type === 'json'){
+        val[last] = x.data.data;
+      }else{
+        val[last] = x.data;
+      }
+
     }
 
     return acc;

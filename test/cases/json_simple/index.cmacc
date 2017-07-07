@@ -1,0 +1,3 @@
+$ person1 = [./Willem_Veelenturf.json]
+
+# Hello {{person1.firstName}} {{person1.lastName}}

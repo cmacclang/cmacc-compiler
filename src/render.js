@@ -1,6 +1,6 @@
-const MATCH_VARIABLE = /\{\{(.*)\}\}/;
-
 function render(ast) {
+
+  const MATCH_VARIABLE = /\{\{([\w\.]*)\}\}/g;
 
   function repace(x) {
 
@@ -28,7 +28,7 @@ function render(ast) {
     .map((x) => {
 
       if (x.type === 'placeholder') {
-        const key = x.content.match(MATCH_VARIABLE)[1];
+        const key = MATCH_VARIABLE.exec(x.content)[1];
         return render(ast[key])
       }
 

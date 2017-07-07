@@ -6,6 +6,14 @@ function assemble(file, base) {
 
   return loader(file, base).then((res) => {
 
+    if (res.type === 'json') {
+      const data = {
+        type: res.type,
+        data: JSON.parse(res.data),
+      };
+      return Promise.resolve(data)
+    }
+
     if (res.type === 'schema') {
       const data = {
         type: res.type,
