@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "id": "http://example.com/example.json",
+  "properties": {
+    "firstName": {
+      "id": "/properties/firstName",
+      "type": "string"
+    },
+    "lastName": {
+      "id": "/properties/lastName",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

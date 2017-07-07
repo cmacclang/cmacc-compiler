@@ -6,8 +6,16 @@ function assemble(file, base) {
 
   return loader(file, base).then((res) => {
 
+    if(res.type === 'schema'){
+      let data = JSON.parse(res.data);
+      data['$type$'] = res.type;
+      return Promise.resolve(data)
+    }
+
     if(res.type === 'js'){
-      return Promise.resolve(eval(res.data))
+      let data = eval(res.data);
+      data['$type$'] = res.type;
+      return Promise.resolve(data)
     }
 
     const md = parser(res.data);
