@@ -9,12 +9,10 @@ function reduce(ast) {
       const split = x.name.split('.');
       const last = split.pop();
       const val = split.reduce((acc, val) => acc[val], acc);
-      if (x.data.type === 'json') {
-        val[last] = x.data.data;
+      if (x.data.type === 'json' || x.data.type === 'js') {
+        val[last] = x.data.data ;
       } else if (x.data.type === 'schema') {
-        val[last] = {
-          '$schema$': x.data.data
-        }
+        val[last] = {'$schema$': x.data.data}
       } else {
         val[last] = x.data;
       }
