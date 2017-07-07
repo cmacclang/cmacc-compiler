@@ -8,11 +8,17 @@ describe('simple_link', function () {
 
   it('render', function (done) {
     const file = url.join('file://', __dirname, './simple_link.cmacc')
-    cmacc.compile(file).then(cmacc.render).then(html => {
-      const expect = '<h1>Hello TEST</h1>\n';
-      assert.equal(html, expect);
-      done();
-    });
+    cmacc.compile(file)
+      .then(cmacc.render)
+      .then(x => {
+        return cmacc.remarkable.renderer.render(x)
+      })
+      .then(html => {
+        const expect = '<h1>Hello TEST</h1>\n';
+        assert.equal(html, expect);
+        done();
+      })
+      .catch(done);
   });
 
 });

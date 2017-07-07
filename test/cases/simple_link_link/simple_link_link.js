@@ -8,12 +8,26 @@ describe('simple_link_link', function () {
 
   it('render', function (done) {
     const file = url.join('file://', __dirname, './simple_link_link.cmacc')
-    cmacc.compile(file).then(console.log);
-    cmacc.compile(file).then(cmacc.render).then(html => {
-      const expect = '<h1>Hello TEST</h1>\n';
-      assert.equal(html, expect);
-      done();
-    });
+    cmacc.compile(file)
+      .then(cmacc.render)
+      .then( x => {
+        assert.equal(x[0].type, 'heading_open');
+        assert.equal(x[1].type, 'inline');
+        assert.equal(x[1].children[0].type, 'text');
+        assert.equal(x[1].children[0].content, 'Hello TEST');
+        assert.equal(x[2].type, 'heading_close');
+        console.log(x)
+        return x;
+      })
+      .then(x => {
+        return cmacc.remarkable.renderer.render(x)
+      })
+      .then(html => {
+        const expect = '<h1>Hello TEST</h1>\n';
+        assert.equal(html, expect);
+        done();
+      })
+      .catch(done);
   });
 
 });

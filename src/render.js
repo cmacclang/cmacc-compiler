@@ -1,45 +1,44 @@
-const Remarkable = require('remarkable');
-
+const MATCH_VARIABLE = /\{\{(.*)\}\}/;
 
 function render(ast) {
 
-  const MATCH_VARIABLE = /\{\{(.*)\}\}/;
-
-  const md = new Remarkable();
-
   function repace(x) {
+
+    if(x.children){
+      x.children.map(repace)
+    }
+
     if (x.type === 'text' || x.type === 'htmlblock') {
       x.content = x.content.replace(MATCH_VARIABLE, function (res, variable) {
         const val = variable.split('.').reduce((acc, val) => acc[val], ast);
 
         if (typeof val === 'string')
           return val;
-        else
+
+        if (typeof val === 'object')
           return render(val)
+
       })
     }
 
     return x
   }
 
-  const arr = ast['$md$'].map((x) => {
+  const arr = ast['$md$']
+    .map((x) => {
 
-    if (x.type === 'placeholder') {
-      x.type = 'htmlblock'
-      x = repace(x);
-      return x
-    }
+      if (x.type === 'placeholder') {
+        const key = x.content.match(MATCH_VARIABLE)[1];
+        return render(ast[key])
+      }
 
-    if (x.children) {
-      x.children.map(repace)
-    }
+      return [x].map(repace)
+    })
+    .reduce((acc, val) => {
+      return acc.concat(val);
+    }, []);
 
-    return x
-  });
-
-  const html = md.renderer.render(arr, {})
-
-  return html;
+  return arr;
 }
 
 module.exports = render;

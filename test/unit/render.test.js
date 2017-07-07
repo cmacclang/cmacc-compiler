@@ -3,8 +3,7 @@ const path = require('path');
 
 const fsMock = require('fs-mock');
 
-const compiler = require('../../src/index').compile;
-const render = require('../../src/index').render;
+const cmacc = require('../../src/index');
 
 
 describe('render', () => {
@@ -39,19 +38,12 @@ Dit is een berichtje`;
 
     fileMock("./test.cmacc", cmacc2)
 
-    compiler(cmacc1, opts)
-      .then((ast) => {
-
-
-        const html = render(ast);
-
-        const val = `<h1>Hello world1</h1>
-<h1>Hello world2</h1>
-<p>Dit is een berichtje</p>
-<h2>Test</h2>
-`;
-
-        assert.equal(html, val);
+    cmacc.compile(cmacc1, opts)
+      .then(cmacc.render)
+      .then(md => {
+        assert.equal(md[0].type, 'heading_open');
+        assert.equal(md[1].type, 'inline');
+        assert.equal(md[2].type, 'heading_close');
         done();
       })
       .catch(done);

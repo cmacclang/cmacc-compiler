@@ -1,3 +1,6 @@
+const Remarkable = require('remarkable');
+const md = new Remarkable();
+
 var cmacc = {
   parser: require('./parser'),
   render: require('./render'),
@@ -6,6 +9,7 @@ var cmacc = {
   variables: require('./variables'),
   assemble: require('./assemble'),
   reduce: require('./reduce'),
+  remarkable: md,
 };
 
 module.exports = cmacc;
