@@ -13,7 +13,7 @@ describe('script_simple', function () {
     const file = url.join('file://', __dirname, './index.cmacc')
     cmacc.compile(file)
       .then(x => {
-        assert.equal(x.script(), 'Hello World');
+        assert.equal(x.script['data'](), 'Hello World');
         return x;
       })
       .then(cmacc.render)

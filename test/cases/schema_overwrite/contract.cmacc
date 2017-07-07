@@ -1,0 +1,3 @@
+$ person = [./person.schema]
+
+# Hello {{person.firstName}}

@@ -6,15 +6,19 @@ function assemble(file, base) {
 
   return loader(file, base).then((res) => {
 
-    if(res.type === 'schema'){
-      let data = JSON.parse(res.data);
-      data['$type$'] = res.type;
+    if (res.type === 'schema') {
+      const data = {
+        type: res.type,
+        data: JSON.parse(res.data),
+      };
       return Promise.resolve(data)
     }
 
-    if(res.type === 'js'){
-      let data = eval(res.data);
-      data['$type$'] = res.type;
+    if (res.type === 'js') {
+      const data = {
+        type: res.type,
+        data: eval(res.data),
+      };
       return Promise.resolve(data)
     }
 
@@ -30,7 +34,6 @@ function assemble(file, base) {
             return x;
           })
       }
-
 
 
       x.data = x.value;

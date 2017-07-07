@@ -5,7 +5,7 @@ const cmacc = require('../../../src/index');
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
-describe('schema_simple', function () {
+describe('schema_overwrite', function () {
 
   global.fs = require('fs');
 
@@ -14,15 +14,7 @@ describe('schema_simple', function () {
     cmacc.compile(file)
       .then(ast => {
         console.log(ast)
-        assert.equal(ast.person['data'].id, "http://example.com/example.json");
-        assert.deepEqual(ast.person['data'].properties.firstName, {
-          "id": "/properties/firstName",
-          "type": "string"
-        });
-        assert.deepEqual(ast.person['data'].properties.lastName, {
-          "id": "/properties/lastName",
-          "type": "string"
-        });
+
         return ast;
       })
       .then(cmacc.render)
@@ -30,7 +22,7 @@ describe('schema_simple', function () {
         return md.renderer.render(x)
       })
       .then(html => {
-        const expect = '<h1>Hello world</h1>\n';
+        const expect = '<h1>Hello Willem</h1>\n';
         assert.equal(html, expect);
         done();
       })
