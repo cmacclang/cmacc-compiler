@@ -1,5 +1,4 @@
 $ contract = [./contract.cmacc]
 $ contract.person.firstName = "Willem"
-$ contract.person.lastName = "Veelenturf"
 
 {{contract}}

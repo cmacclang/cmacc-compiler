@@ -13,20 +13,19 @@ describe('schema_overwrite', function () {
     const file = url.join('file://', __dirname, './index.cmacc')
     cmacc.compile(file)
       .then(ast => {
-        console.log(ast)
+        //console.log(ast)
 
         return ast;
       })
+      .then(cmacc.validate)
       .then(cmacc.render)
       .then(x => {
         return md.renderer.render(x)
       })
-      .then(html => {
-        const expect = '<h1>Hello Willem Veelenturf</h1>\n';
-        assert.equal(html, expect);
-        done();
-      })
-      .catch(done);
+      .catch(e =>{
+        assert.equal(e.message, 'requires property "lastName"');
+        done()
+      });
 
   });
 });

@@ -14,12 +14,12 @@ describe('schema_simple', function () {
     cmacc.compile(file)
       .then(ast => {
         console.log(ast)
-        assert.equal(ast.person['data'].id, "http://example.com/example.json");
-        assert.deepEqual(ast.person['data'].properties.firstName, {
+        assert.equal(ast.person['$schema$'].id, "http://example.com/example.json");
+        assert.deepEqual(ast.person['$schema$'].properties.firstName, {
           "id": "/properties/firstName",
           "type": "string"
         });
-        assert.deepEqual(ast.person['data'].properties.lastName, {
+        assert.deepEqual(ast.person['$schema$'].properties.lastName, {
           "id": "/properties/lastName",
           "type": "string"
         });

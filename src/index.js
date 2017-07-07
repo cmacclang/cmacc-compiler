@@ -9,6 +9,7 @@ var cmacc = {
   variables: require('./variables'),
   assemble: require('./assemble'),
   reduce: require('./reduce'),
+  validate: require('./validate'),
   remarkable: md,
 };
 

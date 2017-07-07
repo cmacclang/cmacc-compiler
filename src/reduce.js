@@ -5,13 +5,17 @@ function reduce(ast) {
     if (x.data.type === 'cmacc')
       acc[x.name] = reduce(x.data);
 
-    else{
+    else {
       const split = x.name.split('.');
       const last = split.pop();
       const val = split.reduce((acc, val) => acc[val], acc);
-      if(x.data.type === 'json'){
+      if (x.data.type === 'json') {
         val[last] = x.data.data;
-      }else{
+      } else if (x.data.type === 'schema') {
+        val[last] = {
+          '$schema$': x.data.data
+        }
+      } else {
         val[last] = x.data;
       }
 
