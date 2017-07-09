@@ -24,9 +24,6 @@ function render(ast) {
     return x
   }
 
-  if (!ast['$md$'])
-    console.log(ast)
-
   const arr = ast['$md$']
     .map((x) => {
 

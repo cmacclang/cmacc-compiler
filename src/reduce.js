@@ -2,18 +2,21 @@ function reduce(ast) {
 
   const vars = ast.vars.reduce((acc, x) => {
 
-    if (x.data.type === 'cmacc')
+    if (x.data && x.data.type === 'cmacc')
       acc[x.name] = reduce(x.data);
 
     else {
       const split = x.name.split('.');
       const last = split.pop();
       const val = split.reduce((acc, val) => acc[val], acc);
-      if (x.data.type === 'json' || x.data.type === 'js') {
+
+      if (x.data && (x.data.type === 'json' || x.data.type === 'js')) {
         val[last] = x.data.data ;
-      } else if (x.data.type === 'schema') {
+      } else if (x.data && x.data.type === 'schema') {
         val[last] = {'$schema$': x.data.data}
-      } else {
+      } else if (x.type === 'variable') {
+        val[last] = acc[x.data];
+      }else {
         val[last] = x.data;
       }
 

@@ -9,7 +9,7 @@ function variables(vars) {
   function typeConverter(x) {
     if (x === "null") return "null";
     if (x.match(MATCH_STRING)) return "string";
-    if (x.match(MATCH_LINK)) return "cmacc";
+    if (x.match(MATCH_LINK)) return "link";
     return "variable";
   };
 
