@@ -10,7 +10,7 @@ describe('simple_variable', function () {
     const file = url.join('file://', __dirname, './simple_variable.cmacc')
     cmacc.compile(file).then(cmacc.render)
       .then(x => {
-        return cmacc.remarkable.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>Hello world</h1>\n';

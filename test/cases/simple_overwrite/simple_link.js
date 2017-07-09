@@ -11,7 +11,7 @@ describe('simple_link', function () {
     cmacc.compile(file)
       .then(cmacc.render)
       .then(x => {
-        return cmacc.remarkable.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>Hello TEST</h1>\n';

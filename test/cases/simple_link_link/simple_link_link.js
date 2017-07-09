@@ -20,7 +20,7 @@ describe('simple_link_link', function () {
         return x;
       })
       .then(x => {
-        return cmacc.remarkable.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>Hello TEST</h1>\n';

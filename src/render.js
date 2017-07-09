@@ -4,7 +4,7 @@ function render(ast) {
 
   function repace(x) {
 
-    if(x.children){
+    if (x.children) {
       x.children.map(repace)
     }
 
@@ -24,16 +24,33 @@ function render(ast) {
     return x
   }
 
+  if (!ast['$md$'])
+    console.log(ast)
+
   const arr = ast['$md$']
     .map((x) => {
 
       if (x.type === 'placeholder') {
-        const key = MATCH_VARIABLE.exec(x.content)[1];
-        return render(ast[key])
+
+        MATCH_VARIABLE.lastIndex = 0;
+        const match = MATCH_VARIABLE.exec(x.content);
+        const key = match[1];
+        const val = key.split('.').reduce((a, b) => a[b], ast)
+
+        if (typeof val === "object")
+          return render(val);
+
+        if (typeof val === "string")
+          return [{
+            type: 'text',
+            content: val}];
+
+        throw new Error(`cannot find ${key}`)
       }
 
-      return [x].map(repace)
-    })
+        return [x].map(repace)
+      }
+      )
     .reduce((acc, val) => {
       return acc.concat(val);
     }, []);

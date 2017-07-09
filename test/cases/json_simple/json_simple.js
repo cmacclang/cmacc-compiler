@@ -16,7 +16,7 @@ describe('json_simple', function () {
       })
       .then(cmacc.render)
       .then(x => {
-        return cmacc.remarkable.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>Hello Willem Veelenturf</h1>\n';
