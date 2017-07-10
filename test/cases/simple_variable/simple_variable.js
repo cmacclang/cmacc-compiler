@@ -8,15 +8,17 @@ describe('simple_variable', function () {
 
   it('render', function (done) {
     const file = url.join('file://', __dirname, './simple_variable.cmacc')
-    cmacc.compile(file).then(cmacc.render)
-      .then(x => {
-        return cmacc.remarkable.render(x)
+    cmacc.compile(file)
+      .then(cmacc.render)
+      .then(md => {
+        return cmacc.remarkable.render(md)
       })
       .then(html => {
-        const expect = '<h1>Hello world</h1>\n';
+        const expect = '<h1>Hello world 123</h1>\n';
         assert.equal(html, expect);
         done();
-      });
+      })
+      .catch(done);
 
 
   });

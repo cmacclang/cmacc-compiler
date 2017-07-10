@@ -1,3 +1,5 @@
+const merge = require('./merge');
+
 function reduce(ast) {
 
   const vars = ast.vars.reduce((acc, x) => {
@@ -15,7 +17,7 @@ function reduce(ast) {
       } else if (x.data && x.data.type === 'schema') {
         val[last] = {'$schema$': x.data.data}
       } else if (x.type === 'variable') {
-        val[last] = acc[x.data];
+        val[last] = merge(val[last], acc[x.data]);
       }else {
         val[last] = x.data;
       }
@@ -29,6 +31,7 @@ function reduce(ast) {
   if (ast.type === 'schema' || ast.type === 'js')
     vars['$schema$'] = ast.data;
 
+  vars['$file$'] = ast.file;
   vars['$md$'] = ast.md;
   vars['$meta$'] = ast.meta;
   vars['$type$'] = ast.type;

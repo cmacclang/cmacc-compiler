@@ -1,58 +1,61 @@
 function render(ast) {
 
-  const MATCH_VARIABLE = /\{\{([\w\.]*)\}\}/g;
+  function item(x) {
 
-  function repace(x) {
+    if (x.children)
+      x.children = x.children.map(item);
 
-    if (x.children) {
-      x.children.map(repace)
+
+    if (x.type === 'htmlblock') {
+      x.content = x.content.replace(/{{([^{]*)}}/g, function (match, name) {
+        return ast[name];
+      });
+      return x;
     }
 
-    if (x.type === 'text' || x.type === 'htmlblock') {
-      x.content = x.content.replace(MATCH_VARIABLE, function (res, variable) {
-        const val = variable.split('.').reduce((acc, val) => acc[val], ast);
+    if (x.type === 'placeholder') {
 
-        if (typeof val === 'string')
-          return val;
+      const split = x.variable.split('.');
+      const last = split.pop();
+      const res = split.reduce((ast, val) => ast[val], ast);
+      const val = res[last]
 
-        if (typeof val === 'object')
-          return render(val)
+      if (typeof val === 'undefined') {
+        return {
+          type: 'text',
+          content: `!!${x.variable}!!`,
+        };
+      }
 
-      })
+      if (typeof val === 'string') {
+        return {
+          type: 'text',
+          content: val.replace(/{{([^{]*)}}/g, function (match, name) {
+            return res[name];
+          }),
+        };
+      }
+
+      if (typeof val === 'object') {
+        return render(val);
+      }
+
     }
 
-    return x
+    return x;
+
   }
 
-  const arr = ast['$md$']
-    .map((x) => {
+  if (ast['$md$']) {
+    return ast['$md$']
+      .map(item)
+      .reduce((acc, val) => {
+        return acc.concat(val);
+      }, []);
+  } else {
+    return []
+  }
 
-      if (x.type === 'placeholder') {
-
-        MATCH_VARIABLE.lastIndex = 0;
-        const match = MATCH_VARIABLE.exec(x.content);
-        const key = match[1];
-        const val = key.split('.').reduce((a, b) => a[b], ast)
-
-        if (typeof val === "object")
-          return render(val);
-
-        if (typeof val === "string")
-          return [{
-            type: 'text',
-            content: val}];
-
-        throw new Error(`cannot find ${key}`)
-      }
-
-        return [x].map(repace)
-      }
-      )
-    .reduce((acc, val) => {
-      return acc.concat(val);
-    }, []);
-
-  return arr;
 }
 
 module.exports = render;

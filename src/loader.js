@@ -30,7 +30,7 @@ const loader = (x, base) => {
   if (fs && urlObj.protocol === 'file:') {
     const promise = new Promise((resolve, reject) => {
       fs.readFile(urlObj.path, (err, data) => {
-        if (err) reject(err);
+        if (err) return reject(err);
         resolve({
           file: url.format(urlObj),
           type: path.extname(urlObj.path).slice(1).toLowerCase(),

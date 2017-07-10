@@ -8,6 +8,7 @@ function assemble(file, base) {
 
     if (res.type === 'string' || res.type === 'json' || res.type === 'schema') {
       const data = {
+        file: res.file,
         type: res.type,
         data: JSON.parse(res.data),
       };
@@ -24,6 +25,7 @@ function assemble(file, base) {
 
     if (res.type === 'js') {
       const data = {
+        file: res.file,
         type: res.type,
         data: eval(res.data),
       };
@@ -42,6 +44,11 @@ function assemble(file, base) {
             })
         }
 
+        if (x.type === 'object') {
+          x.data = JSON.parse(x.value);
+          return Promise.resolve(x)
+        }
+
         x.data = x.value;
         return Promise.resolve(x)
 
@@ -50,10 +57,11 @@ function assemble(file, base) {
       return Promise.all(ast)
         .then(x => {
           return {
-            "type": md.type,
-            "md": md.md,
-            "meta": md.meta,
-            "vars": x,
+            file: res.file,
+            type: md.type,
+            md: md.md,
+            meta: md.meta,
+            vars: x,
           };
         })
     }

@@ -4,11 +4,13 @@ var parser = require('./parser');
 function variables(vars) {
 
   const MATCH_STRING = /^[\'\"](.*)[\'\"]$/;
+  const MATCH_OBJECT = /^{(.*)}$/;
   const MATCH_LINK = /^\[(.*)\]$/;
 
   function typeConverter(x) {
     if (x === "null") return "null";
     if (x.match(MATCH_STRING)) return "string";
+    if (x.match(MATCH_OBJECT)) return "object";
     if (x.match(MATCH_LINK)) return "link";
     return "variable";
   };
