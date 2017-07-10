@@ -29,10 +29,11 @@ const loader = (x, base) => {
   // file
   if (fs && urlObj.protocol === 'file:') {
     const promise = new Promise((resolve, reject) => {
-      fs.readFile(urlObj.path, (err, data) => {
+      const file = decodeURI(urlObj.path)
+      fs.readFile(file, (err, data) => {
         if (err) return reject(err);
         resolve({
-          file: url.format(urlObj),
+          file: decodeURI(url.format(urlObj)),
           type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: data.toString(),
         });

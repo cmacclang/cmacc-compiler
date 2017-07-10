@@ -52,9 +52,23 @@ describe('loader', () => {
 
   it('local file relative ../', (done) => {
     const file = '../cmacc-compiler/test.cmacc';
+    fileMock(file)
     loader(file)
       .then((res) => {
         assert.equal(res.file, 'file://' + dirname + '/test.cmacc');
+        assert.equal(res.type, 'cmacc');
+        assert.equal(res.data, text);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('local file relative ../ with spatie', (done) => {
+    const file = '../cmacc-compiler/spa tie/test.cmacc';
+    fileMock(file)
+    loader(file)
+      .then((res) => {
+        assert.equal(res.file, 'file://' + dirname + '/spa tie/test.cmacc');
         assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();
