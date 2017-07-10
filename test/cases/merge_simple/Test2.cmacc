@@ -1,6 +1,0 @@
-$ person = [./Person2.cmacc]
-
-$ test = [./Test1.cmacc]
-$ test.person = person
-
-{{test}}

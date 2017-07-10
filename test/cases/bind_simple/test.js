@@ -5,7 +5,7 @@ const cmacc = require('../../../src/index');
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
-describe('schema_simple', function () {
+describe('bind_simple', function () {
 
   global.fs = require('fs');
 
@@ -13,7 +13,7 @@ describe('schema_simple', function () {
     const file = url.join('file://', __dirname, './Test1.cmacc')
     cmacc.compile(file)
       .then(ast => {
-        console.log(ast);
+        //console.log(ast);
 
         return ast;
       })
@@ -34,7 +34,9 @@ describe('schema_simple', function () {
     const file = url.join('file://', __dirname, './Test2.cmacc')
     cmacc.compile(file)
       .then(ast => {
-        console.log(ast);
+        //console.log(ast);
+
+        //ast.test.person = ast.person
 
         return ast;
       })
@@ -55,7 +57,8 @@ describe('schema_simple', function () {
     const file = url.join('file://', __dirname, './Test3.cmacc')
     cmacc.compile(file)
       .then(ast => {
-        console.log(ast);
+        ast.test.person = ast.person
+        ast.test.test.person = ast.test.person
         return ast;
       })
       .then(cmacc.render)

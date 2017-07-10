@@ -1,0 +1,6 @@
+$ person3 = [./Person3.cmacc]
+
+$ test = [./Test2.cmacc]
+$ test.person2 = person3
+
+{{test}}

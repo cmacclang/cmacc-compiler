@@ -1,0 +1,3 @@
+$ person1 = [./Person1.cmacc]
+
+# Hello {{person1.name}}
