@@ -31,7 +31,7 @@ function render(ast) {
         return {
           type: 'text',
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
-            return res[name];
+            return res[name]
           }),
         };
       }

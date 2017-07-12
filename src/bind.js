@@ -19,7 +19,11 @@ function bind(ast) {
 
     if (x.type === 'variable') {
       const from = x.name.split('.').reduce((a, b) => find(a.data, b), {data: ast});
+      if(!from) throw new Error(`Cannot set property ${x.name} in file ${ast.file}`);
+
       const to = x.data.split('.').reduce((a, b) => find(a.data, b), {data: ast});
+      if(!from) throw new Error(`Cannot get property ${x.data} in file ${ast.file}`);
+
       from.data = to.data
     }
 
