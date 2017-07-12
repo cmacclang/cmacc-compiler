@@ -10,7 +10,7 @@ describe('render', () => {
 
   function fileMock(file, text) {
     var data = {};
-    data[path.resolve(__dirname, '../../../', file)] = text;
+    data[path.resolve(__dirname, '../../', file)] = text;
     global.fs = new fsMock(data);
   }
 

@@ -13,7 +13,7 @@ function validate(ast) {
       validator(ast, schema, opts);
     }
 
-    if (typeof val === 'object') {
+    if (val && typeof val === 'object') {
       validate(val)
     }
 

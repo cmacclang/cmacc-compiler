@@ -1,0 +1,8 @@
+$ column1 = "Willem"
+$ column2 = "Veelenturf"
+
+$ table = [./Table.cmacc]
+$ table.column1 = column1
+$ table.column2 = column2
+
+{{table}}

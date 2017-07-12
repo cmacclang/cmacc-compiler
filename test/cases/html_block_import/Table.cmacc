@@ -1,0 +1,18 @@
+$ column1 = "Test"
+$ column2 = "Test"
+
+$ content1 = [./Content.cmacc]
+$ content1.world = column1
+
+$ content2 = [./Content.cmacc]
+$ content2.world = column2
+
+<table><tr><td>
+
+{{content1}}
+
+</td><td>
+
+{{content2}}
+
+</td></tr></table>

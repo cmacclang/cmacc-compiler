@@ -16,9 +16,9 @@ function reduce(ast) {
         val[last] = x.data.data;
       } else if (x.data && x.data.type === 'schema') {
         val[last] = {'$schema$': x.data.data}
-      } else if (x.type === 'variable') {
-        //val[last] = merge(val[last], acc[x.data]);
-      }else {
+      } else if (
+        x.type === 'variable') {
+      } else {
         val[last] = x.data;
       }
 

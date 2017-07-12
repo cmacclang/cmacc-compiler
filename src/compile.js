@@ -1,12 +1,18 @@
-var assemble = require('./assemble');
-var reduce = require('./reduce');
-var bind = require('./bind');
+const assemble = require('./assemble');
+const reduce = require('./reduce');
+const validate = require('./validate');
+const bind = require('./bind');
 
 function compile(file, opts = {}) {
 
   return assemble(file, opts.base)
+    .then(x =>{
+      //console.log(JSON.stringify(x, null, 2))
+      return x
+    })
     .then(bind)
-    .then(reduce);
+    .then(reduce)
+    .then(validate);
 
 }
 

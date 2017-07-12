@@ -1,0 +1,4 @@
+$ test = [./contract.cmacc]
+$ test.person.name = "Jan Jansen"
+
+{{test}}
