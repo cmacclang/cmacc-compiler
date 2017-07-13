@@ -4,7 +4,6 @@ const validate = require('./validate');
 const bind = require('./bind');
 
 function compile(file, opts = {}) {
-
   return assemble(file, opts.base)
     .then(x =>{
       //console.log(JSON.stringify(x, null, 2))
@@ -12,7 +11,8 @@ function compile(file, opts = {}) {
     })
     .then(bind)
     .then(reduce)
-    .then(validate);
+    .then(validate)
+
 
 }
 

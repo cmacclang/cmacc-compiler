@@ -1,0 +1,5 @@
+$ func = [./function.js]
+
+$ val = func()
+
+# Hello {{val}}

@@ -1,10 +1,11 @@
 var loader = require('./loader');
 var parser = require('./parser');
 
-function variables(vars) {
+function variables(vars, file) {
 
   const MATCH_STRING = /^[\'\"](.*)[\'\"]$/;
   const MATCH_OBJECT = /^{(.*)}$/;
+  const MATCH_FUNCTION = /^(.*)\((.*)\)$/;
   const MATCH_LINK = /^\[(.*)\]$/;
 
   function typeConverter(x) {
@@ -12,6 +13,7 @@ function variables(vars) {
     if (x.match(MATCH_STRING)) return "string";
     if (x.match(MATCH_OBJECT)) return "object";
     if (x.match(MATCH_LINK)) return "link";
+    if (x.match(MATCH_FUNCTION)) return "function";
     return "variable";
   };
 

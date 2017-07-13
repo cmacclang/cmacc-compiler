@@ -1,30 +1,47 @@
-function find(ast, name) {
 
-  return ast.vars.reduce((a, b) => {
 
-    if (b.name === name)
-      a = b;
-
-    return a;
-
-  }, null)
-}
 
 function bind(ast) {
+
+  function prop(v){
+    const res = v.split('.').reduce((a, b) => find(a.data, b), {data: ast});
+    if(!res)throw new Error(`Cannot find property ${v} in file ${ast.file}`);
+    return res
+  }
+
+  function find(ast, name) {
+    return ast.vars.reduce((a, b) => {
+      if (b.name === name) a = b;
+      return a;
+    }, null)
+  }
 
   if(!ast.vars)
     return ast
 
   ast.vars.forEach(function (x) {
 
+
+    if (x.type === 'link') {
+      const from = prop(x.name);
+      from.data = x.data
+    }
+
     if (x.type === 'variable') {
-      const from = x.name.split('.').reduce((a, b) => find(a.data, b), {data: ast});
-      if(!from) throw new Error(`Cannot set property ${x.name} in file ${ast.file}`);
-
-      const to = x.data.split('.').reduce((a, b) => find(a.data, b), {data: ast});
-      if(!from) throw new Error(`Cannot get property ${x.data} in file ${ast.file}`);
-
+      const from = prop(x.name);
+      const to = prop(x.data);
       from.data = to.data
+    }
+
+    if (x.type === 'function') {
+      const MATCH_FUNCTION = /^(.*)\((.*)\)$/;
+      const match = x.data.match(MATCH_FUNCTION)
+      const func = match[1];
+      const args = match[2] ? match[2].split(",") : [];
+      const val = prop(func);
+      const from = prop(x.name);
+      const input = args.map(prop).map(x => x.data.data)
+      from.data = val.data.data.apply({}, input)
     }
 
   });

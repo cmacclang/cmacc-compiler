@@ -15,7 +15,8 @@ function reduce(ast) {
       if (x.data && (x.data.type === 'json' || x.data.type === 'js')) {
         val[last] = x.data.data;
       } else if (x.data && x.data.type === 'schema') {
-        val[last] = {'$schema$': x.data.data}
+        val[last] = val[last] || {}
+        val[last]['$schema$'] = x.data.data
       } else if (
         x.type === 'variable') {
       } else {
