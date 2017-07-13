@@ -46,8 +46,10 @@ function assemble(file, base) {
           return Promise.resolve(x)
         }
 
+
         x.data = x.value;
         return Promise.resolve(x)
+
 
       });
 

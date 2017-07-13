@@ -13,13 +13,10 @@ function reduce(ast) {
       const val = split.reduce((acc, val) => acc[val], acc);
 
       if (x.data && (x.data.type === 'json' || x.data.type === 'js')) {
-        val[last] = x.data.data;
-      } else if (x.data && x.data.type === 'schema') {
-        val[last] = val[last] || {}
-        val[last]['$schema$'] = x.data.data
-      } else if (
-        x.type === 'variable') {
-      } else {
+        x = x.data;
+      }
+
+      if (x.type !== 'variable') {
         val[last] = x.data;
       }
 

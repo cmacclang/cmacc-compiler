@@ -10,10 +10,19 @@ function bind(ast) {
   }
 
   function find(ast, name) {
+
+    if(!ast.vars) {
+      ast = {}
+      ast['vars'] = {}
+      ast['vars'][name] = {}
+      return ast['vars'][name];
+    }
+
     return ast.vars.reduce((a, b) => {
       if (b.name === name) a = b;
       return a;
     }, null)
+
   }
 
   if(!ast.vars)
@@ -21,16 +30,23 @@ function bind(ast) {
 
   ast.vars.forEach(function (x) {
 
+    const from = prop(x.name);
+
+
+    if(from.data && from.data.type === 'schema') {
+      console.log(x.data)
+      x.data['$schema$'] = from.data.data
+    }
 
     if (x.type === 'link') {
-      const from = prop(x.name);
+
       from.data = x.data
     }
 
     if (x.type === 'variable') {
-      const from = prop(x.name);
       const to = prop(x.data);
       from.data = to.data
+
     }
 
     if (x.type === 'function') {
@@ -39,7 +55,6 @@ function bind(ast) {
       const func = match[1];
       const args = match[2] ? match[2].split(",") : [];
       const val = prop(func);
-      const from = prop(x.name);
       const input = args.map(prop).map(x => x.data.data)
       from.data = val.data.data.apply({}, input)
     }
