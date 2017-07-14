@@ -1,0 +1,4 @@
+$ world = "world 123"
+
+Hello {{world}}
+Good bye {{world}}

@@ -22,6 +22,6 @@ module.exports = {
     });
     md.use(require('remarkable-meta'));
     md.use(require('remarkable-variables'));
-    return md.renderer.render(x)
+    return md.renderer.render(x, {})
   }
 };
