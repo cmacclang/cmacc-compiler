@@ -32,14 +32,11 @@ function bind(ast) {
 
     const from = prop(x.name);
 
-
-    if(from.data && from.data.type === 'schema') {
-      console.log(x.data)
-      x.data['$schema$'] = from.data.data
-    }
-
     if (x.type === 'link') {
 
+      if(from.data && from.data.type === 'schema') {
+        x.data['$schema$'] = from.data.data
+      }
       from.data = x.data
     }
 
