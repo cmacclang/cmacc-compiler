@@ -44,12 +44,17 @@ const loader = (x, base) => {
 
   // http
   if (fetch && (urlObj.protocol === 'http:' || urlObj.protocol === 'https:')) {
+    console.log(x)
     return fetch(x).then((y) => {
+
+      if(y.status != 200)
+        throw new Error('File not found')
+
       return y.text().then(data => {
         return {
           file: url.format(urlObj),
           //ToDo: base on content type or extention
-          type: 'NOT_IMPL',
+          type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: data.toString(),
         }
       });
