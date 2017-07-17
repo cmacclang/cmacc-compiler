@@ -47,7 +47,7 @@ const loader = (x, base) => {
     console.log(x)
     return fetch(x).then((y) => {
 
-      if(y.status != 200)
+      if (y.status != 200)
         throw new Error('File not found')
 
       return y.text().then(data => {
@@ -60,6 +60,43 @@ const loader = (x, base) => {
       });
     });
   }
+
+  // github
+  if (fetch && (urlObj.protocol === 'github:')) {
+
+    const file = urlObj.path
+
+    const match = file.match(/^\/([^\/]*)\/([^\/]*)\/([^\/]*)(.*)$/);
+
+    const owner = match[1]
+    const repo = match[2]
+    const branch = match[3]
+    const path1 = match[4]
+
+    const base = 'https://api.github.com';
+    const urlPath = path.join('repos', owner, repo, 'contents', path1);
+    const location = url.resolve(base, urlPath);
+
+    const opts = {
+      headers: {
+        'Authorization': "token " + global.token
+      }
+    };
+
+    return fetch(location + '?ref=' + branch, opts)
+      .then(x => x.json())
+      .then((x) => {
+        const base64 = x.content;
+        const content = new Buffer(base64, 'base64')
+        return {
+          file: 'github://' + file,
+          //ToDo: base on content type or extention
+          type: path.extname(urlObj.path).slice(1).toLowerCase(),
+          data: content.toString(),
+        }
+      });
+  }
+
 
   return Promise.resolve({
     file: null,
