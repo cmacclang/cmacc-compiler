@@ -82,7 +82,7 @@ describe('loader', () => {
     loader(file)
       .then((res) => {
         assert.equal(res.file, 'http://example.nl/test.cmacc');
-        assert.equal(res.type, 'NOT_IMPL');
+        assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();
       })
@@ -96,7 +96,7 @@ describe('loader', () => {
     loader(file, base)
       .then((res) => {
         assert.equal(res.file, 'http://example.nl/test.cmacc');
-        assert.equal(res.type, 'NOT_IMPL');
+        assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();
       })

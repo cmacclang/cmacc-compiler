@@ -1,0 +1,8 @@
+// External files used
+
+$ territory_Definition = [./LibraryOfClauses.cmacc]
+$ agreement_Territory = territory_Definition.territory_US
+
+// Document
+
+{{agreement_Territory}}

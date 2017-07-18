@@ -11,7 +11,7 @@ describe('github', function () {
   global.fetch = require('node-fetch');
 
   it('Test1', function (done) {
-    const file = "https://raw.githubusercontent.com/cmacclang/cmacc-example-mortgage/master/doc/index.cmacc"
+    const file = "github:///cmacclang/cmacc-example-mortgage/master/doc/index.cmacc"
     cmacc.compile(file)
       .then(ast => {
         //console.log(ast);
@@ -23,7 +23,7 @@ describe('github', function () {
         return md.renderer.render(x)
       })
       .then(html => {
-        const expect = '<h1>Hello Willem Veelenturf</h1>\n';
+        const expect = '<h1>Hello Willem Veelenturf</h1>';
         assert.equal(html, expect);
         done();
       })

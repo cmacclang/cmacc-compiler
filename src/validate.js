@@ -6,7 +6,7 @@ function validate(ast) {
     const val = ast[key];
 
     if(ast['$schema$']){
-      console.log(123123123)
+
       const opts = {
         throwError: true
       };

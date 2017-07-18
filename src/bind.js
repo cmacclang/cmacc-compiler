@@ -42,6 +42,7 @@ function bind(ast) {
 
     if (x.type === 'variable') {
       const to = prop(x.data);
+      from.type = to.type
       from.data = to.data
 
     }

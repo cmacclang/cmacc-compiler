@@ -23,7 +23,7 @@ function render(ast) {
       if (typeof val === 'undefined') {
         return {
           type: 'text',
-          content: `!!${x.variable}!!`,
+          content: `{{${x.variable}}}`,
         };
       }
 
