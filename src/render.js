@@ -20,7 +20,7 @@ function render(ast) {
       const res = split.reduce((ast, val) => ast[val], ast);
       const val = res[last]
 
-      if (typeof val === 'undefined') {
+      if (val == null || typeof val === 'undefined') {
         return {
           type: 'text',
           content: `{{${x.variable}}}`,
