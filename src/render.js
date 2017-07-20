@@ -24,6 +24,7 @@ function render(ast) {
         return {
           type: 'text',
           content: `{{${x.variable}}}`,
+          variable: x.variable,
         };
       }
 
@@ -33,6 +34,7 @@ function render(ast) {
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
             return res[name]
           }),
+          variable: x.variable,
         };
       }
 

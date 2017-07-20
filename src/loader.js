@@ -46,7 +46,7 @@ const loader = (x, opts) => {
 
   // http
   if (fetch && (urlObj.protocol === 'http:' || urlObj.protocol === 'https:')) {
-    console.log(x)
+    // console.log(x)
     return fetch(x).then((y) => {
 
       if (y.status != 200)

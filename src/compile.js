@@ -14,7 +14,7 @@ function compile(file, opts) {
     })
     .then(bind)
     .then(x =>{
-      console.log(JSON.stringify(x, null, 2))
+      // console.log(JSON.stringify(x, null, 2))
       return x
     })
     .then(reduce)
