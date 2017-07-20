@@ -3,8 +3,11 @@ const reduce = require('./reduce');
 const validate = require('./validate');
 const bind = require('./bind');
 
-function compile(file, opts = {}) {
-  return assemble(file, opts.base)
+function compile(file, opts) {
+
+  opts = opts || {}
+
+  return assemble(file, opts)
     .then(x =>{
       //console.log(JSON.stringify(x, null, 2))
       return x

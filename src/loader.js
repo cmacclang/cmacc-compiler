@@ -1,7 +1,9 @@
 const url = require('url');
 const path = require('path');
 
-const loader = (x, base) => {
+const loader = (x, opts) => {
+
+  opts = opts || {}
 
   const count = x.split("\n").length;
 
@@ -15,13 +17,13 @@ const loader = (x, base) => {
 
   // relative path
   if (x.match(/^\.\//) || x.match(/^\.\.\//)) {
-    if (!base) {
-      base = 'file:\/\/' + __dirname;
+    if (!opts.base) {
+      opts.base = 'file:\/\/' + __dirname;
     }
-    if (path.extname(base) !== '') {
-      base = url.resolve(base, './')
+    if (path.extname(opts.base) !== '') {
+      opts.base = url.resolve(opts.base, './')
     }
-    x = url.resolve(base, x);
+    x = url.resolve(opts.base, x);
   }
 
   const urlObj = url.parse(x);
@@ -53,7 +55,7 @@ const loader = (x, base) => {
       return y.text().then(data => {
         return {
           file: url.format(urlObj),
-          //ToDo: base on content type or extention
+          //ToDo: opts.base on content type or extention
           type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: data.toString(),
         }
@@ -77,20 +79,20 @@ const loader = (x, base) => {
     const urlPath = path.join('repos', owner, repo, 'contents', path1);
     const location = url.resolve(base, urlPath);
 
-    const opts = {
+    const cont = {
       headers: {
-        'Authorization': "token " + global.token
+        'Authorization': "token " + opts.token
       }
     };
 
-    return fetch(location + '?ref=' + branch, opts)
+    return fetch(location + '?ref=' + branch, opts.token ? cont : null)
       .then(x => x.json())
       .then((x) => {
         const base64 = x.content;
         const content = new Buffer(base64, 'base64')
         return {
           file: 'github://' + file,
-          //ToDo: base on content type or extention
+          //ToDo: opts.base on content type or extention
           type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: content.toString(),
         }

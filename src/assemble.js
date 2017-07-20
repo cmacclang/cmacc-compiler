@@ -2,9 +2,11 @@ var loader = require('./loader');
 var parser = require('./parser');
 var variables = require('./variables');
 
-function assemble(file, base) {
+function assemble(file, opts) {
 
-  return loader(file, base).then((res) => {
+  opts = opts || {}
+
+  return loader(file, opts).then((res) => {
 
     if (res.type === 'json' || res.type === 'schema') {
       const data = {
@@ -29,7 +31,10 @@ function assemble(file, base) {
       const ast = variables(md.vars, res.file).map((x) => {
 
         if (x.type === 'link') {
-          return assemble(x.value, res.file)
+          const opts = {
+            base: res.file
+          }
+          return assemble(x.value, opts)
             .then(res => {
               x.data = res;
               return x;

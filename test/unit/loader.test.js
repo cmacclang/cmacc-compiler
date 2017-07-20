@@ -91,9 +91,11 @@ describe('loader', () => {
 
   it('remote http relative and base', (done) => {
     httpMock('http://example.nl/test.cmacc');
-    const base = 'http://example.nl/'
+    const opts = {
+      base: 'http://example.nl/'
+    };
     const file = './test.cmacc';
-    loader(file, base)
+    loader(file, opts)
       .then((res) => {
         assert.equal(res.file, 'http://example.nl/test.cmacc');
         assert.equal(res.type, 'cmacc');

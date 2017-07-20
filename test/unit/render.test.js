@@ -14,11 +14,11 @@ describe('render', () => {
     global.fs = new fsMock(data);
   }
 
-  it('link', (done) => {
+  it( 'link', (done) => {
 
-    const base = 'file:\/\/:' + path.resolve(__dirname, '../../');
-
-    const opts = {base};
+    const opts = {
+      base: 'file:\/\/:' + path.resolve(__dirname, '../../')
+    };
 
     const cmacc1 = `$ world = "world1"
     
