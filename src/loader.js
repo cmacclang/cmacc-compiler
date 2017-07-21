@@ -85,7 +85,7 @@ const loader = (x, opts) => {
       }
     };
 
-    return fetch(location + '?ref=' + branch, opts.token ? cont : null)
+    return fetch(location + '?ref=' + branch, cont ? cont : null)
       .then(x => x.json())
       .then((x) => {
         const base64 = x.content;
@@ -96,6 +96,9 @@ const loader = (x, opts) => {
           type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: content.toString(),
         }
+      })
+      .catch(e => {
+        throw new Error(`Cannot load file: ${location} ${branch} ${opts.token}`,e)
       });
   }
 

@@ -31,9 +31,8 @@ function assemble(file, opts) {
       const ast = variables(md.vars, res.file).map((x) => {
 
         if (x.type === 'link') {
-          const opts = {
-            base: res.file
-          }
+          opts = opts || {}
+          opts.base = res.file
           return assemble(x.value, opts)
             .then(res => {
               x.data = res;
