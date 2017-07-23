@@ -102,6 +102,32 @@ const loader = (x, opts) => {
       });
   }
 
+  // github
+  if (fs && urlObj.protocol === 'yarn:') {
+
+    const file = urlObj.path;
+
+    const findRoot = require('find-root');
+    const packageRoot = opts.base ? findRoot(opts.base.replace('file://', '')) : findRoot(process.cwd());
+    const nodeModules = path.join(packageRoot, 'node_modules')
+
+    const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
+
+
+    const promise = new Promise((resolve, reject) => {
+
+      fs.readFile(location, (err, data) => {
+        if (err) return reject(err);
+        resolve({
+          file: decodeURI(url.format(urlObj)),
+          type: path.extname(urlObj.path).slice(1).toLowerCase(),
+          data: data.toString(),
+        });
+      });
+    });
+    return promise;
+  }
+
 
   return Promise.resolve({
     file: null,

@@ -7,8 +7,9 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.0.1",
+    "cmacc-example-helloworld": "github:cmacclang/cmacc-example-helloworld",
     "cmacc-lib-entity": "^1.0.0",
-    "find-root": "^1.0.0",
+    "find-root": "^1.1.0",
     "jsonschema": "^1.1.1",
     "marked": "^0.3.5",
     "remarkable": "^1.7.1",
