@@ -4,14 +4,21 @@
 function bind(ast) {
 
   function prop(v){
-    const res = v.split('.').reduce((a, b) => find(a.data, b), {data: ast});
-    if(!res)throw new Error(`Cannot find property ${v} in file ${ast.file}`);
+    const res = v.split('.').reduce((a, b) => {
+      if(!a){
+        throw new Error(`Cannot find property ${v} in file ${ast.file}`);
+      }
+      return find(a.data, b)
+    }, {data: ast});
+    if(!res){
+      throw new Error(`Cannot find property ${v} in file ${ast.file}`);
+    }
     return res
   }
 
   function find(ast, name) {
 
-    if(!ast.vars) {
+    if(!ast || !ast.vars) {
       ast = {}
       ast['vars'] = {}
       ast['vars'][name] = {}

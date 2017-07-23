@@ -18,6 +18,10 @@ function render(ast) {
       const split = x.variable.split('.');
       const last = split.pop();
       const res = split.reduce((ast, val) => ast[val], ast);
+
+      if(!res || !res[last])
+        throw new Error(`Cannot read property '${last}' in file ${ast['$file$']}`)
+
       const val = res[last]
 
       if (val == null || typeof val === 'undefined') {

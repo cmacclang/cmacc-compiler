@@ -1,0 +1,3 @@
+$ helloworld = [github:///cmacclang/cmacc-example-helloworld/master/Example.cmacc]
+
+{{helloworld}}

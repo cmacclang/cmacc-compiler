@@ -85,7 +85,7 @@ const loader = (x, opts) => {
       }
     };
 
-    return fetch(location + '?ref=' + branch, cont ? cont : null)
+    return fetch(location + '?ref=' + branch, opts.token ? cont : null)
       .then(x => x.json())
       .then((x) => {
         const base64 = x.content;
