@@ -1,43 +1,13 @@
-
-
+const find = require('./find');
 
 function bind(ast) {
-
-  function prop(v){
-    const res = v.split('.').reduce((a, b) => {
-      if(!a){
-        throw new Error(`Cannot find property ${v} in file ${ast.file}`);
-      }
-      return find(a.data, b)
-    }, {data: ast});
-    if(!res){
-      throw new Error(`Cannot find property ${v} in file ${ast.file}`);
-    }
-    return res
-  }
-
-  function find(ast, name) {
-
-    if(!ast || !ast.vars) {
-      ast = {}
-      ast['vars'] = {}
-      ast['vars'][name] = {}
-      return ast['vars'][name];
-    }
-
-    return ast.vars.reduce((a, b) => {
-      if (b.name === name) a = b;
-      return a;
-    }, null)
-
-  }
 
   if(!ast.vars)
     return ast
 
   ast.vars.forEach(function (x) {
 
-    const from = prop(x.name);
+    const from = find(x.name, ast);
 
     if (x.type === 'link') {
 
@@ -48,7 +18,7 @@ function bind(ast) {
     }
 
     if (x.type === 'variable') {
-      const to = prop(x.data);
+      const to = find(x.data, ast);
       from.type = to.type
       from.data = to.data
 
@@ -59,8 +29,8 @@ function bind(ast) {
       const match = x.data.match(MATCH_FUNCTION)
       const func = match[1];
       const args = match[2] ? match[2].split(",") : [];
-      const val = prop(func);
-      const input = args.map(prop).map(x => x.data.data)
+      const val = find(func, ast);
+      const input = args.map(x => find(x, ast)).map(x => x.data.data)
       from.data = val.data.data.apply({}, input)
     }
 

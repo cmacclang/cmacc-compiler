@@ -1,3 +1,5 @@
+const helpers = require('./helpers');
+
 function render(ast) {
 
   function item(x) {
@@ -15,14 +17,26 @@ function render(ast) {
 
     if (x.type === 'placeholder') {
 
-      const split = x.variable.split('.');
+      const match = x.variable.match(/(?:#(.*)\s)?(.*)/);
+
+      const helper = match[1];
+      const variable = match[2];
+
+      const split = variable.split('.');
       const last = split.pop();
       const res = split.reduce((ast, val) => ast[val], ast);
 
       if(!res || !res[last])
-        throw new Error(`Cannot read property '${last}' in file ${ast['$file$']}`)
+        throw new Error(`Cannot read property '${last}' in file ${ast['$file$']}`);
 
-      const val = res[last]
+      const val = res[last];
+
+      if(helper){
+        if(!helpers[helper])
+          throw new Error(`Helper '${helper}' does not exist `);
+
+        return helpers[helper](res)
+      }
 
       if (val == null || typeof val === 'undefined') {
         return {
@@ -59,7 +73,7 @@ function render(ast) {
         return acc.concat(val);
       }, []);
   } else {
-    return []
+    return [];
   }
 
 }
