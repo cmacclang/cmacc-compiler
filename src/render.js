@@ -35,7 +35,7 @@ function render(ast) {
         if(!helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
-        return helpers[helper](res)
+        return helpers[helper](val)
       }
 
       if (val == null || typeof val === 'undefined') {

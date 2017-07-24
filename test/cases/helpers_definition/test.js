@@ -5,7 +5,7 @@ const cmacc = require('../../../src/index');
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
-describe('helpers_filename', function () {
+describe('helpers_definition', function () {
 
   global.fs = require('fs');
   global.fetch = require('node-fetch');
@@ -19,10 +19,10 @@ describe('helpers_filename', function () {
       })
       .then(cmacc.render)
       .then(x => {
-        return md.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
-        const expect = '<p>Hello World</p>\nHelloWorld.cmacc';
+        const expect = '<p><strong>Hello World</strong>  <br>\nThis is the definition of hello world</p>\n<a href="#Hello-World">Hello World</a>';
         assert.equal(html, expect);
         done();
       })

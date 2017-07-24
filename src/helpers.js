@@ -1,4 +1,4 @@
-const file = (ast) => {
+const location = (ast) => {
   return {
     type: 'text',
     content: ast['$file$'],
@@ -13,4 +13,15 @@ const filename = (ast) => {
   };
 };
 
-module.exports = {file, filename};
+const definition = (ast) => {
+  const definition = ast['$meta$']['Definition']
+
+  if(!definition)
+    throw new Error(`definition not found in file ${ast['$file$']}`);
+  return {
+    type: 'htmlblock',
+    content: `<a href="#${definition.replace(' ','-')}">${definition}</a>`
+  };
+};
+
+module.exports = {location, filename, definition};
