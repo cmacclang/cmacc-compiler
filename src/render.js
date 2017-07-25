@@ -5,7 +5,14 @@ function render(ast) {
   function item(x) {
 
     if (x.children)
-      x.children = x.children.map(item);
+      x.children = x.children
+        .map(x => {
+          const res = item(x)
+          if (Array.isArray(res))
+            throw new Error(`Cannot render ref inline for param: ${x.variable}`);
+          else
+            return res;
+        });
 
 
     if (x.type === 'htmlblock') {
@@ -28,8 +35,8 @@ function render(ast) {
 
       const val = res[last];
 
-      if(helper){
-        if(!helpers[helper])
+      if (helper) {
+        if (!helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
         return helpers[helper](val)

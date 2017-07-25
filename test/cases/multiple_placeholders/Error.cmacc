@@ -1,0 +1,11 @@
+$ Xnum = "Xnum"
+
+// section numbers
+
+$ def_Xnum = "1"
+
+$ define_Confid = [./DefineConfid.cmacc]
+
+### {{Xnum}}. Confidentiality
+
+{{Xnum}}.{{def_Xnum}} {{define_Confid}}
