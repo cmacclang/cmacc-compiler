@@ -6,10 +6,10 @@ function render(ast) {
 
     if (x.children)
       x.children = x.children
-        .map(x => {
-          const res = item(x)
+        .map(child => {
+          const res = item(child)
           if (Array.isArray(res))
-            throw new Error(`Cannot render ref inline for param: ${x.variable}`);
+            throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
           else
             return res;
         });

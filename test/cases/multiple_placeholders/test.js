@@ -55,7 +55,7 @@ disclose_Type<p>including without limitation information regarding</p>
         return cmacc.remarkable.render(x)
       })
       .catch(e => {
-        assert.equal(e.message, 'Cannot render ref inline for param: define_Confid');
+        assert.equal(e.message, 'Cannot render ref inline for param: define_Confid in file file:///Users/wveelenturf/projects/cmacc/cmacc-compiler/test/cases/multiple_placeholders/Error.cmacc');
         done()
       });
 
