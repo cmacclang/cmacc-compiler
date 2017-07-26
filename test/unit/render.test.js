@@ -17,7 +17,7 @@ describe('render', () => {
   it( 'link', (done) => {
 
     const opts = {
-      base: 'file:\/\/:' + path.resolve(__dirname, '../../')
+      base: 'file:\/\/:' + path.resolve(__dirname, '../')
     };
 
     const cmacc1 = `$ world = "world1"

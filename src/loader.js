@@ -50,7 +50,7 @@ const loader = (x, opts) => {
     return fetch(x).then((y) => {
 
       if (y.status != 200)
-        throw new Error('File not found')
+        throw new Error('File not found');
 
       return y.text().then(data => {
         return {
