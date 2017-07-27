@@ -17,6 +17,7 @@ if (!url.parse(input).protocol) {
 }
 
 global.fs = require('fs');
+global.fetch = require('node-fetch');
 
 cmacc.compile(file)
   .then(ast => {
