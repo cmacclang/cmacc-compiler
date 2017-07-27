@@ -13,7 +13,7 @@ describe('bind_string_two_layer', function () {
     const file = url.join('file://', __dirname, './Index.cmacc')
     cmacc.compile(file)
       .then(ast => {
-        console.log(ast);
+        // console.log(ast);
         return ast;
       })
       .then(cmacc.render)

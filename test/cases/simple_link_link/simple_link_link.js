@@ -18,7 +18,7 @@ describe('simple_link_link', function () {
         assert.equal(x[1].children[1].type, 'text');
         assert.equal(x[1].children[1].content, 'TEST');
         assert.equal(x[2].type, 'heading_close');
-        console.log(x)
+        // console.log(x)
         return x;
       })
       .then(x => {

@@ -1,4 +1,4 @@
 module.exports = () => {
-  console.log('Hello World');
+  // console.log('Hello World');
   return 'Hello World'
 };

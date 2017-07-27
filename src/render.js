@@ -8,11 +8,16 @@ function render(ast) {
       x.children = x.children
         .map(child => {
           const res = item(child)
-          if (Array.isArray(res))
+          if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : cur.type !== 'text', false)) {
+            // console.log(x.type)
             throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
-          else
+          } else {
             return res;
-        });
+          }
+        })
+        .reduce((acc, val) => {
+          return acc.concat(val);
+        }, []);
 
 
     if (x.type === 'htmlblock') {
@@ -22,7 +27,7 @@ function render(ast) {
       return x;
     }
 
-    if (x.type === 'placeholder') {
+    if (x.type === 'placeholder_block' || x.type === 'placeholder_inline') {
 
       const match = x.variable.match(/(?:#(.*)\s)?(.*)/);
 
@@ -39,7 +44,8 @@ function render(ast) {
         if (!helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
-        return helpers[helper](val)
+        const res = helpers[helper](val)
+        return res
       }
 
       if (val == null || typeof val === 'undefined') {
@@ -61,7 +67,11 @@ function render(ast) {
       }
 
       if (typeof val === 'object') {
-        return render(val);
+        const res = render(val);
+        if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
+          return res[1].children;
+        else
+          return res;
       }
 
     }

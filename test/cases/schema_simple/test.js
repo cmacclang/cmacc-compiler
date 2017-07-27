@@ -13,7 +13,7 @@ describe('schema_simple', function () {
     const file = url.join('file://', __dirname, './index.cmacc')
     cmacc.compile(file)
       .then(ast => {
-        console.log(ast)
+        // console.log(ast)
         assert.equal(ast.person['$schema$'].id, "http://example.com/example.json");
         assert.deepEqual(ast.person['$schema$'].properties.firstName, {
           "id": "/properties/firstName",

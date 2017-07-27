@@ -2,9 +2,6 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-const Remarkable = require('remarkable');
-const md = new Remarkable();
-
 describe('helpers_definition', function () {
 
   global.fs = require('fs');
@@ -22,7 +19,9 @@ describe('helpers_definition', function () {
         return cmacc.remarkable.render(x)
       })
       .then(html => {
-        const expect = '<p><strong>Hello World</strong>  <br>\nThis is the definition of hello world</p>\n<a href="#Hello-World">Hello World</a>';
+        const expect = `<p><strong>Hello World</strong>  <br>
+This is the definition of hello world</p>
+<a href="#Hello-World">Hello World</a>`;
         assert.equal(html, expect);
         done();
       })

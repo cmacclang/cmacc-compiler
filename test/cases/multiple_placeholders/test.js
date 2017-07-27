@@ -8,13 +8,12 @@ describe('multiple_placeholders', function () {
   global.fs = require('fs');
 
   it('happy', function (done) {
-    const file = url.join('file://', __dirname, './index.cmacc')
+    const file = url.join('file://', __dirname, './Index.cmacc')
     cmacc.compile(file)
 
       .then(cmacc.render)
       .then(x => {
-        console.log(x)
-
+        // console.log(x)
         return x;
       })
       .then(x => {
@@ -47,8 +46,7 @@ disclose_Type<p>including without limitation information regarding</p>
 
       .then(cmacc.render)
       .then(x => {
-        console.log(x)
-
+        // console.log(x)
         return x;
       })
       .then(x => {
