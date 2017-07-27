@@ -1,0 +1,7 @@
+$ test = "Test" 
+
+$ helloWorld = [./OneLine.cmacc]
+
+1. Hello
+1. {{test}} 
+1. {{helloWorld}}

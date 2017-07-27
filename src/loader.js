@@ -75,34 +75,48 @@ const loader = (x, opts) => {
     const branch = match[3]
     const path1 = match[4]
 
-    const base = 'https://api.github.com';
-    const urlPath = path.join('repos', owner, repo, 'contents', path1);
-    const location = url.resolve(base, urlPath);
+    if (opts.token) {
+      const base = 'https://api.github.com';
+      const urlPath = path.join('repos', owner, repo, 'contents', path1);
+      const location = url.resolve(base, urlPath);
 
-    const cont = {
-      headers: {
-        'Authorization': "token " + opts.token
-      }
-    };
-
-    return fetch(location + '?ref=' + branch, opts.token ? cont : null)
-      .then(x => x.json())
-      .then((x) => {
-        const base64 = x.content;
-        const content = new Buffer(base64, 'base64')
-        return {
-          file: 'github://' + file,
-          //ToDo: opts.base on content type or extention
-          type: path.extname(urlObj.path).slice(1).toLowerCase(),
-          data: content.toString(),
+      const cont = {
+        headers: {
+          'Authorization': "token " + opts.token
         }
-      })
-      .catch(e => {
-        throw new Error(`Cannot load file: ${location} ${branch} ${opts.token}`,e)
-      });
+      };
+
+      return fetch(location + '?ref=' + branch, opts.token ? cont : null)
+        .then(x => x.json())
+        .then((x) => {
+          const base64 = x.content;
+          const content = new Buffer(base64, 'base64')
+          return {
+            file: 'github://' + file,
+            //ToDo: opts.base on content type or extention
+            type: path.extname(urlObj.path).slice(1).toLowerCase(),
+            data: content.toString(),
+          }
+        })
+        .catch(e => {
+          throw new Error(`Cannot load file: ${location} ${branch} ${opts.token}`, e)
+        });
+    } else {
+      return fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path1}`)
+        .then(res => res.text())
+        .then(x =>{
+          console.log(x)
+          return {
+            file: 'github://' + file,
+            //ToDo: opts.base on content type or extention
+            type: path.extname(urlObj.path).slice(1).toLowerCase(),
+            data: x,
+          }
+        })
+    }
   }
 
-  // github
+  // yarn
   if (fs && urlObj.protocol === 'yarn:') {
 
     const file = urlObj.path;
