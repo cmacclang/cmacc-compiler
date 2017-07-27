@@ -104,7 +104,7 @@ const loader = (x, opts) => {
     } else {
       return fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path1}`)
         .then(res => res.text())
-        .then(x =>{
+        .then(x => {
           console.log(x)
           return {
             file: 'github://' + file,
