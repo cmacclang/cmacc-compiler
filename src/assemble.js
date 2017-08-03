@@ -1,6 +1,8 @@
-var loader = require('./loader');
-var parser = require('./parser');
-var variables = require('./variables');
+const path = require('path');
+
+const loader = require('./loader');
+const parser = require('./parser');
+const variables = require('./variables');
 
 function assemble(file, opts) {
 
@@ -18,10 +20,14 @@ function assemble(file, opts) {
     }
 
     if (res.type === 'js') {
+      const dirname = path.dirname(res.file.replace('file://', ''))
+      const source = res.data.replace(/require\('((.*))'\)/, (match, reqi) => {
+        return `require('${path.resolve(dirname, reqi)}')`
+      });
       const data = {
         file: res.file,
         type: res.type,
-        data: eval(res.data),
+        data: eval(source),
       };
       return Promise.resolve(data)
     }

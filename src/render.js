@@ -4,27 +4,11 @@ function render(ast) {
 
   function item(x) {
 
-    if (x.children)
-      x.children = x.children
-        .map(child => {
-          const res = item(child)
-          if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : cur.type !== 'text', false)) {
-            // console.log(x.type)
-            throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
-          } else {
-            return res;
-          }
-        })
-        .reduce((acc, val) => {
-          return acc.concat(val);
-        }, []);
-
-
     if (x.type === 'htmlblock') {
       x.content = x.content.replace(/{{([^{]*)}}/g, function (match, name) {
         return ast[name];
       });
-      return x;
+      return Promise.resolve(x);
     }
 
     if (x.type === 'placeholder_block' || x.type === 'placeholder_inline') {
@@ -44,50 +28,86 @@ function render(ast) {
         if (!helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
-        const res = helpers[helper](val)
-        return res
+        const res = helpers[helper](val);
+        return Promise.resolve(res);
       }
 
       if (val == null || typeof val === 'undefined') {
-        return {
+        const res = {
           type: 'text',
           content: `{{${x.variable}}}`,
           variable: x.variable,
         };
+        return Promise.resolve(res);
       }
 
       if (typeof val === 'string') {
-        return {
+        const res = {
           type: 'text',
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
             return res[name]
           }),
           variable: x.variable,
         };
+        return Promise.resolve(res);
       }
 
       if (typeof val === 'object') {
-        const res = render(val);
-        if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
-          return res[1].children;
-        else
-          return res;
+
+        if (val.then) {
+          return val.then(x => {
+            const res = {
+              type: 'text',
+              content: x,
+              variable: x.variable,
+            };
+            return res;
+          })
+        }
+
+        return render(val).then(res => {
+          if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
+            return res[1].children;
+          else
+            return res;
+        });
+
       }
 
     }
 
-    return x;
+    return Promise.resolve(x);
 
   }
 
   if (ast['$md$']) {
-    return ast['$md$']
-      .map(item)
-      .reduce((acc, val) => {
+    return Promise.all(ast['$md$']
+      .map(x => {
+
+        x.children = x.children || []
+
+        children = x.children.map(child => item(child).then((res) => {
+          if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : cur.type !== 'text', false)) {
+            throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
+          }
+          return res;
+        }));
+
+        return Promise.all(children)
+          .then(res => res.reduce((acc, val) => {
+            return acc.concat(val);
+          }, []))
+          .then(res => {
+            x.children = res;
+            return item(x)
+          })
+      }))
+      .then(res => res.reduce((acc, val) => {
         return acc.concat(val);
-      }, []);
+      }, []))
+
   } else {
-    return [];
+    return Promise.resolve([]);
   }
 
 }

@@ -29,9 +29,10 @@ function bind(ast) {
       const match = x.data.match(MATCH_FUNCTION)
       const func = match[1];
       const args = match[2] ? match[2].split(",") : [];
+      const input = args.map(x => find(x, ast)).map(x => x.data)
       const val = find(func, ast);
-      const input = args.map(x => find(x, ast)).map(x => x.data.data)
-      from.data = val.data.data.apply({}, input)
+      const data =val.data.data.apply({}, input)
+      from.data = data
     }
 
   });
