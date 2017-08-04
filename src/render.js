@@ -18,6 +18,11 @@ function render(ast) {
       const helper = match[1];
       const variable = match[2];
 
+      if(variable === 'this'){
+        const res = helpers[helper](ast);
+        return Promise.resolve(res);
+      }
+
       const split = variable.split('.');
       const last = split.pop();
       const res = split.reduce((ast, val) => ast[val], ast);

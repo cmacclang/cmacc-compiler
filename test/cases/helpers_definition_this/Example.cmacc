@@ -1,0 +1,5 @@
+$ def = [./HelloWordDefinition.cmacc]
+
+{{def}}
+
+{{#definition def}}
