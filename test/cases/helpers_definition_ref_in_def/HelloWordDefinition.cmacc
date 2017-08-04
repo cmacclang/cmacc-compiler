@@ -1,0 +1,10 @@
+---
+Definition: Hello World
+---
+
+$ testDefinition = [./TestDefinition.cmacc]
+
+**Hello World**  
+This is the definition of hello world 
+
+Def {{#definition testDefinition}}
