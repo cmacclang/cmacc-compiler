@@ -86,6 +86,8 @@ const loader = (x, opts) => {
         }
       };
 
+      console.log('fetch from github', location)
+
       return fetch(location + '?ref=' + branch, opts.token ? cont : null)
         .then(x => x.json())
         .then((x) => {
