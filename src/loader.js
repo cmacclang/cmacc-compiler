@@ -103,7 +103,8 @@ const loader = (x, opts) => {
         });
     } else {
       const base = opts.githubContentUrl || 'https://raw.githubusercontent.com';
-      return fetch(`${base}/${owner}/${repo}/${branch}/${path1}`)
+      const urlPath = path.join(base, owner, repo, branch, path1);
+      return fetch(urlPath)
         .then(res => res.text())
         .then(x => {
           console.log(x)
