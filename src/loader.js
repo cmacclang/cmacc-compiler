@@ -76,7 +76,7 @@ const loader = (x, opts) => {
     const path1 = match[4]
 
     if (opts.token) {
-      const base = 'https://api.github.com';
+      const base = opts.githubApiUrl || 'https://api.github.com';
       const urlPath = path.join('repos', owner, repo, 'contents', path1);
       const location = url.resolve(base, urlPath);
 
@@ -102,7 +102,8 @@ const loader = (x, opts) => {
           throw new Error(`Cannot load file: ${location} ${branch} ${opts.token}`, e)
         });
     } else {
-      return fetch(`https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path1}`)
+      const base = opts.githubContentUrl || 'https://raw.githubusercontent.com';
+      return fetch(`${base}/${owner}/${repo}/${branch}/${path1}`)
         .then(res => res.text())
         .then(x => {
           console.log(x)
