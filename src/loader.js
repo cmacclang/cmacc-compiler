@@ -9,7 +9,7 @@ const loader = (x, opts) => {
 
   if (count > 1) {
     return Promise.resolve({
-      file: null,
+      file: opts.base,
       type: 'cmacc',
       data: x,
     })
@@ -149,7 +149,7 @@ const loader = (x, opts) => {
 
 
   return Promise.resolve({
-    file: null,
+    file: opts.base,
     type: 'cmacc',
     data: x,
   })
