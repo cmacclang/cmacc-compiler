@@ -18,23 +18,40 @@ function render(ast) {
       const helper = match[1];
       const variable = match[2];
 
-      if(variable === 'this'){
-        const res = helpers[helper](ast);
-        return Promise.resolve(res);
+      var val;
+
+      if (variable.match(/^\[(.*)\]$/)) {
+        val = variable;
+      } else {
+        const split = variable.split('.');
+        const last = split.pop();
+        const res = split.reduce((ast, val) => ast[val], ast);
+        val = res[last];
       }
 
-      const split = variable.split('.');
-      const last = split.pop();
-      const res = split.reduce((ast, val) => ast[val], ast);
-
-      const val = res[last];
 
       if (helper) {
+
+        const opts = {
+          base: ast['$file$']
+        }
+
         if (!helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
-        const res = helpers[helper](val);
-        return Promise.resolve(res);
+        if (variable === 'this') {
+          const res = helpers[helper](ast, opts);
+          return Promise.resolve(res);
+        }
+
+        if (val) {
+          const res = helpers[helper](val, opts);
+          return Promise.resolve(res);
+        } else {
+          const res = helpers[helper](variable, opts);
+          return Promise.resolve(res);
+        }
+
       }
 
       if (val == null || typeof val === 'undefined') {

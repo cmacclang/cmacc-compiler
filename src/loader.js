@@ -86,7 +86,7 @@ const loader = (x, opts) => {
         }
       };
 
-      console.log('fetch from github', location)
+      // console.log('fetch from github', location)
 
       return fetch(location + '?ref=' + branch, opts.token ? cont : null)
         .then(x => x.json())
@@ -110,7 +110,7 @@ const loader = (x, opts) => {
       return fetch(location)
         .then(res => res.text())
         .then(x => {
-          console.log(x)
+          // console.log(x)
           return {
             file: 'github://' + file,
             //ToDo: opts.base on content type or extention
