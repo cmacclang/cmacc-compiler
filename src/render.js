@@ -1,6 +1,6 @@
-const helpers = require('./helpers');
-
 function render(ast) {
+
+  const helpers = require('./helpers');
 
   function item(x) {
 
