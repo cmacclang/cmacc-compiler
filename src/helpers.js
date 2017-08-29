@@ -16,6 +16,28 @@ const filename = (ast) => {
   };
 };
 
+var sectionState = [0,0,0,0,0,0]
+const section = (str) => {
+  const val = str.match(/^['"](.*)['"]$/)[1];
+  const split = val.split('.');
+  const pos = split.length
+  for(let i=0;i<6;i++){
+    if(i === pos-1){
+      sectionState[i] = sectionState[i] + 1 || 1;
+    }
+    if(i > pos-1){
+      sectionState[i] = 0
+    }
+  }
+
+  console.log(sectionState)
+  const res = {
+    type: 'text',
+    content: sectionState.slice(0, pos).join('.')
+  };
+  return Promise.resolve(res)
+};
+
 const definition = (val, opts) => {
 
   console.log('-----', val)
@@ -47,10 +69,6 @@ const definition = (val, opts) => {
       })
   }
 
-
-
-
-
 };
 
-module.exports = {location, filename, definition};
+module.exports = {location, filename, section, definition};

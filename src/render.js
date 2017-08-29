@@ -22,6 +22,8 @@ function render(ast) {
 
       if (variable.match(/^\[(.*)\]$/)) {
         val = variable;
+      } else if (variable.match(/^['"](.*)['"]$/)) {
+        val = variable;
       } else {
         const split = variable.split('.');
         const last = split.pop();
