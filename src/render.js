@@ -1,6 +1,8 @@
+const helpers = require('./helpers');
+
 function render(ast) {
 
-  const helpers = require('./helpers');
+  const helpersInstance = helpers();
 
   function item(x) {
 
@@ -38,19 +40,19 @@ function render(ast) {
           base: ast['$file$']
         }
 
-        if (!helpers[helper])
+        if (!helpersInstance[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
         if (variable === 'this') {
-          const res = helpers[helper](ast, opts);
+          const res = helpersInstance[helper](ast, opts);
           return Promise.resolve(res);
         }
 
         if (val) {
-          const res = helpers[helper](val, opts);
+          const res = helpersInstance[helper](val, opts);
           return Promise.resolve(res);
         } else {
-          const res = helpers[helper](variable, opts);
+          const res = helpersInstance[helper](variable, opts);
           return Promise.resolve(res);
         }
 
