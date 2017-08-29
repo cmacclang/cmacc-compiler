@@ -3,7 +3,7 @@ const assert = require('assert');
 const cmacc = require('../../../src/index');
 
 
-describe('multiple_placeholders_oneline', function () {
+describe('multiple_placeholders_list', function () {
 
   global.fs = require('fs');
 
@@ -20,8 +20,13 @@ describe('multiple_placeholders_oneline', function () {
         return cmacc.remarkable.render(x)
       })
       .then(html => {
-        const expect = `<ol>\n<li>Hello</li>\n<li>Test</li>\n<li>Hello World</li>\n</ol>\n`
-        assert.equal(html, expect);
+        const expect = `<ol>
+          <li>Hello</li>
+          <li>Test</li>
+          <li>Hello World</li>
+        </ol>`;
+
+        assert.equal(html.replace(/\s/g, ''), expect.replace(/\s/g, ''));
         done();
       })
       .catch(done);
