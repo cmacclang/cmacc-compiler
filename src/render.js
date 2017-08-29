@@ -24,19 +24,21 @@ function render(ast, state) {
       const helper = match[1];
       const variable = match[2];
 
-      var val;
+      // console.log('------',variable)
 
+      var val;
+      const split = variable.split('.');
+      const last = split.pop();
       if (variable.match(/^\[(.*)\]$/)) {
         val = variable;
       } else if (variable.match(/^['"](.*)['"]$/)) {
         val = variable;
       } else {
-        const split = variable.split('.');
-        const last = split.pop();
         const res = split.reduce((ast, val) => ast[val], ast);
         val = res[last];
       }
 
+      // console.log('------',val, split.join('.'))
 
       if (helper) {
 
@@ -75,8 +77,8 @@ function render(ast, state) {
         const res = {
           type: 'text',
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
-            console.log('------',match, name, ast[name])
-            return ast[name]
+            const res = split.reduce((ast, val) => ast[val], ast);
+            return res[name]
           }),
           variable: x.variable,
         };
