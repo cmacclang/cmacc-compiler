@@ -48,15 +48,15 @@ function render(ast, state) {
           throw new Error(`Helper '${helper}' does not exist `);
 
         if (variable === 'this') {
-          const res = state.helpers[helper](ast, opts);
+          const res = state.helpers[helper](ast, ast, opts);
           return Promise.resolve(res);
         }
 
         if (val) {
-          const res = state.helpers[helper](val, opts);
+          const res = state.helpers[helper](val, ast, opts);
           return Promise.resolve(res);
         } else {
-          const res = state.helpers[helper](variable, opts);
+          const res = state.helpers[helper](variable, ast, opts);
           return Promise.resolve(res);
         }
 
