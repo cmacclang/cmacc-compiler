@@ -57,7 +57,7 @@ module.exports = () => {
 
   const definition = (val, ast, opts) => {
 
-    console.log('-----', val)
+    // console.log('-----', val)
 
     if (typeof val === 'object') {
       const ast = val;

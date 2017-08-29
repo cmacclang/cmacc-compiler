@@ -75,7 +75,8 @@ function render(ast, state) {
         const res = {
           type: 'text',
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
-            return res[name]
+            console.log('------',match, name, ast[name])
+            return ast[name]
           }),
           variable: x.variable,
         };
