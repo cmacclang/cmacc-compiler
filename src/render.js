@@ -1,8 +1,12 @@
 const helpers = require('./helpers');
 
-function render(ast) {
+function render(ast, state) {
 
-  const helpersInstance = helpers();
+  if (!state) {
+    state = {
+      helpers: helpers()
+    }
+  }
 
   function item(x) {
 
@@ -40,19 +44,19 @@ function render(ast) {
           base: ast['$file$']
         }
 
-        if (!helpersInstance[helper])
+        if (!state.helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
 
         if (variable === 'this') {
-          const res = helpersInstance[helper](ast, opts);
+          const res = state.helpers[helper](ast, opts);
           return Promise.resolve(res);
         }
 
         if (val) {
-          const res = helpersInstance[helper](val, opts);
+          const res = state.helpers[helper](val, opts);
           return Promise.resolve(res);
         } else {
-          const res = helpersInstance[helper](variable, opts);
+          const res = state.helpers[helper](variable, opts);
           return Promise.resolve(res);
         }
 
@@ -91,7 +95,7 @@ function render(ast) {
           })
         }
 
-        return render(val).then(res => {
+        return render(val, state).then(res => {
           if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
             return res[1].children;
           else
