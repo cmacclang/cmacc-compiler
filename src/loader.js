@@ -131,7 +131,7 @@ const loader = (x, opts) => {
 
     const findRoot = require('find-root');
 
-    console.log('------', opts.base.replace('file://', ''), process.cwd())
+    // console.log('------', opts.base.replace('file://', ''), process.cwd())
 
     const packageRoot = opts.base ? findRoot(opts.base.replace('file://', '')) : findRoot(process.cwd());
     const nodeModules = path.join(packageRoot, 'node_modules')
@@ -139,7 +139,7 @@ const loader = (x, opts) => {
     const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
 
     const promise = new Promise((resolve, reject) => {
-      console.log('------lll', location)
+      // console.log('------lll', location)
       fs.readFile(location, (err, data) => {
         if (err) return reject(err);
         resolve({
