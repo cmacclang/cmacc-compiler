@@ -16,7 +16,7 @@ const loader = (x, opts) => {
   }
 
   // relative path
-  if (x.match(/^\//) || x.match(/^\.\//) || x.match(/^\.\.\//)) {
+  if (x.match(/^\.\//) || x.match(/^\.\.\//)) {
 
     var base = opts.base;
 
@@ -143,7 +143,7 @@ const loader = (x, opts) => {
       fs.readFile(location, (err, data) => {
         if (err) return reject(err);
         resolve({
-          file: location,
+          file: 'file://' + location,
           type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: data.toString(),
         });
