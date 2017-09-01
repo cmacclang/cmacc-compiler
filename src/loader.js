@@ -133,7 +133,12 @@ const loader = (x, opts) => {
 
     // console.log('------', opts.base.replace('file://', ''), process.cwd())
 
-    const packageRoot = opts.base ? findRoot(opts.base.replace('file://', '')) : findRoot(process.cwd());
+    const check = (dir) => {
+      const p = path.join(dir, 'node_modules', decodeURI(urlObj.host), decodeURI(urlObj.pathname));
+      return fs.existsSync(p)
+    };
+
+    const packageRoot = opts.base ? findRoot(opts.base.replace('file://', ''), check) : findRoot(process.cwd(), check);
     const nodeModules = path.join(packageRoot, 'node_modules')
 
     const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
