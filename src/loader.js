@@ -138,13 +138,15 @@ const loader = (x, opts) => {
       return fs.existsSync(p)
     };
 
-    const packageRoot = opts.base ? findRoot(opts.base.replace('file://', ''), check) : findRoot(process.cwd(), check);
+    const packageRoot = opts.base && opts.base.match(/^file\:/) ? findRoot(opts.base.replace('file://', ''), check) : findRoot(process.cwd(), check);
     const nodeModules = path.join(packageRoot, 'node_modules')
 
     const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
 
     const promise = new Promise((resolve, reject) => {
-      // console.log('------lll', location)
+
+      // console.log('------', location)
+
       fs.readFile(location, (err, data) => {
         if (err) return reject(err);
         resolve({
@@ -153,8 +155,6 @@ const loader = (x, opts) => {
           data: data.toString(),
         });
       });
-      const version = 'x'
-      const npmUrl = `http://registry.npmjs.org/${file}/-/${file}-2.0.0.tgz`
     });
 
     return promise;

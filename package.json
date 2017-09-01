@@ -10,7 +10,7 @@
     "cmacc-example-helloworld": "github:cmacclang/cmacc-example-helloworld",
     "find-node-modules": "^1.0.4",
     "find-root": "^1.1.0",
-    "jsonschema": "^1.1.1",
+    "jsonschema": "^1.2.0",
     "marked": "^0.3.5",
     "remarkable": "^1.7.1",
     "remarkable-meta": "^1.0.1",
@@ -26,10 +26,10 @@
     "cmacc": "./bin/run.js"
   },
   "devDependencies": {
-    "fetch-mock": "^5.12.0",
+    "fetch-mock": "^5.12.2",
     "fs-mock": "^1.2.1",
-    "mocha": "^3.2.0",
+    "mocha": "^3.5.0",
     "mock-fs": "^4.4.1",
-    "node-fetch": "^1.7.1"
+    "node-fetch": "^1.7.2"
   }
 }
