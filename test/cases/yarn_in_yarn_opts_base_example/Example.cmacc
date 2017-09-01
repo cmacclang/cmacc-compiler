@@ -1,0 +1,7 @@
+$ helloworld = [yarn://cmacc-example-helloworld/Example.cmacc]
+
+$ link = [./Link.cmacc]
+
+{{helloworld}}
+
+{{link}}

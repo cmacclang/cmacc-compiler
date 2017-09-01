@@ -16,14 +16,17 @@ const loader = (x, opts) => {
   }
 
   // relative path
-  if (x.match(/^\.\//) || x.match(/^\.\.\//)) {
-    if (!opts.base) {
-      opts.base = 'file:\/\/' + __dirname;
+  if (x.match(/^\//) || x.match(/^\.\//) || x.match(/^\.\.\//)) {
+
+    var base = opts.base;
+
+    if (!base) {
+      base = 'file:\/\/' + __dirname;
     }
-    if (path.extname(opts.base) !== '') {
-      opts.base = url.resolve(opts.base, './')
+    if (path.extname(base) !== '') {
+      base = url.resolve(base, './')
     }
-    x = url.resolve(opts.base, x);
+    x = url.resolve(base, x);
   }
 
   const urlObj = url.parse(x);
@@ -127,23 +130,28 @@ const loader = (x, opts) => {
     const file = urlObj.path;
 
     const findRoot = require('find-root');
+
+    console.log('------', opts.base.replace('file://', ''), process.cwd())
+
     const packageRoot = opts.base ? findRoot(opts.base.replace('file://', '')) : findRoot(process.cwd());
     const nodeModules = path.join(packageRoot, 'node_modules')
 
     const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
 
-
     const promise = new Promise((resolve, reject) => {
-
+      console.log('------lll', location)
       fs.readFile(location, (err, data) => {
         if (err) return reject(err);
         resolve({
-          file: decodeURI(url.format(urlObj)),
+          file: location,
           type: path.extname(urlObj.path).slice(1).toLowerCase(),
           data: data.toString(),
         });
       });
+      const version = 'x'
+      const npmUrl = `http://registry.npmjs.org/${file}/-/${file}-2.0.0.tgz`
     });
+
     return promise;
   }
 
