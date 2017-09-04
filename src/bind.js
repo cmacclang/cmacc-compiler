@@ -18,7 +18,7 @@ function bind(ast) {
     }
 
     if (x.type === 'string') {
-     Fis  from.type = x.type
+      from.type = x.type
       from.data = x.data
 
     }
