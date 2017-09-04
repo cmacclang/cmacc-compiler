@@ -1,0 +1,5 @@
+$ firstName = "Test1"
+
+$ lastName = "Test2"
+
+$ fullName = "{{firstName}} {{lastName}}"

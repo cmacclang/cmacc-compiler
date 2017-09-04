@@ -2,7 +2,7 @@ const find = require('./find');
 
 function bind(ast) {
 
-  if(!ast.vars)
+  if (!ast.vars)
     return ast
 
   ast.vars.forEach(function (x) {
@@ -11,10 +11,16 @@ function bind(ast) {
 
     if (x.type === 'link') {
 
-      if(from.data && from.data.type === 'schema') {
+      if (from.data && from.data.type === 'schema') {
         x.data['$schema$'] = from.data.data
       }
       from.data = x.data
+    }
+
+    if (x.type === 'string') {
+     Fis  from.type = x.type
+      from.data = x.data
+
     }
 
     if (x.type === 'variable') {
@@ -31,7 +37,7 @@ function bind(ast) {
       const args = match[2] ? match[2].split(",") : [];
       const input = args.map(x => find(x, ast)).map(x => x.data)
       const val = find(func, ast);
-      const data =val.data.data.apply({}, input)
+      const data = val.data.data.apply({}, input)
       from.data = data
     }
 
@@ -46,7 +52,6 @@ function bind(ast) {
   });
 
   return ast
-
 
 
 }

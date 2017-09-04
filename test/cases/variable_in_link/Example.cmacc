@@ -1,0 +1,11 @@
+$ firstName = "Willem"
+$ lastName = "Veelenturf"
+
+$ person = [./Person.cmacc]
+$ person.firstName = firstName
+$ person.lastName = lastName
+
+$ mask = [./Mask.cmacc]
+$ mask.person = person
+
+{{mask}}
