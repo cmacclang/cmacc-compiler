@@ -20,13 +20,21 @@ function bind(ast) {
     if (x.type === 'string') {
       from.type = x.type
       from.data = x.data
-
     }
 
     if (x.type === 'variable') {
       const to = find(x.data, ast);
       from.type = to.type
-      from.data = to.data
+      if( to.type === 'string'){
+        from.data = to.data.replace(/\{\{([^}]*)\}\}/g, (match, variable) =>{
+          const split = x.data.split('.');
+          const res = split.slice(0, split.length - 1).join('.') + '.' + variable;
+          console.log(res)
+          return `{{${res}}}`;
+        })
+      }else{
+        from.data = to.data
+      }
 
     }
 

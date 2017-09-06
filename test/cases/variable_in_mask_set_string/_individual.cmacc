@@ -1,0 +1,7 @@
+// Object - Individual
+
+$ first_Name = "name_First"
+
+$ last_Name = "name_Last"
+
+$ full_Name = "{{first_Name}} {{last_Name}}"

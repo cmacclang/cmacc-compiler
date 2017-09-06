@@ -77,8 +77,10 @@ function render(ast, state) {
         const res = {
           type: 'text',
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
-            const res = split.reduce((ast, val) => ast[val], ast);
-            return res[name]
+            const split2 = split.concat(name.split('.'));
+            const last = split2.pop();
+            const res = split2.reduce((ast, val) => ast[val], ast);
+            return res[last]
           }),
           variable: x.variable,
         };

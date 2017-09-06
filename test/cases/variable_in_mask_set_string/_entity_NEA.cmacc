@@ -1,0 +1,5 @@
+$ entity = [./_entity.cmacc]
+
+$ full_Name = entity.full_Name
+
+Hello full name {{full_Name}}

@@ -1,0 +1,14 @@
+$ first_Name = "Willem"
+$ last_Name = "Veelenturf"
+
+$ individual = [./_individual.cmacc]
+$ individual.first_Name = first_Name
+$ individual.last_Name = last_Name
+
+$ entity = [./_entity_Individual.cmacc]
+$ entity.individual = individual
+
+$ mask = [./_entity_NEA.cmacc]
+$ mask.entity = entity
+
+{{mask}}

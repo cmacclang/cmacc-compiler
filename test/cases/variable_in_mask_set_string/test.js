@@ -2,7 +2,7 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-describe('variable_in_mask', function () {
+describe('variable_in_mask_set_string', function () {
 
   global.fs = require('fs');
   global.fetch = require('node-fetch');
@@ -19,7 +19,7 @@ describe('variable_in_mask', function () {
         return cmacc.remarkable.render(x)
       })
       .then(html => {
-        const expect = `<p>Hello my name is Willem Veelenturf</p>
+        const expect = `<p>Hello full name Willem Veelenturf</p>
 `;
         assert.equal(html, expect);
         done();

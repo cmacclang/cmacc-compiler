@@ -1,0 +1,3 @@
+$ individual = [./_individual.cmacc]
+
+$ full_Name = individual.full_Name
