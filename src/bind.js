@@ -7,7 +7,7 @@ function bind(ast) {
 
   ast.vars.forEach(function (x) {
 
-    console.log(x.type, x.name, x.value)
+    // console.log(x.type, x.name, x.value)
 
     const from = find(x.name, ast);
 
