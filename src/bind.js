@@ -11,18 +11,10 @@ function bind(ast) {
 
     const from = find(x.name, ast);
 
-    if (x.type === 'link') {
-
-      if (from.data && from.data.type === 'schema') {
-        x.data['$schema$'] = from.data.data
-      }
-      bind(x.data)
-      from.data = x.data
-    }
-
     if (x.type === 'string') {
-      from.type = x.type
-      from.data = x.data
+      from.type = x.type;
+      from.data = x.data;
+      return;
     }
 
     if (x.type === 'variable') {
@@ -37,7 +29,16 @@ function bind(ast) {
       }else{
         from.data = to.data
       }
+      return;
+    }
 
+    if (x.type === 'link') {
+      if (from.data && from.data.type === 'schema') {
+        x.data['$schema$'] = from.data.data
+      }
+      from.data = x.data
+      bind(x.data);
+      return;
     }
 
     if (x.type === 'function') {
@@ -49,6 +50,7 @@ function bind(ast) {
       const val = find(func, ast);
       const data = val.data.data.apply({}, input)
       from.data = data
+      return;
     }
 
   });
