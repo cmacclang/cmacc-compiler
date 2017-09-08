@@ -40,7 +40,7 @@ describe('escrow_case', function () {
         assert.equal(ast.deal.price_USD, '$650.00');
         assert.equal(ast.deal.seller.full_Name, 'Gerry\'s Grapes, LLC');
 
-        assert.equal(ast.seller.full_Name, 'Gerry\'s Grapes, LLC');
+        assert.equal(ast.seller123.full_Name, 'Gerry\'s Grapes, LLC');
         done();
       })
       .catch(done);

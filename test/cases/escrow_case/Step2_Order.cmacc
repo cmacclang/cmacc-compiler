@@ -9,7 +9,7 @@ $ order = [./Step1_Parties.cmacc]
 $ deal = order.deal
 $ deal.price_USD = price_USD
 
-$ seller = deal.seller
+$ seller123 = deal.seller
 
 // Document
 

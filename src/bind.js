@@ -3,9 +3,11 @@ const find = require('./find');
 function bind(ast) {
 
   if (!ast.vars)
-    return ast
+    return ast;
 
   ast.vars.forEach(function (x) {
+
+    console.log(x.type, x.name, x.value)
 
     const from = find(x.name, ast);
 
@@ -14,6 +16,7 @@ function bind(ast) {
       if (from.data && from.data.type === 'schema') {
         x.data['$schema$'] = from.data.data
       }
+      bind(x.data)
       from.data = x.data
     }
 
@@ -29,7 +32,6 @@ function bind(ast) {
         from.data = to.data.replace(/\{\{([^}]*)\}\}/g, (match, variable) =>{
           const split = x.data.split('.');
           const res = split.slice(0, split.length - 1).join('.') + '.' + variable;
-          console.log(res)
           return `{{${res}}}`;
         })
       }else{

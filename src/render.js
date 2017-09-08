@@ -29,12 +29,17 @@ function render(ast, state) {
       var val;
       const split = variable.split('.');
       const last = split.pop();
-      if (variable.match(/^\[(.*)\]$/)) {
+      if (variable === 'this') {
+        val = ast;
+      } else if (variable.match(/^\[(.*)\]$/)) {
         val = variable;
       } else if (variable.match(/^['"](.*)['"]$/)) {
         val = variable;
       } else {
         const res = split.reduce((ast, val) => ast[val], ast);
+        if(!res[last]){
+          throw new Error(`Cannot find var '${variable}' in file '${ast['$file$']}'`);
+        }
         val = res[last];
       }
 
@@ -48,11 +53,6 @@ function render(ast, state) {
 
         if (!state.helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
-
-        if (variable === 'this') {
-          const res = state.helpers[helper](ast, ast, opts);
-          return Promise.resolve(res);
-        }
 
         if (val) {
           const res = state.helpers[helper](val, ast, opts);

@@ -2,7 +2,7 @@ $ first_Name = "Willem"
 $ last_Name = "Veelenturf"
 
 $ individual = [./_individual.cmacc]
-$ individual.first_Name = first_Name
+$ individual.first_Name = "Willem"
 $ individual.last_Name = last_Name
 
 $ entity = [./_entity_Individual.cmacc]

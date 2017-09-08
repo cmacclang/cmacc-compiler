@@ -2,7 +2,7 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-describe('variable_in_mask_set_string', function () {
+describe('variable_in_mask_set_string_set', function () {
 
   global.fs = require('fs');
   global.fetch = require('node-fetch');
