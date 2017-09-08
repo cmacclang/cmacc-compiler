@@ -1,0 +1,15 @@
+// Parameters
+
+// External files
+
+$ seller = [./GerrysGrapesLLC.cmacc]
+$ seller.entity_a = seller.entity_a_EN
+$ seller.adr_Type = seller.adr_Type_EN
+
+
+$ deal = [./Escrow.cmacc]
+$ deal.seller = seller
+
+// Document 
+
+{{deal}}

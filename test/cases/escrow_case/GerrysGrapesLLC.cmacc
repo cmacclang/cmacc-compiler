@@ -1,0 +1,27 @@
+$ full_Name = "Gerry's Grapes, LLC"
+
+$ formal_Name = "Gerry's Grapes"
+
+$ entity_a = "entity_a"
+
+$ expertise = "expertise"
+
+$ adr_Type = "adr_Type"
+
+$ contact_Formal_Name = "contact_Name_Formal"
+
+$ sign_Rep_Title = "sign_Title"
+
+$ jurisdiction_Origin = "jurisdiction_Origin"
+
+$ sign_Rep = [./GeraldineGraber.cmacc]
+
+$ claim_Response_Delay = "two business days from the date of the Claim"
+
+// Settings for English
+
+$ entity_a_EN = "a Massachusetts LLC"
+
+$ adr_Type_EN = "business"
+
+$ sign_Rep_Title_EN = "Founder"

@@ -1,0 +1,22 @@
+// Parameters
+
+$ price_USD = "Price_USD"
+
+// Parties
+
+$ seller = [./_entity.cmacc]
+
+// Masks
+
+$ seller_NEA = [./_entity_NEA.cmacc]
+$ seller_NEA.entity = seller
+
+// Document
+
+ESCROW AGREEMENT
+
+This escrow agreement ("Escrow Agreement") is made and entered into on {{escrow_Effective_YMD}} by and among:
+
+{{seller_NEA}} ("Seller"),
+
+WHEREAS, the Purchaser and the Seller have entered into a purchase agreement ("Purchase Agreement") for the sale to the Purchaser of {{product_Description}} (the "Products") owned by the Seller in exchange for {{price_USD}} (the "Purchase Price") (altogether, the "Transaction");

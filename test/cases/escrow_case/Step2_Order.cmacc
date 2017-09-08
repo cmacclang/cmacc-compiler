@@ -1,0 +1,16 @@
+// Parameters
+
+$ price_USD = "$650.00"
+
+// External files
+
+$ order = [./Step1_Parties.cmacc]
+
+$ deal = order.deal
+$ deal.price_USD = price_USD
+
+$ seller = deal.seller
+
+// Document
+
+{{order}}

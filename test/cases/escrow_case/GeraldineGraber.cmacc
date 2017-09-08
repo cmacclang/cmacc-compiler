@@ -1,0 +1,15 @@
+$ first_Name = "Geraldine"
+
+$ last_Name = "Graber"
+
+$ full_Name = "{{first_Name}} {{last_Name}}"
+
+$ formal_Name = "formal_Namer"
+
+$ adr_Type = "adr_Type"
+
+$ Sign_Title = "Sign_Title"
+
+$ gender = "gender"
+
+$ pron = "pron"

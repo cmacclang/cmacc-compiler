@@ -1,0 +1,5 @@
+$ entity = [./_entity.cmacc]
+
+$ adr_12 = [./_adr_12.cmacc]
+
+{{entity.full_Name}}, {{entity.entity_a}} whose {{entity.adr_Type}} address is {{adr_12}}
