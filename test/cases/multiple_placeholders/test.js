@@ -40,7 +40,7 @@ disclose_Type<p>including without limitation information regarding</p>
 
   });
 
-  it('error', function (done) {
+  xit('error', function (done) {
     const file = url.join('file://', __dirname, './Error.cmacc')
     cmacc.compile(file)
 
