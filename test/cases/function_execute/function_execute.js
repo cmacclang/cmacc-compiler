@@ -7,7 +7,7 @@ describe('function_execute', function () {
   global.fs = require('fs');
 
   it('happy', function (done) {
-    const file = url.join('file://', __dirname, './Index.cmacc')
+    const file = url.join('file://', __dirname, '/Index.cmacc')
     cmacc.compile(file)
       .then(ast => {
         //console.log(ast)
