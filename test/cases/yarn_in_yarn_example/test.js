@@ -5,7 +5,7 @@ const cmacc = require('../../../src/index');
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
-describe('github', function () {
+describe('yarn_in_yarn_example', function () {
 
   global.fs = require('fs');
   global.fetch = require('node-fetch');

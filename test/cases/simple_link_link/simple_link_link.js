@@ -11,7 +11,7 @@ describe('simple_link_link', function () {
     cmacc.compile(file)
       .then(cmacc.render)
       .then( x => {
-        console.log('----', x)
+        // console.log('----', x)
         assert.equal(x[0].type, 'heading_open');
         assert.equal(x[1].type, 'inline');
         assert.equal(x[1].children[0].type, 'text');
