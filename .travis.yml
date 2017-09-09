@@ -1,3 +1,11 @@
 language: node_js
 node_js:
-  - "7.3.0"
+- 7.3.0
+deploy:
+  provider: npm
+  email: willem.veelenturf@gmail.com
+  api_key:
+    secure: pco4Y17qxguM8c8TPZcIlizzLXG3Aruqe12RB3NcTTGDPVYjBSVoXVX+NjZlJw3Hz4rRgvLoYk+2RfdSAclfp9B3AZAwUu4woDCjttzqbsKEPBmyfKRf89/Pt37qlyzISBKa7e9Ufa/Tzp/g7MQxUWRdl/73/rpQvR08OUtOItcO8NAuVyP0GbhADysAXjf6a/yl1mKYtQukGLbM6JW7sYV7hEiZ14XFXDCulib6cQ7RHovHvd5S13S6VvrlSHmdVEDlU2fEmZxBHISWU2EGn2ydb/4ByugRjSMTynXZP6cXwY83m35GxguRTZjYsXwVk7FIHq5vYvfkOXombMzadvomEvI4GI7F4WCYdLAGZGiebV39iKWY/UOlcdJ1VL6NUfjfR62R7LPjh4epZG+UYmqQcqDwtkQ9wrWqugtpu9tgRomZ7Ed8qWxkxwVqW96M2jP6tVwUeuJmH/8DQYKIChC40Add+rkdjawD+nqWmlHhHMPjzRYIRJ6bywYKwMkqpb3rpnD3lohIcbLvoXvCBQkhjk9gOQvK2AIZmSucywqbQ0skYyy3IA7upF0mLV+uO2wInwIkD68EGfjzzUNlHYKLPCf4aHrSbPPQABTJoEGBzAwPQOCyPrG0yLASo9FkuslG1pY5NBV3kasuXpC4u1TRnPlXiEzYdxlhtE4K2mQ=
+  on:
+    branch: master
+    tags: true
