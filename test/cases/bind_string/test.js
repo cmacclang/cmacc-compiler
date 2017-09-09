@@ -5,7 +5,7 @@ const cmacc = require('../../../src/index');
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
-describe('bind_simple', function () {
+describe('bind_string', function () {
 
   global.fs = require('fs');
 
