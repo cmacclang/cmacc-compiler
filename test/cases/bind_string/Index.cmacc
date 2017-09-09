@@ -1,4 +1,4 @@
-$ test = [./contract.cmacc]
+$ test = [./Contract.cmacc]
 $ test.person.name = "Jan Jansen"
 
 {{test}}
