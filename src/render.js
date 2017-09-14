@@ -1,4 +1,5 @@
 const helpers = require('./helpers');
+const resolve = require('./resolve');
 
 function render(ast, state) {
 
@@ -24,32 +25,13 @@ function render(ast, state) {
       const helper = match[1];
       const variable = match[2];
 
-      // console.log('------',variable)
-
-      var val;
-      const split = variable.split('.');
-      const last = split.pop();
-      if (variable === 'this') {
-        val = ast;
-      } else if (variable.match(/^\[(.*)\]$/)) {
-        val = variable;
-      } else if (variable.match(/^['"](.*)['"]$/)) {
-        val = variable;
-      } else {
-        const res = split.reduce((ast, val) => ast[val], ast);
-        if(!res[last]){
-          throw new Error(`Cannot find var '${variable}' in file '${ast['$file$']}'`);
-        }
-        val = res[last];
-      }
-
-      // console.log('------',val, split.join('.'))
+      var val = resolve(variable, ast);
 
       if (helper) {
 
         const opts = {
           base: ast['$file$']
-        }
+        };
 
         if (!state.helpers[helper])
           throw new Error(`Helper '${helper}' does not exist `);
@@ -77,10 +59,8 @@ function render(ast, state) {
         const res = {
           type: 'text',
           content: val.replace(/{{([^{]*)}}/g, function (match, name) {
-            const split2 = split.concat(name.split('.'));
-            const last = split2.pop();
-            const res = split2.reduce((ast, val) => ast[val], ast);
-            return res[last]
+            const x = variable.split('.').slice(0, -1).concat(name.split('.')).join('.');
+            return resolve(x, ast)
           }),
           variable: x.variable,
         };
