@@ -1,6 +1,6 @@
 {
   "name": "cmacc-compiler",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Cmacc Compiler",
   "main": "src/index.js",
   "author": "",
@@ -17,7 +17,8 @@
     "remarkable-variables": "^2.0.0",
     "request": "^2.74.0",
     "resolve-url": "^0.2.1",
-    "sync-request": "^3.0.1"
+    "sync-request": "^3.0.1",
+    "yarn": "^1.0.2"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test --recursive"
