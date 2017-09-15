@@ -7,26 +7,17 @@ module.exports = () => {
   const referenceState = {};
 
   const location = (ast) => {
-    return {
-      type: 'text',
-      content: ast['$file$'],
-    };
+    return Promise.resolve(ast['$file$']);
   };
 
   const filename = (ast) => {
     const arr = ast['$file$'].split('/')
-    return {
-      type: 'text',
-      content: arr[arr.length - 1]
-    };
+    return Promise.resolve(arr[arr.length - 1]);
   };
 
   const reference = (ast) => {
     const number = referenceState[ast['$file$']];
-    return {
-      type: 'text',
-      content: number
-    };
+    return Promise.resolve(number);
   };
 
   const section = (str, ast) => {
@@ -48,25 +39,15 @@ module.exports = () => {
       referenceState[ast['$file$']] = number;
     }
 
-    const res = {
-      type: 'text',
-      content: number
-    };
-    return Promise.resolve(res)
+    return Promise.resolve(number)
   };
 
   const definition = (val, ast, opts) => {
 
-    // console.log('-----', val)
-
     if (typeof val === 'object') {
       const ast = val;
       const definition = ast['$meta$']['Definition']
-      const res = {
-        type: 'htmlblock',
-        content: `<a href="#${definition.replace(' ', '-')}">${definition}</a>`
-      };
-      return Promise.resolve(res)
+      return Promise.resolve(`<a href="#${definition.replace(' ', '-')}">${definition}</a>`);
     }
 
     if (typeof val === 'string') {
@@ -79,10 +60,7 @@ module.exports = () => {
           if (!definition)
             throw new Error(`definition not found in file ${ast['$file$']}`);
 
-          return {
-            type: 'htmlblock',
-            content: `<a href="#${definition.replace(' ', '-')}">${definition}</a>`
-          };
+          return Promise.resolve(`<a href="#${definition.replace(' ', '-')}">${definition}</a>`);
         })
     }
   };

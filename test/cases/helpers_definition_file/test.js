@@ -2,7 +2,7 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-describe('helpers_definition_ref_in_def', function () {
+describe('helpers_definition_file', function () {
 
   global.fs = require('fs');
   global.fetch = require('node-fetch');

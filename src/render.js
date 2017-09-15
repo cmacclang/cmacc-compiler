@@ -3,6 +3,10 @@ const resolve = require('./resolve');
 
 function render(ast, state) {
 
+  const opts = {
+    base: ast['$file$']
+  };
+
   if (!state) {
     state = {
       helpers: helpers()
@@ -25,28 +29,26 @@ function render(ast, state) {
       const helper = match[1];
       const variable = match[2];
 
-      var val = resolve(variable, ast);
+      const value = resolve(variable, ast);
 
       if (helper) {
 
-        const opts = {
-          base: ast['$file$']
-        };
-
-        if (!state.helpers[helper])
+        if (!state.helpers[helper]){
           throw new Error(`Helper '${helper}' does not exist `);
-
-        if (val) {
-          const res = state.helpers[helper](val, ast, opts);
-          return Promise.resolve(res);
-        } else {
-          const res = state.helpers[helper](variable, ast, opts);
-          return Promise.resolve(res);
         }
+
+        return state.helpers[helper](value, ast, opts)
+          .then(content => {
+            return {
+              type: 'htmlblock',
+              content: content,
+              variable: x.variable,
+            }
+          });
 
       }
 
-      if (val == null || typeof val === 'undefined') {
+      if (value == null || typeof value === 'undefined') {
         const res = {
           type: 'text',
           content: `{{${x.variable}}}`,
@@ -55,11 +57,14 @@ function render(ast, state) {
         return Promise.resolve(res);
       }
 
-      if (typeof val === 'string') {
+      if (typeof value === 'string') {
         const res = {
           type: 'text',
-          content: val.replace(/{{([^{]*)}}/g, function (match, name) {
+          content: value.replace(/{{(?:#(.*)\s)?([^{]*)}}/g, function (match, helper, name) {
             const x = variable.split('.').slice(0, -1).concat(name.split('.')).join('.');
+            if (helper) {
+              return state.helpers[helper](resolve(x, ast), ast, opts);
+            }
             return resolve(x, ast)
           }),
           variable: x.variable,
@@ -67,10 +72,10 @@ function render(ast, state) {
         return Promise.resolve(res);
       }
 
-      if (typeof val === 'object') {
+      if (typeof value === 'object') {
 
-        if (val.then) {
-          return val.then(x => {
+        if (value.then) {
+          return value.then(x => {
             const res = {
               type: 'text',
               content: x,
@@ -80,7 +85,7 @@ function render(ast, state) {
           })
         }
 
-        return render(val, state).then(res => {
+        return render(value, state).then(res => {
           if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
             return res[1].children;
           else
@@ -99,9 +104,9 @@ function render(ast, state) {
     return Promise.all(ast['$md$']
       .map(x => {
 
-        x.children = x.children || []
+        x.children = x.children || [];
 
-        children = x.children.map(child => item(child).then((res) => {
+        const children = x.children.map(child => item(child).then((res) => {
           if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : cur.type !== 'text', false)) {
             throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
           }

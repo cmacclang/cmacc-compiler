@@ -7,7 +7,7 @@ describe('multiple_placeholders_list', function () {
 
   global.fs = require('fs');
 
-  xit('happy', function (done) {
+  it('happy', function (done) {
     const file = url.join('file://', __dirname, './Index.cmacc')
     cmacc.compile(file)
 

@@ -11,7 +11,7 @@ function resolve(variable, ast) {
     const split = variable.split('.');
     const last = split.pop();
     const res = split.reduce((ast, val) => ast[val], ast);
-    if(!res[last]){
+    if(!res || !res[last]){
       throw new Error(`Cannot find variable '${variable}' in file '${ast['$file$']}'`);
     }
     return res[last];

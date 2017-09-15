@@ -8,15 +8,7 @@ function compile(file, opts) {
   opts = opts || {}
 
   return assemble(file, opts)
-    .then(x =>{
-      //console.log(JSON.stringify(x, null, 2))
-      return x
-    })
     .then(bind)
-    .then(x =>{
-      // console.log(JSON.stringify(x, null, 2))
-      return x
-    })
     .then(reduce)
     .then(validate)
 

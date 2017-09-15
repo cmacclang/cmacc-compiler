@@ -7,8 +7,6 @@ function bind(ast) {
 
   ast.vars.forEach(function (x) {
 
-    // console.log(x.type, x.name, x.value)
-
     const from = find(x.name, ast);
 
     if (x.type === 'string') {
@@ -21,9 +19,12 @@ function bind(ast) {
       const to = find(x.data, ast);
       from.type = to.type
       if( to.type === 'string'){
-        from.data = to.data.replace(/\{\{([^}]*)\}\}/g, (match, variable) =>{
+        from.data = to.data.replace(/{{(?:#(.*)\s)?([^{]*)}}/g, (match, helper, variable) =>{
           const split = x.data.split('.');
           const res = split.slice(0, split.length - 1).concat(variable).join('.');
+          if(helper){
+            return `{{#${helper} ${variable}}}`;
+          }
           return `{{${res}}}`;
         })
       }else{
