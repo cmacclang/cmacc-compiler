@@ -7,7 +7,7 @@ describe('helpers_in_variable', function () {
   global.fs = require('fs');
   global.fetch = require('node-fetch');
 
-  xit('HelloWordSection', function (done) {
+  it('HelloWordSection', function (done) {
     const file = url.join('file://', __dirname, './HelloWordSection.cmacc');
 
     cmacc.compile(file)
@@ -19,12 +19,8 @@ describe('helpers_in_variable', function () {
         return cmacc.remarkable.render(x)
       })
       .then(html => {
-        const expect = `<h1>Section 1</h1>
-<h1>Section 1</h1>
-<h1>Section 1</h1>`;
-
-        assert.equal(html.replace(/\s/g, ''), expect.replace(/\s/g, ''));
-        done();
+        assert.equal(html, '<h1>Section 1</h1>\n<h1>Section 2</h1>\n<h1>Section 3</h1>\n');
+        done()
       })
       .catch(done);
 

@@ -62,7 +62,7 @@ const loader = (x, opts) => {
 
   // http
   if (fetch && (urlObj.protocol === 'http:' || urlObj.protocol === 'https:')) {
-    // console.log(x)
+
     return fetch(x).then(y => {
       if (y.status != 200) throw new Error('File not found');
 
@@ -99,8 +99,6 @@ const loader = (x, opts) => {
         }
       };
 
-      // console.log('fetch from github', location)
-
       return fetch(location + '?ref=' + branch, opts.token ? cont : null)
         .then(x => x.json())
         .then(x => {
@@ -121,7 +119,6 @@ const loader = (x, opts) => {
       const urlPath = path.join(owner, repo, branch, path1);
       const location = url.resolve(base, urlPath);
       return fetch(location).then(res => res.text()).then(x => {
-        // console.log(x)
         return {
           file: 'github://' + file,
           //ToDo: opts.base on content type or extention
@@ -138,8 +135,6 @@ const loader = (x, opts) => {
 
     const findRoot = require('find-root');
 
-    // console.log('------', opts.base.replace('file://', ''), process.cwd())
-
     const check = dir => {
       const p = path.join(dir, 'node_modules', decodeURI(urlObj.host), decodeURI(urlObj.pathname));
       return fs.existsSync(p);
@@ -151,8 +146,6 @@ const loader = (x, opts) => {
     const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
 
     const promise = new Promise((resolve, reject) => {
-      // console.log('------', location)
-
       fs.readFile(location, (err, data) => {
         if (err) return reject(err);
         resolve({
