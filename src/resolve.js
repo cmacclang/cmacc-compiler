@@ -2,11 +2,11 @@ function resolve(variable, ast) {
 
 
   if (variable === 'this') {
-    return ast;
+    return Promise.resolve(ast);
   } else if (variable.match(/^\[(.*)\]$/)) {
-    return variable;
+    return Promise.resolve(variable);
   } else if (variable.match(/^['"](.*)['"]$/)) {
-    return variable;
+    return Promise.resolve(variable);
   } else {
     const split = variable.split('.');
     const last = split.pop();
@@ -14,7 +14,7 @@ function resolve(variable, ast) {
     if(!res || !res[last]){
       throw new Error(`Cannot find variable '${variable}' in file '${ast['$file$']}'`);
     }
-    return res[last];
+    return Promise.resolve(res[last]);
   }
 
 }

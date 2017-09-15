@@ -29,70 +29,95 @@ function render(ast, state) {
       const helper = match[1];
       const variable = match[2];
 
-      const value = resolve(variable, ast);
+      return resolve(variable, ast).then((value) => {
 
-      if (helper) {
+          if (helper) {
 
-        if (!state.helpers[helper]){
-          throw new Error(`Helper '${helper}' does not exist `);
-        }
-
-        return state.helpers[helper](value, ast, opts)
-          .then(content => {
-            return {
-              type: 'htmlblock',
-              content: content,
-              variable: x.variable,
+            if (!state.helpers[helper]) {
+              throw new Error(`Helper '${helper}' does not exist `);
             }
-          });
 
-      }
+            return state.helpers[helper](value, ast, opts)
+              .then(content => {
+                return {
+                  type: 'htmlblock',
+                  content: content,
+                  variable: x.variable,
+                }
+              });
 
-      if (value == null || typeof value === 'undefined') {
-        const res = {
-          type: 'text',
-          content: `{{${x.variable}}}`,
-          variable: x.variable,
-        };
-        return Promise.resolve(res);
-      }
+          }
 
-      if (typeof value === 'string') {
-        const res = {
-          type: 'text',
-          content: value.replace(/{{(?:#(.*)\s)?([^{]*)}}/g, function (match, helper, name) {
-            const x = variable.split('.').slice(0, -1).concat(name.split('.')).join('.');
-            if (helper) {
-              return state.helpers[helper](resolve(x, ast), ast, opts);
-            }
-            return resolve(x, ast)
-          }),
-          variable: x.variable,
-        };
-        return Promise.resolve(res);
-      }
-
-      if (typeof value === 'object') {
-
-        if (value.then) {
-          return value.then(x => {
+          if (value == null || typeof value === 'undefined') {
             const res = {
               type: 'text',
-              content: x,
+              content: `{{${x.variable}}}`,
               variable: x.variable,
             };
-            return res;
-          })
+            return Promise.resolve(res);
+          }
+
+          if (typeof value === 'string') {
+            return Promise.resolve(value)
+              .then(value => {
+                return value
+                  .split(/({{[^{]*})/)
+                  .filter(str => str != "");
+              })
+              .then(arr => {
+                const res = arr.map(x => {
+                  const matches = x.match(/{{(?:#(.*)\s)?([^}]*)}}/)
+
+                  if(!matches){
+                    return Promise.resolve(x);
+                  }
+
+                  const helper = matches[1];
+                  const name = matches[2];
+                  const key = variable.split('.').slice(0, -1).concat(name.split('.')).join('.');
+                  if (helper) {
+                    return resolve(key, ast)
+                      .then(x => state.helpers[helper](x, ast, opts))
+                  }
+                  return resolve(key, ast)
+                });
+
+                return Promise.all(res)
+              })
+              .then(arr => {
+                return arr.map(content => {
+                  return {
+                    type: 'text',
+                    content: content,
+                    variable: x.variable,
+                  }
+                })
+              })
+          }
+
+          if (typeof value === 'object') {
+
+            if (value.then) {
+              return value.then(x => {
+                const res = {
+                  type: 'text',
+                  content: x,
+                  variable: x.variable,
+                };
+                return res;
+              })
+            }
+
+            return render(value, state).then(res => {
+              if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
+                return res[1].children;
+              else
+                return res;
+            });
+
+          }
         }
-
-        return render(value, state).then(res => {
-          if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
-            return res[1].children;
-          else
-            return res;
-        });
-
-      }
+      );
 
     }
 
