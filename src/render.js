@@ -87,7 +87,7 @@ function render(ast, state) {
               .then(arr => {
                 return arr.map(content => {
                   return {
-                    type: 'text',
+                    type: 'htmlblock',
                     content: content,
                     variable: x.variable,
                   }
@@ -132,7 +132,7 @@ function render(ast, state) {
         x.children = x.children || [];
 
         const children = x.children.map(child => item(child).then((res) => {
-          if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : cur.type !== 'text', false)) {
+          if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (cur.type !== 'text' && cur.type !== 'htmlblock'), false)) {
             throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
           }
           return res;
