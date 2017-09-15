@@ -22,22 +22,8 @@ function render(ast, state) {
 
       const placeholder = x.content;
 
-      const match = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/);
-
-      const helper = match[1];
-      const variable = match[2];
-
       return resolve(placeholder, ast, state)
         .then(value => {
-
-            if (helper) {
-              return Promise.resolve({
-                type: 'htmlblock',
-                content: value,
-                variable: x.variable,
-              })
-
-            }
 
             if (value == null || typeof value === 'undefined') {
               const res = {
