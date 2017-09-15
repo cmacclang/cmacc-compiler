@@ -3,10 +3,6 @@ const resolve = require('./resolve');
 
 function render(ast, state) {
 
-  const opts = {
-    base: ast['$file$']
-  };
-
   if (!state) {
     state = {
       helpers: helpers()
@@ -31,23 +27,15 @@ function render(ast, state) {
       const helper = match[1];
       const variable = match[2];
 
-      return resolve(variable, ast)
+      return resolve(placeholder, ast, state)
         .then(value => {
 
             if (helper) {
-
-              if (!state.helpers[helper]) {
-                throw new Error(`Helper '${helper}' does not exist `);
-              }
-
-              return state.helpers[helper](value, ast, opts)
-                .then(content => {
-                  return {
-                    type: 'htmlblock',
-                    content: content,
-                    variable: x.variable,
-                  }
-                });
+              return Promise.resolve({
+                type: 'htmlblock',
+                content: value,
+                variable: x.variable,
+              })
 
             }
 
@@ -61,33 +49,14 @@ function render(ast, state) {
             }
 
             if (typeof value === 'string') {
-              const res = value
-                .split(/({{[^}]*}})/)
-                .filter(str => str != "")
-                .map(placeholder => {
-                  const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
 
-                  if (!matches) {
-                    return Promise.resolve(placeholder);
-                  }
+              const res = {
+                type: 'htmlblock',
+                content: value,
+                variable: x.variable,
+              };
+              return Promise.resolve(res);
 
-                  const helper = matches[1];
-                  const name = matches[2];
-                  const key = variable.split('.').slice(0, -1).concat(name.split('.')).join('.');
-
-                  return resolve(key, ast)
-                    .then(x => helper ? state.helpers[helper](x, ast, opts) : x)
-
-                });
-
-              return Promise.all(res)
-                .then(arr => arr.map(content => {
-                  return {
-                    type: 'htmlblock',
-                    content: content,
-                    variable: x.variable,
-                  }
-                }));
             }
 
             if (typeof value === 'object') {
