@@ -23,7 +23,7 @@ function bind(ast) {
           const split = x.data.split('.');
           const res = split.slice(0, split.length - 1).concat(variable).join('.');
           if(helper){
-            return `{{#${helper} ${variable}}}`;
+            return `{{#${helper} ${res}}}`;
           }
           return `{{${res}}}`;
         })

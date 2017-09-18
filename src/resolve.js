@@ -33,7 +33,8 @@ function resolve(placeholder, ast, state) {
 
       if (typeof res === 'string') {
 
-        return Promise.all(res.split(/({{[^}]*}})/)
+        return Promise.all(res
+          .split(/({{[^}]*}})/)
           .filter(str => str != "")
           .map(placeholder => {
             const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
@@ -43,6 +44,8 @@ function resolve(placeholder, ast, state) {
             }
 
             const key = variable.split('.').slice(0, -1).concat(matches[2].split('.')).join('.');
+
+            console.log(res, placeholder, key)
 
             if (!matches[1]) {
               return resolve(`{{${key}}}`, ast, state)
@@ -57,7 +60,7 @@ function resolve(placeholder, ast, state) {
       return res;
 
     })
-    .then(x => helper ? state.helpers[helper](x, ast, opts) : x)
+    .then(value => helper ? state.helpers[helper](value, ast, opts) : value)
 
 }
 
