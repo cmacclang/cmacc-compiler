@@ -17,7 +17,8 @@
     "remarkable-variables": "^2.0.0",
     "request": "^2.74.0",
     "resolve-url": "^0.2.1",
-    "sync-request": "^3.0.1"
+    "sync-request": "^3.0.1",
+    "node-fetch": "^1.7.2"
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test --recursive"
@@ -29,7 +30,6 @@
     "fetch-mock": "^5.12.2",
     "fs-mock": "^1.2.1",
     "mocha": "^3.5.0",
-    "mock-fs": "^4.4.1",
-    "node-fetch": "^1.7.2"
+    "mock-fs": "^4.4.1"
   }
 }
