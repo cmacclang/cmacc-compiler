@@ -1,0 +1,8 @@
+$ xNum1 = "1"
+
+$ subSection = [./SubSection.cmacc]
+$ subSection.xNum2 = xNum1
+
+# Section {{xNum1}}.
+
+{{subSection}}
