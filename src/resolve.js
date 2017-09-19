@@ -25,7 +25,7 @@ function resolve(placeholder, ast, state) {
       const res = variable
         .split('.')
         .reduce((ast, val) => {
-          if (!ast || !ast[val]) {
+          if (!ast || typeof ast[val] === 'undefined') {
             throw new Error(`Cannot find variable '${variable}' in file '${ast['$file$']}'`);
           }
           return ast[val]
