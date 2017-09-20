@@ -1,9 +1,10 @@
 const path = require('path');
 
-const yarnLoader = (urlObj, base) => {
+const yarnLoader = (urlObj, opts) => {
+  var base = opts.base;
+
   const file = urlObj.path;
   const findRoot = require('find-root');
-
   const check = dir => {
     const p = path.join(dir, 'node_modules', decodeURI(urlObj.host), decodeURI(urlObj.pathname));
     return fs.existsSync(p);
@@ -11,9 +12,7 @@ const yarnLoader = (urlObj, base) => {
 
   const packageRoot = base && base.match(/^file\:/) ? findRoot(base.replace('file://', ''), check) : findRoot(process.cwd(), check);
   const nodeModules = path.join(packageRoot, 'node_modules');
-
   const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
-
   const promise = new Promise((resolve, reject) => {
     fs.readFile(location, (err, data) => {
       if (err) return reject(err);

@@ -1,6 +1,14 @@
 const url = require('url');
 const path = require('path');
 
+const githubLoader = (urlObj, opts) => {
+  if (opts.token) {
+    return apioUrlLoader(urlObj, opts.token, opts.githubApiUrl);
+  } else {
+    return contentUrlLoader(urlObj, opts.githubContentUrl);
+  }
+};
+
 // Load from Github via the API. Provide a token and an optional custom
 // `baseUrl`.
 const apiUrlLoader = (urlObj, token, baseUrl) => {
@@ -58,4 +66,4 @@ const parseGithubFile = file => {
   return match.slice(1, 5);
 };
 
-module.exports = { apiUrlLoader: apiUrlLoader, contentUrlLoader: contentUrlLoader };
+module.exports = githubLoader;
