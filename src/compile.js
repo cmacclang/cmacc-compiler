@@ -1,14 +1,12 @@
 const assemble = require('./assemble');
 const reduce = require('./reduce');
 const validate = require('./validate');
-const bind = require('./bind');
 
 function compile(file, opts) {
 
   opts = opts || {}
 
   return assemble(file, opts)
-    .then(bind)
     .then(reduce)
     .then(validate)
 

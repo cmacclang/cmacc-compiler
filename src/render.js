@@ -75,15 +75,15 @@ function render(ast, state) {
 
   }
 
-  if (ast['$md$']) {
-    return Promise.all(ast['$md$']
+  if (ast['$md']) {
+    return Promise.all(ast['$md']
       .map(x => {
 
         x.children = x.children || [];
 
         const children = x.children.map(child => item(child).then((res) => {
           if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (cur.type !== 'text' && cur.type !== 'htmlblock'), false)) {
-            throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file$']}`);
+            throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file']}`);
           }
           return res;
         }));

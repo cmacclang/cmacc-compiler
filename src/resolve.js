@@ -1,7 +1,7 @@
 function resolve(placeholder, ast, state) {
 
   const opts = {
-    base: ast['$file$']
+    base: ast['$file']
   };
 
   const match = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/);
@@ -26,7 +26,7 @@ function resolve(placeholder, ast, state) {
         .split('.')
         .reduce((ast, val) => {
           if (!ast || typeof ast[val] === 'undefined') {
-            throw new Error(`Cannot find variable '${variable}' in file '${ast['$file$']}'`);
+            throw new Error(`Cannot find variable '${variable}' in file '${ast['$file']}'`);
           }
           return ast[val]
         }, ast);
@@ -44,8 +44,6 @@ function resolve(placeholder, ast, state) {
             }
 
             const key = variable.split('.').slice(0, -1).concat(matches[2].split('.')).join('.');
-
-            console.log(res, placeholder, key)
 
             if (!matches[1]) {
               return resolve(`{{${key}}}`, ast, state)

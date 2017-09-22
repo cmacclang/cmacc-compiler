@@ -14,6 +14,7 @@ function assemble(file, opts) {
       const data = {
         file: res.file,
         type: res.type,
+        vars: [],
         data: JSON.parse(res.data),
       };
       return Promise.resolve(data)
