@@ -7,16 +7,16 @@ module.exports = () => {
   const referenceState = {};
 
   const location = (ast) => {
-    return Promise.resolve(ast['$file$']);
+    return Promise.resolve(ast['$file']);
   };
 
   const filename = (ast) => {
-    const arr = ast['$file$'].split('/')
+    const arr = ast['$file'].split('/')
     return Promise.resolve(arr[arr.length - 1]);
   };
 
   const reference = (ast) => {
-    const number = referenceState[ast['$file$']];
+    const number = referenceState[ast['$file']];
     return Promise.resolve(number);
   };
 
@@ -35,8 +35,8 @@ module.exports = () => {
 
     const number = sectionState.slice(0, pos).join('.');
 
-    if (!referenceState[ast['$file$']]) {
-      referenceState[ast['$file$']] = number;
+    if (!referenceState[ast['$file']]) {
+      referenceState[ast['$file']] = number;
     }
 
     return Promise.resolve(number)
@@ -46,7 +46,7 @@ module.exports = () => {
 
     if (typeof val === 'object') {
       const ast = val;
-      const definition = ast['$meta$']['Definition']
+      const definition = ast['$meta']['Definition']
       return Promise.resolve(`<a href="#${definition.replace(' ', '-')}">${definition}</a>`);
     }
 
@@ -58,7 +58,7 @@ module.exports = () => {
           const definition = ast['meta']['Definition'];
 
           if (!definition)
-            throw new Error(`definition not found in file ${ast['$file$']}`);
+            throw new Error(`definition not found in file ${ast['$file']}`);
 
           return Promise.resolve(`<a href="#${definition.replace(' ', '-')}">${definition}</a>`);
         })

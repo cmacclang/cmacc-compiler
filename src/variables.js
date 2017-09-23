@@ -1,7 +1,7 @@
 var loader = require('./loader');
 var parser = require('./parser');
 
-function variables(vars, file) {
+function variables(vars) {
 
   const MATCH_STRING = /^[\'\"](.*)[\'\"]$/;
   const MATCH_OBJECT = /^{(.*)}$/;

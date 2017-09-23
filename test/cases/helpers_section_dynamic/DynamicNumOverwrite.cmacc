@@ -1,0 +1,6 @@
+$ xNum = "x.x"
+
+$ doc = [./DynamicNum.cmacc]
+$ doc.xNum = xNum
+
+{{doc}}

@@ -1,6 +1,4 @@
-
-
-var cmacc = {
+const cmacc = {
   parser: require('./parser'),
   render: require('./render'),
   loader: require('./loader'),

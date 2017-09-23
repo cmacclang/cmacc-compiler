@@ -1,40 +1,93 @@
-const merge = require('./merge');
-
 function reduce(ast) {
 
   const vars = ast.vars.reduce((acc, x) => {
 
-    if (x.data && x.data.type === 'cmacc')
-      acc[x.name] = reduce(x.data);
-
-    else {
-      const split = x.name.split('.');
-      const last = split.pop();
-      const val = split.reduce((acc, val) => acc[val], acc);
-
-      if (x.data && (x.data.type === 'json' || x.data.type === 'js')) {
-        x = x.data;
-      }
-
-      if (x.type !== 'variable') {
-        val[last] = x.data;
-      }
-
+    if (x.data && x.data.type === 'json') {
+      acc[x.name] = x.data.data;
+      return acc;
     }
+
+    if (x.data && x.data.type === 'js') {
+      acc[x.name] = x.data.data;
+      return acc;
+    }
+
+    if (x.type === 'function') {
+      const MATCH_FUNCTION = /^(.*)\((.*)\)$/;
+      const match = x.data.match(MATCH_FUNCTION)
+      const func = match[1];
+      const args = match[2] ? match[2].split(",") : [];
+      const input = args.map(x => find(x, ast)).map(x => x.data)
+      const val = acc[func];
+      const data = val.apply({}, input)
+      acc[x.name] = data;
+      return acc;
+    }
+
+    const splitName = x.name.split('.');
+    const lastName = splitName.pop();
+    const astName = splitName.reduce((a, b) => a[b], acc);
+
+    if (x.data && (x.data.type === 'cmacc' || x.data.type === 'schema')) {
+      astName[lastName] = reduce(x.data);
+      return acc;
+    }
+
+    if (x.type === 'variable') {
+
+      const defineGetter = function(){
+        const splitValue = x.value.split('.');
+        const lastValue = splitValue.pop();
+        const astValue = splitValue.reduce((a, b) => a[b], acc);
+        return astValue[lastValue];
+      };
+      defineGetter.getAst = function(){
+        const splitValue = x.value.split('.');
+        const lastValue = splitValue.pop();
+        const astValue = splitValue.reduce((a, b) => a[b], acc);
+        if(Object.getOwnPropertyDescriptor(astValue, lastValue).get){
+          return Object.getOwnPropertyDescriptor(astValue, lastValue).get.getAst();
+        }
+        return astValue;
+      };
+      astName.__defineGetter__(lastName, defineGetter);
+
+      astName.__defineSetter__(lastName, (set) => {
+        const splitValue = x.value.split('.');
+        const lastValue = splitValue.pop();
+        const astValue = splitValue.reduce((a, b) => a[b], acc);
+        astValue[lastValue] = set;
+      });
+
+      return acc;
+    }
+
+    const defineGetter = function(){
+      return x['data'];
+    };
+    defineGetter.getAst = function(){
+      return acc;
+    };
+    astName.__defineGetter__(lastName, defineGetter);
+
+    astName.__defineSetter__(lastName, (set) => {
+      x['data'] = set;
+    });
 
     return acc;
 
   }, {});
 
-  if (ast.type === 'schema' || ast.type === 'js')
-    vars['$schema$'] = ast.data;
+  if (ast.type === 'schema') {
+    vars['$schema'] = ast.data;
+  }
 
-  vars['$file$'] = ast.file;
-  vars['$md$'] = ast.md;
-  vars['$meta$'] = ast.meta;
-  vars['$type$'] = ast.type;
-  vars['$value$'] = ast.value;
-  vars['$name$'] = ast.name;
+  vars['$file'] = ast.file;
+  vars['$md'] = ast.md;
+  vars['$meta'] = ast.meta;
+  vars['$type'] = ast.type;
+  vars['$value'] = ast.value;
+  vars['$name'] = ast.name;
 
   return vars;
 

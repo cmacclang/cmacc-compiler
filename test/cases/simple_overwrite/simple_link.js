@@ -2,7 +2,7 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-describe('simple_link', function () {
+describe('simple_overwrite', function () {
 
   global.fs = require('fs');
 

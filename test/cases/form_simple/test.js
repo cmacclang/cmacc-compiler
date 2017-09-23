@@ -5,17 +5,15 @@ const cmacc = require('../../../src/index');
 const Remarkable = require('remarkable');
 const md = new Remarkable();
 
-describe('bind_string_two_layer', function () {
+describe('form_simple', function () {
 
   global.fs = require('fs');
+  global.fetch = require('node-fetch');
 
-  it('Index', function (done) {
-    const file = url.join('file://', __dirname, './Index.cmacc')
+  it('Test1', function (done) {
+    const file = url.join('file://', __dirname, './Example.cmacc')
     cmacc.compile(file)
       .then(ast => {
-       // console.log('-----------');
-        // console.log(ast);
-        assert.equal(ast.contract.world, "Jan Jansen");
         return ast;
       })
       .then(cmacc.render)
@@ -23,13 +21,14 @@ describe('bind_string_two_layer', function () {
         return md.renderer.render(x)
       })
       .then(html => {
-        const expect = '<h1>Hello Jan Jansen</h1>\n';
+        const expect = '<p>Hello my first name is: {{firstName}}</p>\n<p>Hello my last name is: {{lastName}}</p>\n';
         assert.equal(html, expect);
         done();
       })
       .catch(done);
 
   });
+
 
 
 });
