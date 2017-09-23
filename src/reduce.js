@@ -2,7 +2,6 @@ function reduce(ast) {
 
   const vars = ast.vars.reduce((acc, x) => {
 
-
     if (x.data && x.data.type === 'json') {
       acc[x.name] = x.data.data;
       return acc;
@@ -25,33 +24,49 @@ function reduce(ast) {
       return acc;
     }
 
+    const splitName = x.name.split('.');
+    const lastName = splitName.pop();
+    const astName = splitName.reduce((a, b) => a[b], acc);
+
     if (x.data && (x.data.type === 'cmacc' || x.data.type === 'schema')) {
-      acc[x.name] = reduce(x.data);
+      astName[lastName] = reduce(x.data);
       return acc;
     }
-
-    const split = x.name.split('.');
-    const last = split.pop();
-    const val = split.reduce((a, b) => a[b], acc);
 
     if (x.type === 'variable') {
 
-      const s = x.value.split('.');
-      const l = s.pop();
-      const v = s.reduce((a, b) => a[b], acc);
+      const defineGetter = function(){
+        const splitValue = x.value.split('.');
+        const lastValue = splitValue.pop();
+        const astValue = splitValue.reduce((a, b) => a[b], acc);
+        return astValue[lastValue];
+      };
+      defineGetter.getAst = function(){
+        return acc;
+      };
+      astName.__defineGetter__(lastName, defineGetter);
 
-      val.__defineGetter__(last, () => {
-        return v[l];
-      });
-
-      val.__defineSetter__(last, (x) => {
-        v[l] = x;
+      astName.__defineSetter__(lastName, (set) => {
+        const splitValue = x.value.split('.');
+        const lastValue = splitValue.pop();
+        const astValue = splitValue.reduce((a, b) => a[b], acc);
+        astValue[lastValue] = set;
       });
 
       return acc;
     }
 
-    val[last] = x.data;
+    const defineGetter = function(){
+      return x['data'];
+    };
+    defineGetter.getAst = function(){
+      return acc;
+    };
+    astName.__defineGetter__(lastName, defineGetter);
+
+    astName.__defineSetter__(lastName, (set) => {
+      x['data'] = set;
+    });
 
     return acc;
 

@@ -59,10 +59,8 @@ function assemble(file, opts) {
           return Promise.resolve(x)
         }
 
-
         x.data = x.value;
         return Promise.resolve(x)
-
 
       });
 

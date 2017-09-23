@@ -22,18 +22,26 @@ function resolve(placeholder, ast, state) {
         return variable;
       }
 
-      const res = variable
-        .split('.')
+      const split = variable.split('.')
+      const last = split.pop();
+      const sub = split
         .reduce((ast, val) => {
+
           if (!ast || typeof ast[val] === 'undefined') {
             throw new Error(`Cannot find variable '${variable}' in file '${ast['$file']}'`);
           }
+
           return ast[val]
         }, ast);
 
-      if (typeof res === 'string') {
+      if (!sub || typeof sub[last] === 'undefined') {
+        throw new Error(`Cannot find variable '${variable}' in file '${sub['$file']}'`);
+      }
 
-        return Promise.all(res
+
+      if (typeof sub[last] === 'string') {
+
+        return Promise.all(sub[last]
           .split(/({{[^}]*}})/)
           .filter(str => str != "")
           .map(placeholder => {
@@ -43,19 +51,20 @@ function resolve(placeholder, ast, state) {
               return placeholder;
             }
 
-            const key = variable.split('.').slice(0, -1).concat(matches[2].split('.')).join('.');
+            const key = matches[2];
 
+            const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst() || ast;
             if (!matches[1]) {
-              return resolve(`{{${key}}}`, ast, state)
+              return resolve(`{{${key}}}`, propAst, state)
             } else {
-              return resolve(`{{#${matches[1]} ${key}}}`, ast, state)
+              return resolve(`{{#${matches[1]} ${key}}}`, propAst, state)
             }
 
           }))
           .then(x => x.join(''))
       }
 
-      return res;
+      return sub[last];
 
     })
     .then(value => helper ? state.helpers[helper](value, ast, opts) : value)
