@@ -42,7 +42,13 @@ function reduce(ast) {
         return astValue[lastValue];
       };
       defineGetter.getAst = function(){
-        return acc;
+        const splitValue = x.value.split('.');
+        const lastValue = splitValue.pop();
+        const astValue = splitValue.reduce((a, b) => a[b], acc);
+        if(Object.getOwnPropertyDescriptor(astValue, lastValue).get){
+          return Object.getOwnPropertyDescriptor(astValue, lastValue).get.getAst();
+        }
+        return astValue;
       };
       astName.__defineGetter__(lastName, defineGetter);
 

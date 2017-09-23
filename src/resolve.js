@@ -53,7 +53,7 @@ function resolve(placeholder, ast, state) {
 
             const key = matches[2];
 
-            const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst() || ast;
+            const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
             if (!matches[1]) {
               return resolve(`{{${key}}}`, propAst, state)
             } else {

@@ -25,42 +25,9 @@ describe('variable_in_mask_set_string_set', function () {
         assert.equal(ast.mask.entity.individual.first_Name, 'Willem');
         assert.equal(ast.mask.entity.individual.last_Name, 'Veelenturf');
 
-        ast.first_Name = '1'
-        ast.last_Name = '2'
-        //ast.entity.individual.full_Name = '3'
-
         return ast;
       })
-      .then(ast => {
-        const resovle = (ast, root) => {
 
-          Object.keys(ast).map((key) => {
-
-            const path = root ? root + '.' + key : key;
-
-            if (key.match(/^\$/)) {
-              return;
-            }
-
-            if (typeof ast[key] === 'object') {
-              resovle(ast[key], path)
-            }
-
-            if (typeof ast[key] === 'string'){
-
-            }
-
-            if (typeof ast[key] === 'string' && Object.getOwnPropertyDescriptor(ast, key).value) {
-              console.log(path, ast[key])
-            }
-
-          });
-        };
-        resovle(ast)
-
-
-        return ast;
-      })
       .then(cmacc.render)
       .then(x => {
         return cmacc.remarkable.render(x)
