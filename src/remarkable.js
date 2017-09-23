@@ -1,7 +1,5 @@
 const Remarkable = require('remarkable');
 
-
-
 module.exports = {
   parse: function (x) {
     const md = new Remarkable({
