@@ -21,7 +21,8 @@ describe('yarnLoader', () => {
     let urlObj = url.parse('yarn://my-test-module/test.cmacc');
     loader(urlObj, {})
       .then(res => {
-        assert.equal(res.file, file);
+        assert(res.file.startsWith('file://'));
+        assert(res.file.endsWith('/my-test-module/test.cmacc'));
         assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();

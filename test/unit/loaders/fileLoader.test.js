@@ -7,7 +7,7 @@ const loader = require('../../../src/loaders/fileLoader');
 describe('fileLoader', () => {
   const text = `$ world = "world"
 # Hello {{world}}`;
-  const dirname = path.join(__dirname, '../..');
+  const dirname = path.join(__dirname, '../../../..');
 
   function fileMock(file) {
     var data = {};
@@ -20,10 +20,11 @@ describe('fileLoader', () => {
   it('loads a local file', done => {
     const file = './test.cmacc';
     const fullPath = fileMock(file);
-    let urlObj = { path: fullPath };
+    const filePath = 'file://' + fullPath;
+    let urlObj = url.parse(filePath);
     loader(urlObj)
       .then(res => {
-        assert.equal(res.file, file);
+        assert.equal(res.file, filePath);
         assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();
@@ -34,10 +35,11 @@ describe('fileLoader', () => {
   it('loads a file with a space in the path', done => {
     const file = './cmacc-compiler/spa tie/test.cmacc';
     const fullPath = fileMock(file);
-    let urlObj = { path: fullPath };
+    const filePath = 'file://' + fullPath;
+    let urlObj = url.parse(filePath);
     loader(urlObj)
       .then(res => {
-        assert.equal(res.file, 'file://' + dirname + '/spa tie/test.cmacc');
+        assert.equal(res.file, 'file://' + dirname + '/cmacc-compiler/spa tie/test.cmacc');
         assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();
