@@ -109,8 +109,6 @@ function render(ast, state) {
                   }
                 });
 
-
-
             }
 
             if (typeof value === 'object') {
