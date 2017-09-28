@@ -79,6 +79,7 @@ function render(ast, state) {
                   }
 
                   const key = matches[2];
+                  const helper = matches[1];
 
                   const split = x.variable.split('.')
                   const last = split.pop();
@@ -97,16 +98,24 @@ function render(ast, state) {
                   if (!matches[1]) {
                     return resolve(key, null, propAst, state)
                   } else {
-                    return resolve(key, matches[1], propAst, state)
+                    return resolve(key, helper, propAst, state)
                   }
 
                 }))
                 .then(y => {
-                  return {
-                    type: 'htmlblock',
-                    content: y.join(''),
-                    variable: x.variable,
-                  }
+                  return [
+                    {
+                      type: 'variable_open',
+                      path: ast['$path'].concat(x.variable) || []
+                    },
+                    {
+                      type: 'htmlblock',
+                      content: y.join(''),
+                      variable: x.variable,
+                    },
+                    {
+                      type: 'variable_close'
+                    }]
                 });
 
             }
@@ -116,11 +125,11 @@ function render(ast, state) {
               if (Array.isArray(value)) {
                 return value
                   .map(x => {
-                  return {
-                    type: 'text',
-                    content: x
-                  }
-                });
+                    return {
+                      type: 'text',
+                      content: x
+                    }
+                  });
               }
 
               return render(value, state).then(res => {

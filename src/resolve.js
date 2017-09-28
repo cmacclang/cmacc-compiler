@@ -39,30 +39,30 @@ function resolve(value, helper, ast, state) {
       }
 
 
-      if (typeof sub[last] === 'string') {
-
-        return Promise.all(sub[last]
-          .split(/({{[^}]*}})/)
-          .filter(str => str != "")
-          .map(placeholder => {
-            const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
-
-            if (!matches) {
-              return placeholder;
-            }
-
-            const key = matches[2];
-
-            const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
-            if (!matches[1]) {
-              return resolve(key, null, propAst, state)
-            } else {
-              return resolve(key, matches[1], propAst, state)
-            }
-
-          }));
-
-      }
+      // if (typeof sub[last] === 'string') {
+      //
+      //   return Promise.all(sub[last]
+      //     .split(/({{[^}]*}})/)
+      //     .filter(str => str != "")
+      //     .map(placeholder => {
+      //       const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
+      //
+      //       if (!matches) {
+      //         return placeholder;
+      //       }
+      //
+      //       const key = matches[2];
+      //
+      //       const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
+      //       if (!matches[1]) {
+      //         return resolve(key, null, propAst, state)
+      //       } else {
+      //         return resolve(key, matches[1], propAst, state)
+      //       }
+      //
+      //     }));
+      //
+      // }
 
       return sub[last];
 
