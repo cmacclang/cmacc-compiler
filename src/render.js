@@ -53,15 +53,15 @@ function render(ast, state) {
 
     if (x.type === 'placeholder_block' || x.type === 'placeholder_inline') {
 
-      const placeholder = x.content;
+      const match = x.content.match(/{{(?:#(.*)\s)?([^}]*)}}/);
 
-      return resolve(placeholder, ast, state)
+      return resolve(match[2], match[1], ast, state)
         .then(value => {
 
             if (value == null || typeof value === 'undefined') {
               const res = {
                 type: 'text',
-                content: placeholder,
+                content: x.content,
                 variable: x.variable,
               };
               return Promise.resolve(res);
@@ -69,19 +69,55 @@ function render(ast, state) {
 
             if (typeof value === 'string') {
 
-              const res = {
-                type: 'htmlblock',
-                content: value,
-                variable: x.variable,
-              };
-              return Promise.resolve(res);
+              return Promise.all(value.split(/({{[^}]*}})/)
+                .filter(str => str != "")
+                .map(placeholder => {
+                  const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
+
+                  if (!matches) {
+                    return placeholder;
+                  }
+
+                  const key = matches[2];
+
+                  const split = x.variable.split('.')
+                  const last = split.pop();
+                  const sub = split
+                    .reduce((ast, val) => {
+
+                      if (!ast || typeof ast[val] === 'undefined') {
+                        throw new Error(`Cannot find variable '${variable}' in file '${ast['$file']}'`);
+                      }
+
+                      return ast[val]
+                    }, ast);
+
+                  const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
+
+                  if (!matches[1]) {
+                    return resolve(key, null, propAst, state)
+                  } else {
+                    return resolve(key, matches[1], propAst, state)
+                  }
+
+                }))
+                .then(y => {
+                  return {
+                    type: 'htmlblock',
+                    content: y.join(''),
+                    variable: x.variable,
+                  }
+                });
+
+
 
             }
 
             if (typeof value === 'object') {
 
               if (Array.isArray(value)) {
-                return value.map(x => {
+                return value
+                  .map(x => {
                   return {
                     type: 'text',
                     content: x

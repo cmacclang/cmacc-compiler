@@ -1,13 +1,10 @@
-function resolve(placeholder, ast, state) {
+function resolve(value, helper, ast, state) {
 
   const opts = {
     base: ast['$file']
   };
 
-  const match = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/);
-  const helper = match[1];
-
-  return Promise.resolve(match[2])
+  return Promise.resolve(value)
     .then(variable => {
 
       if (variable === 'this') {
@@ -34,35 +31,38 @@ function resolve(placeholder, ast, state) {
           return ast[val]
         }, ast);
 
+      if(sub[last] && sub[last].getAst)
+        sub[last] = sub[last].getAst()
+
       if (!sub || typeof sub[last] === 'undefined') {
         throw new Error(`Cannot find variable '${variable}' in file '${sub['$file']}'`);
       }
 
 
-      if (typeof sub[last] === 'string') {
-
-        return Promise.all(sub[last]
-          .split(/({{[^}]*}})/)
-          .filter(str => str != "")
-          .map(placeholder => {
-            const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
-
-            if (!matches) {
-              return placeholder;
-            }
-
-            const key = matches[2];
-
-            const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
-            if (!matches[1]) {
-              return resolve(`{{${key}}}`, propAst, state)
-            } else {
-              return resolve(`{{#${matches[1]} ${key}}}`, propAst, state)
-            }
-
-          }));
-
-      }
+      // if (typeof sub[last] === 'string') {
+      //
+      //   return Promise.all(sub[last]
+      //     .split(/({{[^}]*}})/)
+      //     .filter(str => str != "")
+      //     .map(placeholder => {
+      //       const matches = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/)
+      //
+      //       if (!matches) {
+      //         return placeholder;
+      //       }
+      //
+      //       const key = matches[2];
+      //
+      //       const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
+      //       if (!matches[1]) {
+      //         return resolve(`{{${key}}}`, propAst, state)
+      //       } else {
+      //         return resolve(`{{#${matches[1]} ${key}}}`, propAst, state)
+      //       }
+      //
+      //     }));
+      //
+      // }
 
       return sub[last];
 
