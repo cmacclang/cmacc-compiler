@@ -1,109 +1,68 @@
 const assert = require('assert');
-
 const path = require('path');
-
-const fsMock = require('fs-mock');
-const fetchMock = require('fetch-mock');
-
+const sinon = require('sinon');
 const loader = require('../../src/index').loader;
 
 describe('loader', () => {
-
   const text = `$ world = "world"
 # Hello {{world}}`;
 
-  const dirname = path.join(__dirname, '../..');
-
-  function fileMock(file) {
-    var data = {};
-    data[path.join(dirname, file)] = text;
-    global.fs = new fsMock(data);
-  }
-
-  function httpMock(file) {
-    fetchMock.get(file, text);
-  }
-
-
-  it('text', (done) => {
+  it('returns text as cmacc typed fileless data', done => {
     loader(text)
-      .then((res) => {
+      .then(res => {
         assert.equal(res.file, null);
         assert.equal(res.type, 'cmacc');
         assert.equal(res.data, text);
         done();
       })
       .catch(done);
-
   });
 
-  it('local file relative ./', (done) => {
-    const file = './test.cmacc';
-    fileMock(file)
+  it('returns a path with unknown protocol as cmacc typed fileless data', done => {
+    let file = 'foo:///test.cmacc';
     loader(file)
-      .then((res) => {
-        assert.equal(res.file, 'file://' + dirname + '/test.cmacc');
+      .then(res => {
+        assert.equal(res.file, null);
         assert.equal(res.type, 'cmacc');
-        assert.equal(res.data, text);
+        assert.equal(res.data, file);
         done();
       })
       .catch(done);
   });
 
-  it('local file relative ../', (done) => {
-    const file = '../cmacc-compiler/test.cmacc';
-    fileMock(file)
-    loader(file)
-      .then((res) => {
-        assert.equal(res.file, 'file://' + dirname + '/test.cmacc');
-        assert.equal(res.type, 'cmacc');
-        assert.equal(res.data, text);
-        done();
-      })
-      .catch(done);
-  });
-
-  it('local file relative ../ with spatie', (done) => {
-    const file = '../cmacc-compiler/spa tie/test.cmacc';
-    fileMock(file)
-    loader(file)
-      .then((res) => {
-        assert.equal(res.file, 'file://' + dirname + '/spa tie/test.cmacc');
-        assert.equal(res.type, 'cmacc');
-        assert.equal(res.data, text);
-        done();
-      })
-      .catch(done);
-  });
-
-  it('remote http absolute ', (done) => {
-    const file = 'http://example.nl/test.cmacc';
-    httpMock(file);
-    loader(file)
-      .then((res) => {
-        assert.equal(res.file, 'http://example.nl/test.cmacc');
-        assert.equal(res.type, 'cmacc');
-        assert.equal(res.data, text);
-        done();
-      })
-      .catch(done);
-  });
-
-  it('remote http relative and base', (done) => {
-    httpMock('http://example.nl/test.cmacc');
+  it('uses a custom loader when given', () => {
+    let fileLoaderSpy = sinon.spy();
     const opts = {
-      base: 'http://example.nl/'
+      loaders: { 'file:': fileLoaderSpy }
+    };
+    const file = 'file:///test.cmacc';
+
+    loader(file, opts);
+    assert(fileLoaderSpy.calledOnce);
+  });
+
+  it('resolves a relative path and base path to an absolute path', () => {
+    let httpLoaderSpy = sinon.spy();
+    const opts = {
+      base: 'http://example.nl/',
+      loaders: { 'http:': httpLoaderSpy }
     };
     const file = './test.cmacc';
-    loader(file, opts)
-      .then((res) => {
-        assert.equal(res.file, 'http://example.nl/test.cmacc');
-        assert.equal(res.type, 'cmacc');
-        assert.equal(res.data, text);
-        done();
-      })
-      .catch(done);
+
+    loader(file, opts);
+    assert.equal(httpLoaderSpy.firstCall.args[0].href, 'http://example.nl/test.cmacc');
   });
 
+  it('resolves a relative path to an absolute path', () => {
+    let fileLoaderSpy = sinon.spy();
+    const opts = {
+      loaders: { 'file:': fileLoaderSpy }
+    };
+    const file = '../test.cmacc';
 
+    loader(file, opts);
+    const givenPath = fileLoaderSpy.firstCall.args[0].path;
+    assert(givenPath.startsWith('/'));
+    assert(givenPath.endsWith('/test.cmacc'));
+  });
 });

@@ -10,7 +10,8 @@ const yarnLoader = (urlObj, opts) => {
     return fs.existsSync(p);
   };
 
-  const packageRoot = base && base.match(/^file\:/) ? findRoot(base.replace('file://', ''), check) : findRoot(process.cwd(), check);
+  const packageRoot =
+    base && base.match(/^file\:/) ? findRoot(base.replace('file://', ''), check) : findRoot(process.cwd(), check);
   const nodeModules = path.join(packageRoot, 'node_modules');
   const location = path.join(nodeModules, decodeURI(urlObj.host), decodeURI(urlObj.pathname));
   const promise = new Promise((resolve, reject) => {

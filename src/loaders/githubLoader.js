@@ -3,16 +3,16 @@ const path = require('path');
 
 const githubLoader = (urlObj, opts) => {
   if (opts.token) {
-    return apioUrlLoader(urlObj, opts.token, opts.githubApiUrl);
+    return apiUrlLoader(urlObj, opts.token, opts.githubApiUrl);
   } else {
     return contentUrlLoader(urlObj, opts.githubContentUrl);
   }
 };
 
-// Load from Github via the API. Provide a token and an optional custom
-// `baseUrl`.
+// Load from Github via the API. Provide a token and an optional custom `baseUrl`.
 const apiUrlLoader = (urlObj, token, baseUrl) => {
-  var [owner, repo, branch, filePath] = parseGithubFile(urlObj.path);
+  const file = urlObj.path;
+  var [owner, repo, branch, filePath] = parseGithubFile(file);
 
   const base = baseUrl || 'https://api.github.com';
   const urlPath = path.join('repos', owner, repo, 'contents', filePath);
@@ -37,7 +37,7 @@ const apiUrlLoader = (urlObj, token, baseUrl) => {
       };
     })
     .catch(e => {
-      throw new Error(`Cannot load file: ${location} ${branch} ${opts.token}`, e);
+      throw new Error(`Cannot load file: ${location} ${branch} ${token}`, e);
     });
 };
 
@@ -59,8 +59,7 @@ const contentUrlLoader = (urlObj, baseUrl) => {
   });
 };
 
-// Return the owner, repository, branch and path respectively given the file
-// path.
+// Return the owner, repository, branch and path respectively given the file path.
 const parseGithubFile = file => {
   const match = file.match(/^\/([^\/]*)\/([^\/]*)\/([^\/]*)(.*)$/);
   return match.slice(1, 5);

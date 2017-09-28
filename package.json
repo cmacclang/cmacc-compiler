@@ -21,7 +21,7 @@
     "sync-request": "^3.0.1"
   },
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test --recursive"
+    "test": "nyc --reporter=html node_modules/mocha/bin/mocha test --recursive"
   },
   "bin": {
     "cmacc": "./bin/run.js"
@@ -30,6 +30,8 @@
     "fetch-mock": "^5.12.2",
     "fs-mock": "^1.2.1",
     "mocha": "^3.5.0",
-    "mock-fs": "^4.4.1"
+    "mock-fs": "^4.4.1",
+    "nyc": "^11.2.1",
+    "sinon": "^4.0.0"
   }
 }
