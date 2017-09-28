@@ -85,11 +85,13 @@ function reduce(ast) {
 
   const md = [].concat({
       type: 'variable_open',
+      varType: 'block',
       path: ast.name
     },
     ast.md,
     {
-      type: 'variable_close'
+      type: 'variable_close',
+      varType: 'block',
     })
 
   vars['$file'] = ast.file;
@@ -98,7 +100,7 @@ function reduce(ast) {
   vars['$type'] = ast.type;
   vars['$value'] = ast.value;
   vars['$name'] = ast.name;
-  vars['$path'] = ast.name;
+  vars['$path'] = ast.path;
 
   return vars;
 

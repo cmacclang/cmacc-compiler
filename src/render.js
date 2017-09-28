@@ -106,6 +106,7 @@ function render(ast, state) {
                   return [
                     {
                       type: 'variable_open',
+                      varType: 'inline',
                       path: ast['$path'] ? ast['$path'].concat(x.variable) : []
                     },
                     {
@@ -114,7 +115,8 @@ function render(ast, state) {
                       variable: x.variable,
                     },
                     {
-                      type: 'variable_close'
+                      type: 'variable_close',
+                      varType: 'inline',
                     }]
                 });
 

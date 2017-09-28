@@ -4,13 +4,14 @@ const customRenderer = function (md, opts) {
 
   md.renderer.rules['variable_open'] = function (tokens, idx) {
     const token = tokens[idx];
-    return `<cmacc-block variable="${token['path']/*.join('.')*/}">`
-    return '';
+    return `<cmacc-${token['varType']} variable="${token['path']/*.join('.')*/}">`
+    //return '';
   };
 
   md.renderer.rules['variable_close'] = function (tokens, idx) {
-    return `</cmacc-block>`
-    return '';
+    const token = tokens[idx];
+    return `</cmacc-${token['varType']}>`
+    //return '';
   };
 
 };
