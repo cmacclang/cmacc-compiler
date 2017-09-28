@@ -1,7 +1,5 @@
 function reduce(ast) {
 
-  ast.path = ast.path || [];
-
   const vars = ast.vars.reduce((acc, x) => {
 
     if (x.data && x.data.type === 'json') {
@@ -32,7 +30,6 @@ function reduce(ast) {
 
     if (x.data && (x.data.type === 'cmacc' || x.data.type === 'schema')) {
       x.data.name = x.name;
-      x.data.path = ast.path.concat(x.name);
       astName[lastName] = reduce(x.data);
       return acc;
     }
@@ -88,13 +85,12 @@ function reduce(ast) {
 
   const md = [].concat({
       type: 'variable_open',
-      path: ast.path,
-      name: ast.name
+      path: ast.name
     },
     ast.md,
     {
       type: 'variable_close'
-    });
+    })
 
   vars['$file'] = ast.file;
   vars['$md'] = md;
@@ -102,7 +98,7 @@ function reduce(ast) {
   vars['$type'] = ast.type;
   vars['$value'] = ast.value;
   vars['$name'] = ast.name;
-  vars['$path'] = ast.path;
+  vars['$path'] = ast.name;
 
   return vars;
 

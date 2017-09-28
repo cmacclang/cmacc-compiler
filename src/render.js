@@ -106,7 +106,7 @@ function render(ast, state) {
                   return [
                     {
                       type: 'variable_open',
-                      path: ast['$path'].concat(x.variable) || []
+                      path: ast['$path'] ? ast['$path'].concat(x.variable) : []
                     },
                     {
                       type: 'htmlblock',
