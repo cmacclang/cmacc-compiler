@@ -2,9 +2,6 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-const Remarkable = require('remarkable');
-const md = new Remarkable();
-
 describe('yarn_in_yarn_opts_base_example', function () {
 
   global.fs = require('fs');
@@ -29,7 +26,7 @@ $ link = [./Link.cmacc]
       })
       .then(cmacc.render)
       .then(x => {
-        return md.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>World Hello</h1>\n<h1>World Hello</h1>\n';

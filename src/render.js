@@ -10,6 +10,7 @@ function render(ast, state) {
   }
 
   if (ast['$md']) {
+
     return Promise.all(ast['$md']
       .map(x => {
 
@@ -17,7 +18,7 @@ function render(ast, state) {
 
         const children = x.children
           .map(child => item(child).then((res) => {
-            if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (cur.type !== 'text' && cur.type !== 'htmlblock'), false)) {
+            if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (cur.type !== 'variable_open' && cur.type !== 'variable_close' && cur.type !== 'text' && cur.type !== 'htmlblock'), false)) {
               throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file']}`);
             }
             return res;
@@ -79,20 +80,19 @@ function render(ast, state) {
 
             if (typeof value === 'object') {
 
-              if (value.then) {
-                return value.then(x => {
-                  const res = {
+              if (Array.isArray(value)) {
+                return value.map(x => {
+                  return {
                     type: 'text',
-                    content: x,
-                    variable: x.variable,
-                  };
-                  return res;
-                })
+                    content: x
+                  }
+                });
               }
 
               return render(value, state).then(res => {
-                if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
-                  return res[1].children;
+                res.variable = x.variable
+                if (x.type === 'placeholder_inline' && res.length === 5 && res[1].type === 'paragraph_open' && res[3].type === 'paragraph_close')
+                  return res[2].children;
                 else
                   return res;
               });

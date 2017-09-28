@@ -1,9 +1,5 @@
-const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
-
-const Remarkable = require('remarkable');
-const md = new Remarkable();
 
 describe('github', function () {
 
@@ -18,7 +14,7 @@ describe('github', function () {
       })
       .then(cmacc.render)
       .then(x => {
-        return md.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>World Hello</h1>\n';

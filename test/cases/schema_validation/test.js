@@ -2,9 +2,6 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-const Remarkable = require('remarkable');
-const md = new Remarkable();
-
 describe('schema_validation', function () {
 
   global.fs = require('fs');
@@ -19,7 +16,7 @@ describe('schema_validation', function () {
       .then(cmacc.validate)
       .then(cmacc.render)
       .then(x => {
-        return md.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .catch(e =>{
         //assert.equal(e.message, 'requires property "lastName"');

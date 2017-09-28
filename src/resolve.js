@@ -60,14 +60,22 @@ function resolve(placeholder, ast, state) {
               return resolve(`{{#${matches[1]} ${key}}}`, propAst, state)
             }
 
-          }))
-          .then(x => x.join(''))
+          }));
+
       }
 
       return sub[last];
 
     })
-    .then(value => helper ? state.helpers[helper](value, ast, opts) : value)
+    .then(value => {
+      if(helper){
+        if(Array.isArray(value)){
+          return state.helpers[helper](value.join(''), ast, opts)
+        }
+        return state.helpers[helper](value, ast, opts)
+      }
+      return value
+    })
 
 }
 
