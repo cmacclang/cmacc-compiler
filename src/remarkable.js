@@ -1,29 +1,39 @@
 const Remarkable = require('remarkable');
 
-const customRenderer = function (md, opts) {
+function customRenderer(opts){
 
-  md.renderer.rules['variable_open'] = function (tokens, idx) {
-    const token = tokens[idx];
-    return `<cmacc-${token['varType']} variable="${token['path']/*.join('.')*/}">`
-    //return '';
-  };
+  opts = opts || {}
 
-  md.renderer.rules['variable_close'] = function (tokens, idx) {
-    const token = tokens[idx];
-    return `</cmacc-${token['varType']}>`
-    //return '';
-  };
+  return function (md) {
 
+    md.renderer.rules['variable_open'] = function (tokens, idx) {
+      const token = tokens[idx];
+      if(opts.debug){
+        return `<cmacc-${token['varType']} variable="${token['path']/*.join('.')*/}">`
+      }
+      return '';
+    };
+
+    md.renderer.rules['variable_close'] = function (tokens, idx) {
+      const token = tokens[idx];
+
+      if(opts.debug){
+        return `</cmacc-${token['varType']}>`
+      }
+      return '';
+    };
+
+  }
 };
 
 module.exports = {
-  parse: function (x) {
+  parse: function (x, opts) {
     const md = new Remarkable({
       html: true
     });
     md.use(require('remarkable-meta'));
     md.use(require('remarkable-variables'));
-    md.use(customRenderer);
+    md.use(customRenderer(opts));
 
     return {
       md: md.parse(x,{}),
@@ -32,13 +42,13 @@ module.exports = {
     }
   },
 
-  render: function (x) {
+  render: function (x, opts) {
     const md = new Remarkable({
       html: true
     });
     md.use(require('remarkable-meta'));
     md.use(require('remarkable-variables'));
-    md.use(customRenderer);
+    md.use(customRenderer(opts));
     return md.renderer.render(x, {})
   }
 };

@@ -41,9 +41,9 @@ Dit is een berichtje`;
     cmacc.compile(cmacc1, opts)
       .then(cmacc.render)
       .then(md => {
-        assert.equal(md[0].type, 'heading_open');
-        assert.equal(md[1].type, 'inline');
-        assert.equal(md[2].type, 'heading_close');
+        assert.equal(md[1].type, 'heading_open');
+        assert.equal(md[2].type, 'inline');
+        assert.equal(md[3].type, 'heading_close');
         done();
       })
       .catch(done);

@@ -12,13 +12,15 @@ describe('simple_link_link', function () {
       .then(cmacc.render)
       .then( x => {
         // console.log('----', x)
-        assert.equal(x[0].type, 'heading_open');
-        assert.equal(x[1].type, 'inline');
-        assert.equal(x[1].children[0].type, 'text');
-        assert.equal(x[1].children[0].content, 'Hello ');
-        assert.equal(x[1].children[1].type, 'htmlblock');
-        assert.equal(x[1].children[1].content, 'TEST');
-        assert.equal(x[2].type, 'heading_close');
+        assert.equal(x[1].type, 'variable_open');
+        assert.equal(x[2].type, 'variable_open');
+        assert.equal(x[3].type, 'heading_open');
+        assert.equal(x[4].children[0].type, 'text');
+        assert.equal(x[4].children[0].content, 'Hello ');
+        assert.equal(x[4].children[1].type, 'variable_open');
+        assert.equal(x[4].children[2].type, 'htmlblock');
+        assert.equal(x[4].children[2].content, 'TEST');
+        assert.equal(x[5].type, 'heading_close');
         return x;
       })
       .then(x => {
