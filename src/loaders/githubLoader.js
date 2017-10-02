@@ -3,7 +3,7 @@ const path = require('path');
 
 const githubLoader = (urlObj, opts) => {
   if (opts.token) {
-    return apioUrlLoader(urlObj, opts.token, opts.githubApiUrl);
+    return apiUrlLoader(urlObj, opts.token, opts.githubApiUrl);
   } else {
     return contentUrlLoader(urlObj, opts.githubContentUrl);
   }
@@ -27,6 +27,7 @@ const apiUrlLoader = (urlObj, token, baseUrl) => {
   return fetch(location + '?ref=' + branch, token ? cont : null)
     .then(x => x.json())
     .then(x => {
+      const file = urlObj.path;
       const base64 = x.content;
       const content = new Buffer(base64, 'base64');
       return {
@@ -37,7 +38,7 @@ const apiUrlLoader = (urlObj, token, baseUrl) => {
       };
     })
     .catch(e => {
-      throw new Error(`Cannot load file: ${location} ${branch} ${opts.token}`, e);
+      throw new Error(`Cannot load file: ${location} ${branch} ${token}`);
     });
 };
 

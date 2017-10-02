@@ -2,9 +2,6 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-const Remarkable = require('remarkable');
-const md = new Remarkable();
-
 describe('bind_string', function () {
 
   global.fs = require('fs');
@@ -19,7 +16,7 @@ describe('bind_string', function () {
       })
       .then(cmacc.render)
       .then(x => {
-        return md.renderer.render(x)
+        return cmacc.remarkable.render(x)
       })
       .then(html => {
         const expect = '<h1>Hello Jan Jansen</h1>\n';

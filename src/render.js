@@ -15,9 +15,18 @@ function render(ast, state) {
 
         x.children = x.children || [];
 
+        const types = [
+          'text',
+          'htmlblock',
+          'placeholder_block_open',
+          'placeholder_block_close',
+          'placeholder_inline_open',
+          'placeholder_inline_close',
+        ]
+
         const children = x.children
           .map(child => item(child).then((res) => {
-            if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (cur.type !== 'text' && cur.type !== 'htmlblock'), false)) {
+            if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (types.indexOf(cur.type) < 0), false)) {
               throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file']}`);
             }
             return res;
@@ -52,49 +61,90 @@ function render(ast, state) {
 
     if (x.type === 'placeholder_block' || x.type === 'placeholder_inline') {
 
-      const placeholder = x.content;
+      const match = x.content.match(/{{(?:#(.*)\s)?([^}]*)}}/);
 
-      return resolve(placeholder, ast, state)
+      return resolve(match[2], match[1], ast, state)
         .then(value => {
 
             if (value == null || typeof value === 'undefined') {
               const res = {
                 type: 'text',
-                content: placeholder,
+                content: x.content,
                 variable: x.variable,
               };
               return Promise.resolve(res);
             }
 
+            if (Array.isArray(value)) {
+
+              const res = value.map(y => {
+                return {
+                  type: 'htmlblock',
+                  content: y,
+                  variable: x.variable,
+                }
+              });
+
+              return [].concat(
+                {
+                  type: x.type + '_open',
+                  path: ast['$path'].concat(match[2]),
+                },
+                res,
+                {
+                  type: x.type + '_close',
+                  path: ast['$path'].concat(match[2]),
+                });
+
+            }
+
             if (typeof value === 'string') {
 
-              const res = {
-                type: 'htmlblock',
-                content: value,
-                variable: x.variable,
-              };
-              return Promise.resolve(res);
+              const res = [
+                {
+                  type: x.type + '_open',
+                  path: ast['$path'].concat(match[2]),
+                },
+                {
+                  type: 'htmlblock',
+                  content: value,
+                  variable: x.variable,
+                },
+                {
+                  type: x.type + '_close',
+                  path: ast['$path'].concat(match[2]),
+                }
+              ];
+
+              return res;
 
             }
 
             if (typeof value === 'object') {
 
-              if (value.then) {
-                return value.then(x => {
-                  const res = {
-                    type: 'text',
-                    content: x,
-                    variable: x.variable,
-                  };
-                  return res;
-                })
-              }
-
               return render(value, state).then(res => {
                 if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
-                  return res[1].children;
+                  return [].concat(
+                    {
+                      type: x.type + '_open',
+                      path: ast['$path'],
+                    },
+                    res[1].children,
+                    {
+                      type: x.type + '_close',
+                      path: ast['$path'],
+                    });
                 else
-                  return res;
+                  return [].concat(
+                    {
+                      type: x.type + '_open',
+                      path: ast['$path'],
+                    },
+                    res,
+                    {
+                      type: x.type + '_close',
+                      path: ast['$path'],
+                    });;
               });
 
             }

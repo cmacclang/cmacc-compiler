@@ -1,13 +1,11 @@
-function resolve(placeholder, ast, state) {
+function resolve(variable, helper, ast, state) {
 
   const opts = {
     base: ast['$file']
   };
 
-  const match = placeholder.match(/{{(?:#(.*)\s)?([^}]*)}}/);
-  const helper = match[1];
 
-  return Promise.resolve(match[2])
+  return Promise.resolve(variable)
     .then(variable => {
 
       if (variable === 'this') {
@@ -55,19 +53,27 @@ function resolve(placeholder, ast, state) {
 
             const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
             if (!matches[1]) {
-              return resolve(`{{${key}}}`, propAst, state)
+              return resolve(key, null, propAst, state)
             } else {
-              return resolve(`{{#${matches[1]} ${key}}}`, propAst, state)
+              return resolve(key, matches[1], propAst, state)
             }
 
           }))
-          .then(x => x.join(''))
+
       }
 
       return sub[last];
 
     })
-    .then(value => helper ? state.helpers[helper](value, ast, opts) : value)
+    .then(value => {
+      if(helper && Array.isArray(value)){
+        return  state.helpers[helper](value.join(''), ast, opts)
+      }
+      if(helper){
+        return  state.helpers[helper](value, ast, opts)
+      }
+      return value;
+    })
 
 }
 

@@ -4,18 +4,13 @@ function reduce(ast) {
 
   const vars = ast.vars.reduce((acc, x) => {
 
-
-
-
     if (x.data && x.data.type === 'json') {
       acc[x.name] = x.data.data;
-      acc[x.name].name = x;
       return acc;
     }
 
     if (x.data && x.data.type === 'js') {
       acc[x.name] = x.data.data;
-      acc[x.name].name = x;
       return acc;
     }
 
@@ -28,7 +23,6 @@ function reduce(ast) {
       const val = acc[func];
       const data = val.apply({}, input)
       acc[x.name] = data;
-      acc[x.name].name = x;
       return acc;
     }
 
@@ -73,7 +67,7 @@ function reduce(ast) {
     }
 
     const defineGetter = function(){
-      return x['data'];
+      return x.data;
     };
     defineGetter.getAst = function(){
       return acc;

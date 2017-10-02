@@ -2,9 +2,6 @@ const url = require('path');
 const assert = require('assert');
 const cmacc = require('../../../src/index');
 
-const Remarkable = require('remarkable');
-const md = new Remarkable();
-
 describe('escrow_case', function () {
 
   global.fs = require('fs');
