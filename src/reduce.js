@@ -1,14 +1,21 @@
 function reduce(ast) {
 
+  ast.path = ast.path || [];
+
   const vars = ast.vars.reduce((acc, x) => {
+
+
+
 
     if (x.data && x.data.type === 'json') {
       acc[x.name] = x.data.data;
+      acc[x.name].name = x;
       return acc;
     }
 
     if (x.data && x.data.type === 'js') {
       acc[x.name] = x.data.data;
+      acc[x.name].name = x;
       return acc;
     }
 
@@ -21,6 +28,7 @@ function reduce(ast) {
       const val = acc[func];
       const data = val.apply({}, input)
       acc[x.name] = data;
+      acc[x.name].name = x;
       return acc;
     }
 
@@ -28,7 +36,9 @@ function reduce(ast) {
     const lastName = splitName.pop();
     const astName = splitName.reduce((a, b) => a[b], acc);
 
-    if (x.data && (x.data.type === 'cmacc' || x.data.type === 'schema')) {
+    if (x.type === 'link') {
+      x.data.name = x.name;
+      x.data.path = ast.path.concat(x.name);
       astName[lastName] = reduce(x.data);
       return acc;
     }
@@ -88,6 +98,7 @@ function reduce(ast) {
   vars['$type'] = ast.type;
   vars['$value'] = ast.value;
   vars['$name'] = ast.name;
+  vars['$path'] = ast.path;
 
   return vars;
 
