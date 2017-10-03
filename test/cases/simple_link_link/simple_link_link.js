@@ -13,9 +13,9 @@ describe('simple_link_link', function () {
       .then( x => {
         // console.log('----', x)
         assert.equal(x[0].type, 'placeholder_block_open');
-        assert.deepEqual(x[0].path, []);
+        assert.deepEqual(x[0].path, ['link']);
         assert.equal(x[1].type, 'placeholder_block_open');
-        assert.deepEqual(x[1].path, ['link']);
+        assert.deepEqual(x[1].path, ['link', 'link' ]);
         assert.equal(x[2].type, 'heading_open');
         assert.equal(x[3].type, 'inline');
         assert.equal(x[3].children[0].type, 'text');

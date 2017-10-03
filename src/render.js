@@ -127,23 +127,23 @@ function render(ast, state) {
                   return [].concat(
                     {
                       type: x.type + '_open',
-                      path: ast['$path'],
+                      path: ast['$path'].concat(match[2]),
                     },
                     res[1].children,
                     {
                       type: x.type + '_close',
-                      path: ast['$path'],
+                      path: ast['$path'].concat(match[2]),
                     });
                 else
                   return [].concat(
                     {
                       type: x.type + '_open',
-                      path: ast['$path'],
+                      path: ast['$path'].concat(match[2]),
                     },
                     res,
                     {
                       type: x.type + '_close',
-                      path: ast['$path'],
+                      path: ast['$path'].concat(match[2]),
                     });;
               });
 
