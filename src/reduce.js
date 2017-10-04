@@ -32,6 +32,7 @@ function reduce(ast) {
 
     if (x.type === 'link') {
       x.data.name = x.name;
+      x.data.value = x.value;
       x.data.path = ast.path.concat(x.name);
       astName[lastName] = reduce(x.data);
       return acc;
