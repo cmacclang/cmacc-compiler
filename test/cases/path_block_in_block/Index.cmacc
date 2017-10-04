@@ -1,0 +1,3 @@
+$ block1 = [./Block1.cmacc]
+
+{{block1}}
