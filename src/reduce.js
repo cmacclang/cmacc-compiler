@@ -19,9 +19,9 @@ function reduce(ast) {
       const match = x.data.match(MATCH_FUNCTION)
       const func = match[1];
       const args = match[2] ? match[2].split(",") : [];
-      const input = args.map(x => find(x, ast)).map(x => x.data)
+      const input = args.map(x => ast[x]).map(x => x.data)
       const val = acc[func];
-      const data = val.apply({}, input)
+      const data = val.apply({}, input);
       acc[x.name] = data;
       return acc;
     }
@@ -88,6 +88,7 @@ function reduce(ast) {
   }
 
   vars['$file'] = ast.file;
+  vars['$data'] = ast.data;
   vars['$md'] = ast.md;
   vars['$meta'] = ast.meta;
   vars['$type'] = ast.type;

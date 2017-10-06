@@ -15,9 +15,11 @@ module.exports = () => {
     return Promise.resolve(arr[arr.length - 1]);
   };
 
-  const reference = (ast) => {
-    const number = referenceState[ast['$file']];
-    return Promise.resolve(number);
+  const reference = (ref, ast) => {
+    const path = ref['$path'].join('.');
+    const number = referenceState[path];
+    console.log('+', ref['$path'], path, number)
+    return Promise.resolve('test');
   };
 
   const section = (str, ast) => {
@@ -34,9 +36,11 @@ module.exports = () => {
     }
 
     const number = sectionState.slice(0, pos).join('.');
+    const path = ast['$path'].join('.');
 
-    if (!referenceState[ast['$file']]) {
-      referenceState[ast['$file']] = number;
+    if (!referenceState[path]) {
+      referenceState[path] = number;
+      console.log('-', path, number)
     }
 
     return Promise.resolve(number)

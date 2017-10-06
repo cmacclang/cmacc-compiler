@@ -68,6 +68,7 @@ function assemble(file, opts) {
         .then(x => {
           return {
             file: res.file,
+            data: res.data,
             type: md.type,
             md: md.md,
             meta: md.meta,

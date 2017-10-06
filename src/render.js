@@ -10,6 +10,7 @@ function render(ast, state) {
   }
 
   if (ast['$md']) {
+
     return Promise.all(ast['$md']
       .map(x => {
 
@@ -22,15 +23,16 @@ function render(ast, state) {
           'placeholder_block_close',
           'placeholder_inline_open',
           'placeholder_inline_close',
-        ]
+        ];
 
         const children = x.children
-          .map(child => item(child).then((res) => {
-            if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (types.indexOf(cur.type) < 0), false)) {
-              throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file']}`);
-            }
-            return res;
-          }));
+          .map(child => item(child)
+            .then((res) => {
+              if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (types.indexOf(cur.type) < 0), false)) {
+                throw new Error(`Cannot render ref inline for param: ${child.variable} in file ${ast['$file']}`);
+              }
+              return res;
+            }));
 
         return Promise.all(children)
           .then(res => res.reduce((acc, val) => {
@@ -144,7 +146,7 @@ function render(ast, state) {
                     {
                       type: x.type + '_close',
                       path: ast['$path'].concat(match[2]),
-                    });;
+                    });
               });
 
             }

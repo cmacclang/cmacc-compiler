@@ -20,13 +20,9 @@ global.fs = require('fs');
 global.fetch = require('node-fetch');
 
 cmacc.compile(file)
-  .then(ast => {
-    //console.log(ast)
-    return ast;
-  })
   .then(cmacc.render)
   .then(x => {
-    return cmacc.remarkable.render(x, {})
+    return cmacc.remarkable.render(x)
   })
   .then(html => {
     fs.writeFileSync(path.resolve(process.cwd(), output + '.html'), html);

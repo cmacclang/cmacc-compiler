@@ -66,6 +66,7 @@ function resolve(variable, helper, ast, state) {
 
     })
     .then(value => {
+
       if(helper && Array.isArray(value)){
         return  state.helpers[helper](value.join(''), ast, opts)
       }
