@@ -1,7 +1,7 @@
 const helpers = require('./helpers');
 const resolve = require('./resolve');
 
-function render(ast, state) {
+function render(ast, opts, state) {
 
   if (!state) {
     state = {
@@ -65,7 +65,7 @@ function render(ast, state) {
 
       const match = x.content.match(/{{(?:#(.*)\s)?([^}]*)}}/);
 
-      return resolve(match[2], match[1], ast, state)
+      return resolve(match[2], match[1], ast, opts, state)
         .then(value => {
 
             if (value == null || typeof value === 'undefined') {
@@ -124,7 +124,7 @@ function render(ast, state) {
 
             if (typeof value === 'object') {
 
-              return render(value, state).then(res => {
+              return render(value, opts, state).then(res => {
                 if (x.type === 'placeholder_inline' && res.length === 3 && res[0].type === 'paragraph_open' && res[2].type === 'paragraph_close')
                   return [].concat(
                     {

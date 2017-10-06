@@ -1,9 +1,7 @@
-function resolve(variable, helper, ast, state) {
+function resolve(variable, helper, ast, opts, state) {
 
-  const opts = {
-    base: ast['$file']
-  };
 
+  opts = opts || {base : ast['$file']}
 
   return Promise.resolve(variable)
     .then(variable => {
@@ -53,9 +51,9 @@ function resolve(variable, helper, ast, state) {
 
             const propAst = Object.getOwnPropertyDescriptor(sub, last).get.getAst();
             if (!matches[1]) {
-              return resolve(key, null, propAst, state)
+              return resolve(key, null, propAst, opts, state)
             } else {
-              return resolve(key, matches[1], propAst, state)
+              return resolve(key, matches[1], propAst, opts, state)
             }
 
           }))

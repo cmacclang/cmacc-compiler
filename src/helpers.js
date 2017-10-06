@@ -19,7 +19,7 @@ module.exports = () => {
     const path = ref['$path'].join('.');
     const number = referenceState[path];
     console.log('+', ref['$path'], path, number)
-    return Promise.resolve('test');
+    return Promise.resolve(number);
   };
 
   const section = (str, ast) => {
