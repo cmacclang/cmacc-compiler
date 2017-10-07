@@ -1,0 +1,7 @@
+$ world = "Willem Veelenturf"
+
+$ content = [./Content.cmacc]
+$ content.world = world
+
+
+{{content}}

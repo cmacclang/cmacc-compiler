@@ -14,7 +14,9 @@ function render(ast, opts, state) {
     return Promise.all(ast['$md']
       .map(x => {
 
-        x.children = x.children || [];
+        const obj = JSON.parse(JSON.stringify(x))
+
+        obj.children = obj.children || [];
 
         const types = [
           'text',
@@ -25,7 +27,7 @@ function render(ast, opts, state) {
           'placeholder_inline_close',
         ];
 
-        const children = x.children
+        const children = obj.children
           .map(child => item(child)
             .then((res) => {
               if (Array.isArray(res) && res.reduce((acc, cur) => acc ? acc : (types.indexOf(cur.type) < 0), false)) {
@@ -39,8 +41,8 @@ function render(ast, opts, state) {
             return acc.concat(val);
           }, []))
           .then(res => {
-            x.children = res;
-            return item(x)
+            obj.children = res;
+            return item(obj)
           })
       }))
       .then(res => res.reduce((acc, val) => {
@@ -55,10 +57,15 @@ function render(ast, opts, state) {
   function item(x) {
 
     if (x.type === 'htmlblock') {
-      x.content = x.content.replace(/{{([^}]*)}}/g, function (match, name) {
+      const content = x.content.replace(/{{([^}]*)}}/g, function (match, name) {
         return ast[name];
       });
-      return Promise.resolve(x);
+      const res = {
+        type: 'htmlblock',
+        content: content,
+        variable: x.variable,
+      };
+      return Promise.resolve(res);
     }
 
     if (x.type === 'placeholder_block' || x.type === 'placeholder_inline') {

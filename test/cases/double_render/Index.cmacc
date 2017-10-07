@@ -1,0 +1,4 @@
+$ contract = [./Contract.cmacc]
+$ contract.world = "Jan Jansen"
+
+{{contract}}
